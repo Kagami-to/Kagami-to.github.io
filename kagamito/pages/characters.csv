@@ -1,27 +1,27 @@
 Character ID,日本語名,読み,English Name,URL ID,二つ名,二つ名英語,容姿画像パス,初登場作品ID,能力,能力英語,能力詳細,立場,立場英語,プロフィール,登場作品ID
-C001,双結八耶,ふたゆい やや,Futayui Yaya,yaya,割れた鏡の救世主,Savior of the Broken Mirror,,P001,均衡をあらわす,Embodies balance,,,上白川学園・中等部2年生,Second-Year Student at Kamishirakawa Academy Middle School,,"P001, P002, P003, P004"
+C001,双結八耶,ふたゆい やや,Futayui Yaya,yaya,割れた鏡の救世主,Savior of the Broken Mirror,,P001,均衡をあらわす,Embodies balance,,上白川学園・中等部2年生,Second-Year Student at Kamishirakawa Academy Middle School,,"P001, P002, P003, P004"
 C002,上白川琴音,かみしらかわ ことね,Kamishirakawa Kotone,kotone,並外れた琴の天才,Extraordinary Koto Genius,,P001,,,,上白川学園・中等部2年生,Second-Year Student at Kamishirakawa Academy Middle School,,
 C003,鶴城なた乃,つるしろ なたの,Tsurushiro Natano,natano,絶たれた夢の修復士,Restorer of Severed Dreams,,P001,やり直しをあらわす,Embodies starting over,,,,,"P001, P002, P003"
-C004,猪民桜花,いのたみ おうか,Inotami Oka,oka,廃れた都の生き字引,Living Chronicle of the Forsaken Capital,,P001,境目をあらわす,Embodies boundaries,,,鴨草京天照宮復都特命室・室長,Head of the Special Mission Office for the Restoration of Kamokusa-kyō at Tenshōgū,,"P001, P003"
-C005,上白川文音,かみしらかわ あやね,Kamishirakawa Ayane,ayane,並外れた文の秀才,Extraordinary Literary Scholar,,P001,仕方無く必要な物語をあらわす,Embodies stories that must be told,,,上白川文庫・秘書,Secretary at Kamishirakawa Bunko,,"P001, P003"
-C006,アレン・ハーグリーヴズ,,Allen Hargreaves,allen,引き継がれた本の虫,Bookworm of the Inherited Passion,,P001,最も必要な書物をあらわす,Embodies the most necessary book,,,上白川文庫・館長,Director of Kamishirakawa Bunko,,"P001, P003"
-C007,双結零夜,ふたゆい れいや,Futayui Rēya,reya,割れた鏡の仲介人,Mediator of the Broken Mirror,,P001,架け橋をあらわす,Embodies a bridge,,,,,"P001, P002, P003, P004"
-C008,稚早,ちはや,Chihaya,chihaya,見込まれた単の用心棒,Favored Bodyguard of Hitoe,,P001,疾風をあらわす,Embodies the swift wind,,,鴨草京警備局・御虹警備,Mikō Security, Kamokusa-kyō Security Bureau,,"P001, P003"
-C009,御虹重,みこう かさね,Mikō Kasane,kasane,選ばれた桜の君,Chosen Lady of Cherry,,P001,光をあらわす,Embodies light,,,鴨草京天照宮紫宸殿・関白,Kanpaku of the Shishinden at Tenshōgū in Kamokusa-kyō,,"P001, P002, P003, P004"
-C010,御虹単,みこう ひとえ,Mikō Hitoe,hitoe,隠れた橘の君,Hidden Lady of Citrus,,P001,策略をあらわす,Embodies strategy,,,鴨草京天照宮清涼殿・太閤,Taikō of the Seiryōden at Tenshōgū in Kamokusa-kyō,,"P001, P002, P003"
+C004,猪民桜花,いのたみ おうか,Inotami Oka,oka,廃れた都の生き字引,Living Chronicle of the Forsaken Capital,,P001,境目をあらわす,Embodies boundaries,,鴨草京天照宮復都特命室・室長,Head of the Special Mission Office for the Restoration of Kamokusa-kyō at Tenshōgū,,"P001, P003"
+C005,上白川文音,かみしらかわ あやね,Kamishirakawa Ayane,ayane,並外れた文の秀才,Extraordinary Literary Scholar,,P001,仕方無く必要な物語をあらわす,Embodies stories that must be told,,上白川文庫・秘書,Secretary at Kamishirakawa Bunko,,"P001, P003"
+C006,アレン・ハーグリーヴズ,,Allen Hargreaves,allen,引き継がれた本の虫,Bookworm of the Inherited Passion,,P001,最も必要な書物をあらわす,Embodies the most necessary book,,上白川文庫・館長,Director of Kamishirakawa Bunko,,"P001, P003"
+C007,双結零夜,ふたゆい れいや,Futayui Rēya,reya,割れた鏡の仲介人,Mediator of the Broken Mirror,,P001,架け橋をあらわす,Embodies a bridge,,,,"P001, P002, P003, P004"
+C008,稚早,ちはや,Chihaya,chihaya,見込まれた単の用心棒,Favored Bodyguard of Hitoe,,P001,疾風をあらわす,Embodies the swift wind,,鴨草京警備局・御虹警備,"Mikō Security, Kamokusa-kyō Security Bureau",,"P001, P003"
+C009,御虹重,みこう かさね,Mikō Kasane,kasane,選ばれた桜の君,Chosen Lady of Cherry,,P001,光をあらわす,Embodies light,,鴨草京天照宮紫宸殿・関白,Kanpaku of the Shishinden at Tenshōgū in Kamokusa-kyō,,"P001, P002, P003, P004"
+C010,御虹単,みこう ひとえ,Mikō Hitoe,hitoe,隠れた橘の君,Hidden Lady of Citrus,,P001,策略をあらわす,Embodies strategy,,鴨草京天照宮清涼殿・太閤,Taikō of the Seiryōden at Tenshōgū in Kamokusa-kyō,,"P001, P002, P003"
 C011,藤原香桃,ふじわら こもも,Fujiwara Komomo,komomo,,,P002,,,,,,,,,"P002, P003"
 C012,有手翠,うす みどり,Usu Midori,midori,,,P002,,,,,,,,,"P002, P003"
 C013,ノア・アララト,,Noah Ararat,noah,,,P002,方舟をあらわす,Embodies the Ark,,,,,,,"P002, P003"
-C014,メガイアマリア・イオニア,,Magiamalia Ionia,magiamalia,,,P002,黒魔術をあらわす,Embodies black magic,,,イオニア会,Ionian Order,,,"P002, P003"
-C015,櫛稲宮やえ,くしなみや の やえ,Kushinamiya no Yae,yae,,,P002,信仰をあらわす,Embodies faith,,,深韴神宮・巫女神,Divine Miko of Mifutsu Jingū,,,"P002, P003"
-C016,深韴傷瑕,みふつ しょうか,Mifutsu Shōka,shoka,,,P002,瑕をあらわす,Embodies the flaw,,,深韴神宮・祭神,Enshrined Deity of Mifutsu Jingū,,,"P002, P003"
-C017,エフティヒア・イオニア,,Eftychia Ionia,eftychia,,,P002,生命力をあらわす,Embodies vitality,,,イオニア会,Ionian Order,,,"P002, P003"
+C014,メガイアマリア・イオニア,,Magiamalia Ionia,magiamalia,,,P002,黒魔術をあらわす,Embodies black magic,,イオニア会,Ionian Order,,,"P002, P003"
+C015,櫛稲宮やえ,くしなみや の やえ,Kushinamiya no Yae,yae,,,P002,信仰をあらわす,Embodies faith,,深韴神宮・巫女神,Divine Miko of Mifutsu Jingū,,,"P002, P003"
+C016,深韴傷瑕,みふつ しょうか,Mifutsu Shōka,shoka,,,P002,瑕をあらわす,Embodies the flaw,,深韴神宮・祭神,Enshrined Deity of Mifutsu Jingū,,,"P002, P003"
+C017,エフティヒア・イオニア,,Eftychia Ionia,eftychia,,,P002,生命力をあらわす,Embodies vitality,,イオニア会,Ionian Order,,,"P002, P003"
 C018,ムニミ・ムネモシュネ,,Mnimi Mnemosyne,mnimi,,,P003,記憶をあらわす,Embodies memory,,,,,,,"P003, P004"
 C019,時任明日香,ときとう あすか,Tokitō Asuka,asuka,,,P003,伝承をあらわす,Embodies tradition,,,,,,,P003
 C020,時任小春,ときとう こはる,Tokitō Koharu,koharu,,,P003,忘却をあらわす,Embodies forgetting,,,,,,,P003
 C021,石凝宮なみ,いしこりみや の なみ,Ishikorimiya no Nami,nami,,,P004,鏡をあらわす,Embodies the mirror,,,,,,,P004
-C022,篁日菜里,たかむら ひなり,Takamura Hinari,hinari,,,P004,通路をあらわす,Embodies a passageway,,,神湖水道局難波疏水管理部,Naniwa Canal Management Division, Jingo Waterworks Bureau,,,P004
+C022,篁日菜里,たかむら ひなり,Takamura Hinari,hinari,,,P004,通路をあらわす,Embodies a passageway,,神湖水道局難波疏水管理部,"Naniwa Canal Management Division, Jingo Waterworks Bureau",,,P004
 C023,傘崎亞澄,かさざき あすみ,Kasazaki Asumi,asumi,,,P004,,,,,,,,P004
-C024,瑞兆智香,ずいちょう ともか,Zuichō Tomoka,tomoka,,,P004,,,,,,,神湖水道局難波疏水管理部・部長,Director of the Naniwa Canal Management Division, Jingo Waterworks Bureau,,P004
-C025,珠守佐波,たまもり さなみ,Tamamori Sanami,sanami,,,P004,,,,,,,神湖水道局・局長,Director-General of the Jingo Waterworks Bureau,,P004
-C026,玉祖宮めの,たまおやみや の めの,Tamaoyamiya no Meno,meno,,,P004,珠玉をあらわす,Embodies the jewel,,,玉造神明社・祭神,Enshrined Deity of Tamatsukuri Shinmei Shrine,,P004
+C024,瑞兆智香,ずいちょう ともか,Zuichō Tomoka,tomoka,,,P004,,,,,,神湖水道局難波疏水管理部・部長,"Director of the Naniwa Canal Management Division, Jingo Waterworks Bureau",,P004
+C025,珠守佐波,たまもり さなみ,Tamamori Sanami,sanami,,,P004,,,,,,神湖水道局・局長,Director-General of the Jingo Waterworks Bureau,,P004
+C026,玉祖宮めの,たまおやみや の めの,Tamaoyamiya no Meno,meno,,,P004,珠玉をあらわす,Embodies the jewel,,玉造神明社・祭神,Enshrined Deity of Tamatsukuri Shinmei Shrine,,P004
