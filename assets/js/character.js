@@ -35,12 +35,29 @@ function section(title, content) {
 }
 
 function pick(row, jaKey, enKey) {
-  if (getLanguage() === 'en' && row[enKey]) return row[enKey];
-  return row[jaKey] || '';
+  const value = getLanguage() === 'en' ? row[enKey] : row[jaKey];
+  return value || '';
 }
 
 function linkItem(text, href) {
   return href ? `<a href="${href}">${text}</a>` : text;
+}
+
+function workId(work) {
+  return work['Work ID'] || work['作品ID'] || work['ID'] || '';
+}
+
+function workUrl(work) {
+  return work['URL ID'] || workId(work);
+}
+
+function workNumber(work) {
+  return work['作品番号'] || work['Numbering'] || '';
+}
+
+function workTitle(work, en) {
+  if (en) return work['English Title'] || '';
+  return work['メインタイトル'] || work['日本語タイトル'] || '';
 }
 
 async function main() {
@@ -55,19 +72,22 @@ async function main() {
   if (!character) throw new Error('キャラクターが見つかりません。');
 
   const en = getLanguage() === 'en';
-  const name = character['日本語名'] || character['Character ID'];
-  const displayName = en ? (character['English Name'] || name) : name;
+  const displayName = en ? (character['English Name'] || '') : (character['日本語名'] || '');
   document.title = `${displayName} - Kagamito Official`;
 
   const root = document.getElementById('character');
   let html = '';
 
   html += '<header class="character-header">';
+
   const alias = pick(character, '二つ名', '二つ名英語');
   if (alias) html += `<p>${alias}</p>`;
-  html += `<h1>${displayName}</h1>`;
-  if (character['読み']) html += `<p class="character-reading">${character['読み']}</p>`;
-  if (character['本名英語'] && en) html += `<p class="character-english">${character['本名英語']}</p>`;
+
+  if (displayName) html += `<h1>${displayName}</h1>`;
+
+  // 読み仮名は日本語版だけに表示する。
+  if (!en && character['読み']) html += `<p class="character-reading">${character['読み']}</p>`;
+
   html += '</header>';
 
   if (character['容姿画像パス']) {
@@ -77,39 +97,45 @@ async function main() {
   const ability = pick(character, '能力', '能力英語');
   if (ability) html += section(t('ability'), `<p>${ability}</p>`);
 
+  const abilityDetail = pick(character, '能力詳細', '能力詳細英語');
+  if (abilityDetail) html += section(t('abilityDetail'), `<p>${abilityDetail}</p>`);
+
   const position = pick(character, '立場', '立場英語');
   if (position) html += section(t('position'), `<p>${position}</p>`);
 
   if (character['初登場作品ID']) {
-    const work = works.find(w => (w['Work ID'] || w['作品ID'] || w['ID']) === character['初登場作品ID']);
+    const work = works.find(w => workId(w) === character['初登場作品ID']);
     if (work) {
-      const workName = en
-        ? (work['English Title'] || work['英語タイトル'] || work['English Name'] || work['日本語タイトル'] || character['初登場作品ID'])
-        : (work['日本語タイトル'] || work['メインタイトル'] || work['日本語名'] || character['初登場作品ID']);
-      html += section(t('firstAppearance'), `<p>${linkItem(workName, `../works/${encodeURIComponent(work['URL ID'] || work['Work ID'] || character['初登場作品ID'])}.html`)}</p>`);
+      const title = workTitle(work, en);
+      if (title) {
+        const number = workNumber(work);
+        const label = number ? `${number} — ${title}` : title;
+        html += section(t('firstAppearance'), `<p>${linkItem(label, `../works/${encodeURIComponent(workUrl(work))}.html`)}</p>`);
+      }
     }
   }
 
   if (character['テーマ曲ID']) {
-    const song = songs.find(s => (s['Music ID'] || s['ID']) === character['テーマ曲ID']);
+    const song = songs.find(s => (s['Music ID'] || s['ID'] || s['楽曲ID']) === character['テーマ曲ID']);
     if (song) {
-      const songName = en
-        ? (song['English Title'] || song['英語曲名'] || song['日本語曲名'] || character['テーマ曲ID'])
-        : (song['日本語曲名'] || song['日本語タイトル'] || character['テーマ曲ID']);
-      html += section(t('themeSong'), `<p>${linkItem(songName, `../songs/${encodeURIComponent(song['URL ID'] || song['Music ID'] || character['テーマ曲ID'])}.html`)}</p>`);
+      const songName = en ? (song['English Title'] || song['英語曲名'] || '') : (song['日本語曲名'] || song['メインタイトル'] || '');
+      if (songName) {
+        html += section(t('themeSong'), `<p>${linkItem(songName, `../songs/${encodeURIComponent(song['URL ID'] || song['Music ID'] || song['ID'] || character['テーマ曲ID'])}.html`)}</p>`);
+      }
     }
   }
 
   if (character['登場作品ID']) {
     const ids = character['登場作品ID'].split(/\s*,\s*/).filter(Boolean);
     const items = ids.map(id => {
-      const work = works.find(w => (w['Work ID'] || w['作品ID'] || w['ID']) === id);
-      if (!work) return `<li>${id}</li>`;
-      const workName = en
-        ? (work['English Title'] || work['英語タイトル'] || work['English Name'] || work['日本語タイトル'] || id)
-        : (work['日本語タイトル'] || work['メインタイトル'] || work['日本語名'] || id);
-      return `<li>${linkItem(workName, `../works/${encodeURIComponent(work['URL ID'] || work['Work ID'] || id)}.html`)}</li>`;
-    }).join('');
+      const work = works.find(w => workId(w) === id);
+      if (!work) return '';
+      const title = workTitle(work, en);
+      if (!title) return '';
+      const number = workNumber(work);
+      const label = number ? `${number} — ${title}` : title;
+      return `<li>${linkItem(label, `../works/${encodeURIComponent(workUrl(work))}.html`)}</li>`;
+    }).filter(Boolean).join('');
     if (items) html += section(t('appearances'), `<ul class="related-list">${items}</ul>`);
   }
 
