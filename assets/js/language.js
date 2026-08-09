@@ -3,5 +3,5 @@ function getLanguage(){return localStorage.getItem('kagamito-language')||((navig
 function setLanguage(lang){localStorage.setItem('kagamito-language',lang);location.reload()}
 function t(key){return(UI_TEXT[getLanguage()]||UI_TEXT.ja)[key]||key}
 function langButton(){return `<div class="language-switch"><button type="button" onclick="setLanguage('ja')">日本語</button><span>|</span><button type="button" onclick="setLanguage('en')">English</button></div>`}
-function pick(row,jaKey,enKey){if(getLanguage()==='en'&&row[enKey])return row[enKey];return row[jaKey]||''}
+function pick(row,jaKey,enKey){return getLanguage()==='en'?(row[enKey]||''):(row[jaKey]||'')}
 function parseCSV(text){const rows=[];let row=[],field='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'){if(text[i+1]==='"'){field+='"';i++}else quoted=false}else field+=c}else{if(c==='"')quoted=true;else if(c===','){row.push(field);field=''}else if(c==='\n'){row.push(field);rows.push(row);row=[];field=''}else if(c!=='\r')field+=c}}if(field.length||row.length){row.push(field);rows.push(row)}const headers=rows.shift().map(v=>v.trim());return rows.filter(r=>r.some(v=>v.trim()!=='')).map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])))}
