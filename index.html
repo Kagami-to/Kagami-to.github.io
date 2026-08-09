@@ -10,19 +10,37 @@
   <header class="site-header">
     <a href="index.html" class="site-title">Kagamito Official</a>
     <nav>
-      <a href="characters/">Characters</a>
-      <a href="works/">Works</a>
-      <a href="songs/">Songs</a>
+      <a href="characters/" data-i18n="characters">Characters</a>
+      <a href="works/" data-i18n="works">Works</a>
+      <a href="songs/" data-i18n="songs">Songs</a>
+      <span id="language-switch"></span>
     </nav>
   </header>
+
   <main class="container">
     <h1>Kagamito Official</h1>
-    <p>鏡外シリーズの公式サイトです。</p>
+    <p id="description"></p>
+
     <div class="card-grid">
-      <a class="card" href="characters/">Characters</a>
-      <a class="card" href="works/">Works</a>
-      <a class="card" href="songs/">Songs</a>
+      <a class="card" href="characters/" data-i18n="characters">Characters</a>
+      <a class="card" href="works/" data-i18n="works">Works</a>
+      <a class="card" href="songs/" data-i18n="songs">Songs</a>
     </div>
   </main>
+
+  <script src="assets/js/language.js"></script>
+  <script>
+    document.getElementById('language-switch').innerHTML = langButton();
+    document.documentElement.lang = getLanguage();
+
+    document.querySelectorAll('[data-i18n]').forEach(e => {
+      e.textContent = t(e.dataset.i18n);
+    });
+
+    document.getElementById('description').textContent =
+      getLanguage() === 'en'
+        ? 'Official website of the Kagamito series.'
+        : '鏡外シリーズの公式サイトです。';
+  </script>
 </body>
 </html>
