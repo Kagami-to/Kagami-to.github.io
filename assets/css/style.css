@@ -12,6 +12,8 @@ nav { display: flex; gap: 1rem; }
 .character-list { list-style: none; padding: 0; margin: 2rem 0; display: grid; gap: .75rem; }
 .character-list a { display: block; padding: .9rem 1rem; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; }
 .character-list a:hover { border-color: #999; }
+.list-main { display: block; }
+.list-japanese { display: block; margin-top: .15rem; font-size: .78em; line-height: 1.35; color: #777; font-weight: 400; }
 .character-header { margin-bottom: 2rem; }
 .character-header h1 { margin-bottom: .25rem; }
 .character-reading, .character-english { margin: 0; color: #666; }
