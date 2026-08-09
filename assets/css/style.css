@@ -14,6 +14,7 @@ nav { display: flex; gap: 1rem; }
 .character-list a:hover { border-color: #999; }
 .list-main { display: block; }
 .list-japanese { display: block; margin-top: .15rem; font-size: .78em; line-height: 1.35; color: #777; font-weight: 400; }
+.list-subtitle { display: block; margin-top: .15rem; font-size: .82em; line-height: 1.4; color: #666; font-weight: 400; }
 .character-header { margin-bottom: 2rem; }
 .character-header h1 { margin-bottom: .25rem; }
 .character-reading, .character-english { margin: 0; color: #666; }
@@ -21,4 +22,7 @@ nav { display: flex; gap: 1rem; }
 .character-section { margin: 2rem 0; }
 .character-section h2 { font-size: 1.15rem; border-bottom: 1px solid #ddd; padding-bottom: .35rem; }
 .related-list { padding-left: 1.25rem; }
-@media (max-width: 600px) { .site-header { flex-direction: column; align-items: flex-start; } nav { flex-wrap: wrap; } }
+.entity-navigation { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid #ddd; }
+.entity-navigation a { display: inline-block; padding: .7rem 1rem; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; }
+.entity-navigation a:hover { border-color: #999; }
+@media (max-width: 600px) { .site-header { flex-direction: column; align-items: flex-start; } nav { flex-wrap: wrap; } .entity-navigation a { padding: .6rem .75rem; } }
