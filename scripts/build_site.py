@@ -32,13 +32,37 @@ def layout(title, body, depth=0):
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"></head><body><header class="site-header"><a href="{prefix}" class="site-title">鏡外 - Kagamito Official Site</a><nav></nav></header><main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script><script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
+def remove_stale_pages(out, valid_ids):
+    """Delete only generated individual HTML files that are no longer in CSV.
+
+    index.html is intentionally preserved and regenerated separately. No
+    other file types are touched, so manually maintained assets are safe.
+    """
+    for path in out.glob('*.html'):
+        if path.name == 'index.html':
+            continue
+        if path.stem not in valid_ids:
+            path.unlink()
+            print(f'Removed stale page: {path.relative_to(ROOT)}')
+
+
 def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
     data = rows(csv_name)
     out = ROOT / folder
     out.mkdir(parents=True, exist_ok=True)
+
+    # url_id values in the CSV are the sole source of truth for generated
+    # individual-page filenames. Remove old generated pages before writing
+    # the current set so renamed/deleted CSV entries cannot remain published.
+    valid_ids = {
+        url_id(r.get('url_id'))
+        for r in data
+        if url_id(r.get('url_id'))
+    }
+    remove_stale_pages(out, valid_ids)
+
     items = []
     for r in data:
-        # url_id is the sole source of truth for the public filename.
         uid = url_id(r.get('url_id'))
         if not uid:
             continue
