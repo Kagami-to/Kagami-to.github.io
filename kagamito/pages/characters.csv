@@ -16,8 +16,8 @@ C014,magiamalia,メガイアマリア・イオニア,Magiamalia Ionia,,,,,P002,�
 C015,yae,櫛稲宮やえ,Kushinamiya no Yae,くしなみや の やえ,,,,P002,信仰をあらわす,Embodies faith,,,深韴神宮・巫女神,Divine Miko of Mifutsu Jingū,,,M029,"P002, P003"
 C016,shoka,深韴傷瑕,Mifutsu Shōka,みふつ しょうか,,,,P002,瑕をあらわす,Embodies the flaw,,,深韴神宮・祭神,Enshrined Deity of Mifutsu Jingū,,,M031,"P002, P003"
 C017,eftychia,エフティヒア・イオニア,Eftychia Ionia,,,,,P002,生命力をあらわす,Embodies vitality,,,イオニア会,Ionian Order,,,M033,"P002, P003"
-C018,mnimi,ムニミ・ムネモシュネ,Mnimi Mnemosyne,,,,,P003,記憶をあらわす,Embodies memory,,,,,,,M045,"P003, P004"
-C019,asuka,時任明日香,Tokitō Asuka,ときとう あすか,,,,P003,伝承をあらわす,Embodies tradition,,,,,,,M037,P003
+C018,mnimi,ムニミ・ムネモシュネ,Mnimi Mnemosyne,,,,,P003,記憶をあらわす,Embodies memory,,,,,,,"M037, M045","P003, P004"
+C019,asuka,時任明日香,Tokitō Asuka,ときとう あすか,,,,P003,伝承をあらわす,Embodies tradition,,,,,,, ,P003
 C020,koharu,時任小春,Tokitō Koharu,ときとう こはる,,,,P003,忘却をあらわす,Embodies forgetting,,,,,,,,P003
 C021,nami,石凝宮なみ,Ishikorimiya no Nami,いしこりみや の なみ,,,,P004,鏡をあらわす,Embodies the mirror,,,,,,,M043,P004
 C022,hinari,篁日菜里,Takamura Hinari,たかむら ひなり,,,,P004,通路をあらわす,Embodies a passageway,,,神湖水道局難波疏水管理部,Naniwa Canal Management Division, Jingo Waterworks Bureau,,,M047,P004
