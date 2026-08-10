@@ -33,10 +33,11 @@ a { color: inherit; }
 .submenu-inner { min-height: 0; overflow: hidden; }
 .all-link { display: flex; align-items: center; justify-content: space-between; min-height: 54px; padding: 10px 16px 10px 22px; text-decoration: none; color: #5b3a78; background: #e1d3e9; border-top: 1px solid #d7c8e0; font-weight: 750; }
 .all-link:hover { background: #d7c7e2; }
-.list-item { display: flex; align-items: center; gap: 12px; min-height: 50px; padding: 9px 14px 9px 22px; color: #34273a; text-decoration: none; border-top: 1px solid #dfd2e7; }
+.list-item { display: flex; align-items: center; min-height: 58px; padding: 9px 14px 9px 22px; color: #34273a; text-decoration: none; border-top: 1px solid #dfd2e7; }
 .list-item:hover { background: #e3d6ea; }
-.item-id { width: 40px; flex: 0 0 40px; font-size: 11px; color: #806b8b; }
-.item-name { font-size: 14px; font-weight: 650; }
+.item-copy { display: flex; flex-direction: column; min-width: 0; }
+.item-name { font-size: 15px; font-weight: 650; line-height: 1.35; }
+.item-epithet { margin-top: 2px; font-size: 12px; line-height: 1.35; color: #786b86; font-weight: 450; }
 .divider { height: 1px; background: #d2c5dc; margin: 18px 0; }
 .lang-label { font-size: 12px; color: #786b86; margin: 0 8px 8px; }
 .lang-buttons { display: flex; gap: 8px; }
