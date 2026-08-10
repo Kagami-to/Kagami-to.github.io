@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kagamito Official — Header Design Preview</title>
+<style>
+*{box-sizing:border-box}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{margin:0;background:#f5f5f3;color:#202020}.preview-note{padding:18px 20px;background:#202020;color:#fff;text-align:center;font-size:14px}.preview-note strong{display:block;font-size:18px;margin-bottom:4px}.preview-wrap{max-width:1100px;margin:0 auto;padding:28px 20px 60px}.choice{margin:32px 0 14px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#777}.demo{background:#fff;border:1px solid #ddd;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px #0000000d}.demo-label{padding:14px 18px;border-bottom:1px solid #eee;font-weight:700}.hero{padding:60px 28px;min-height:180px}.hero h2{margin:0 0 8px;font-size:28px}.hero p{margin:0;color:#666}.header{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid #ddd;background:#fff}.brand{font-weight:700;text-decoration:none;color:#202020}.icon{width:42px;height:42px;border:1px solid #ddd;border-radius:10px;background:#fff;font-size:22px}.panel{padding:22px;background:#fff}.panel a{display:block;text-decoration:none;color:#222}.panel .big{font-size:20px;font-weight:650;padding:15px 4px}.panel .sub{font-size:12px;color:#888;margin-top:-12px;padding:0 4px 12px}.divider{border-top:1px solid #eee;margin:12px 0 16px}.lang{font-size:13px;color:#777;margin-bottom:8px}.lang button{border:0;background:none;padding:8px 12px;font-weight:600}.lang button.active{background:#eee;border-radius:8px}.option2 .header{background:#111;color:#fff;border-bottom:0}.option2 .brand{color:#fff;letter-spacing:.04em}.option2 .icon{background:#111;color:#fff;border-color:#444}.option2 .panel{background:#111;color:#fff}.option2 .panel a{color:#fff}.option2 .panel .sub,.option2 .lang{color:#999}.option2 .divider{border-color:#333}.option2 .lang button{color:#fff}.option2 .lang button.active{background:#333}.option3 .header{height:78px;background:#fff}.option3 .brand{font-size:17px}.option3 .icon{border:0;border-radius:50%;background:#f0f0ed}.option3 .panel{padding:30px 24px}.option3 .panel a{padding:18px 0;border-bottom:1px solid #eee}.option3 .panel .big{padding:0;font-size:22px}.option3 .panel .sub{padding:3px 0 0;margin:0}.note{font-size:13px;color:#777;padding:16px 4px 0}
+</style>
+</head>
+<body>
+<div class="preview-note"><strong>Kagamito Official — Header Design Preview</strong>これはデザイン検討用の試作ページです。本番サイトは変更していません。</div>
+<div class="preview-wrap">
+<div class="choice">Option A — Clean</div>
+<div class="demo"><div class="demo-label">シンプル・明快</div><div class="header"><a class="brand" href="#">Kagamito Official</a><button class="icon" onclick="toggle(this)">☰</button></div><div class="hero"><h2>Works</h2><p>作品一覧ページを想定した表示例です。</p></div><div class="panel" id="panel-a" hidden><a class="big" href="#">Characters</a><div class="sub">キャラクター</div><a class="big" href="#">Works</a><div class="sub">作品</div><a class="big" href="#">Songs</a><div class="sub">楽曲</div><div class="divider"></div><div class="lang">Language / 言語</div><div><button class="active">日本語</button><button>English</button></div></div></div>
+<div class="note">白背景＋薄い境界線。現在のサイトから最小限の変更で移行しやすい案。</div>
+
+<div class="choice">Option B — Dark</div>
+<div class="demo option2"><div class="demo-label">コントラスト・重厚</div><div class="header"><a class="brand" href="#">Kagamito Official</a><button class="icon" onclick="toggle(this)">☰</button></div><div class="hero" style="background:#181818;color:#fff"><h2>Works</h2><p style="color:#aaa">作品一覧ページを想定した表示例です。</p></div><div class="panel" id="panel-b" hidden><a class="big" href="#">Characters</a><div class="sub">キャラクター</div><a class="big" href="#">Works</a><div class="sub">作品</div><a class="big" href="#">Songs</a><div class="sub">楽曲</div><div class="divider"></div><div class="lang">Language / 言語</div><div><button class="active">日本語</button><button>English</button></div></div></div>
+<div class="note">黒いヘッダー＋黒系メニュー。ゲーム公式サイトらしい強い印象を狙う案。</div>
+
+<div class="choice">Option C — Editorial</div>
+<div class="demo option3"><div class="demo-label">余白・タイポグラフィ重視</div><div class="header"><a class="brand" href="#">Kagamito Official</a><button class="icon" onclick="toggle(this)">☰</button></div><div class="hero"><h2>Works</h2><p>作品一覧ページを想定した表示例です。</p></div><div class="panel" id="panel-c" hidden><a class="big" href="#">Characters</a><div class="sub">キャラクター</div><a class="big" href="#">Works</a><div class="sub">作品</div><a class="big" href="#">Songs</a><div class="sub">楽曲</div><div class="divider"></div><div class="lang">Language / 言語</div><div><button class="active">日本語</button><button>English</button></div></div></div>
+<div class="note">余白を広く取り、リンクを大きく見せる案。スマートフォンとの相性を特に重視。</div>
+</div>
+<script>function toggle(btn){const panel=btn.parentElement.nextElementSibling.nextElementSibling;panel.hidden=!panel.hidden;btn.textContent=panel.hidden?'☰':'×'}</script>
+</body>
+</html>
