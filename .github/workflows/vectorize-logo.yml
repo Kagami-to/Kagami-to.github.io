@@ -16,22 +16,38 @@ jobs:
       - name: Install vectorization tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y imagemagick potrace
+          sudo apt-get install -y potrace
+          python -m pip install --upgrade pillow
 
-      - name: Prepare logo bitmap
+      - name: Prepare logo bitmap with Pillow
         run: |
           mkdir -p work assets/images
-          magick 1619993185.png -alpha extract -threshold 50% work/logo.pbm
+          python - <<'PY'
+          from PIL import Image
+
+          src = Image.open('1619993185.png').convert('RGBA')
+          alpha = src.getchannel('A')
+          # Preserve the transparent PNG silhouette and convert it to a clean
+          # 1-bit PBM for Potrace. Pixels with alpha >= 128 become foreground.
+          mask = alpha.point(lambda a: 255 if a >= 128 else 0, mode='L')
+          mask.save('work/logo.pbm')
+          print('Prepared', src.size, 'logo bitmap')
+          PY
 
       - name: Convert bitmap to SVG
         run: |
           potrace work/logo.pbm --svg --output assets/images/kagamito-logo.svg
+          test -s assets/images/kagamito-logo.svg
+          head -n 5 assets/images/kagamito-logo.svg
 
       - name: Commit SVG
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/images/kagamito-logo.svg
-          git diff --cached --quiet && exit 0
+          if git diff --cached --quiet; then
+            echo "SVG is already up to date"
+            exit 0
+          fi
           git commit -m "Add vectorized Kagamito logo"
           git push
