@@ -27,7 +27,8 @@ a { color: inherit; }
 .menu-copy { display: flex; flex-direction: column; justify-content: center; }
 .menu-main { font-size: 23px; font-weight: 750; line-height: 1.15; }
 .menu-sub { font-size: 13px; color: #786b86; margin-top: 5px; }
-.chevron { font-size: 18px; color: #5b3a78; }
+.chevron { display: inline-block; font-size: 18px; line-height: 1; color: #5b3a78; transform: rotate(0deg); transform-origin: center; transition: transform .3s ease; }
+.menu-group.open .chevron { transform: rotate(180deg); }
 .submenu { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; background: #eee5f3; overflow: hidden; }
 .menu-group.open .submenu { grid-template-rows: 1fr; }
 .submenu-inner { min-height: 0; overflow: hidden; }
