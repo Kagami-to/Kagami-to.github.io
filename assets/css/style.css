@@ -29,6 +29,8 @@ a { color: inherit; }
 .menu-copy { display: flex; flex-direction: column; justify-content: center; }
 .menu-main { font-family: "Shippori Mincho", serif; font-size: 26px; font-weight: 600; line-height: 1.15; }
 .menu-sub { font-family: "Zen Kaku Gothic New", sans-serif; font-size: 13px; color: #786b86; margin-top: 5px; }
+html[lang="en"] .menu-copy { justify-content: center; }
+html[lang="en"] .menu-main { display: flex; align-items: center; min-height: 54px; }
 .chevron { display: inline-block; font-family: "Zen Kaku Gothic New", sans-serif; font-size: 18px; line-height: 1; color: #5b3a78; transform: rotate(0deg); transform-origin: center; transition: transform .3s ease; }
 .menu-group.open .chevron { transform: rotate(180deg); }
 .submenu { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; background: #eee5f3; overflow: hidden; }
