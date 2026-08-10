@@ -19,38 +19,55 @@ jobs:
           sudo apt-get install -y potrace
           python -m pip install --upgrade pillow
 
-      - name: Prepare logo bitmap with Pillow
+      - name: Extract logo from background
         run: |
           mkdir -p work assets/images
           python - <<'PY'
           from PIL import Image
 
           src = Image.open('1619993185.png').convert('RGBA')
-          px = src.load()
           w, h = src.size
-
-          # The original logo is intended to be white on transparent.
-          # Allow about 5% tolerance in each RGB channel so near-white
-          # anti-aliased pixels are retained, while rejecting faint colored
-          # background pixels and transparency artifacts.
+          p = src.load()
           out = Image.new('1', (w, h), 0)
-          dst = out.load()
+          q = out.load()
+
+          # Estimate the background from the four corners. Pixels close to
+          # that background are discarded. Near-white pixels that are both
+          # opaque and sufficiently different from the background are kept.
+          samples = [p[0,0], p[w-1,0], p[0,h-1], p[w-1,h-1]]
+          bg = tuple(sum(s[i] for s in samples) // 4 for i in range(3))
+          tolerance = 13
+
           for y in range(h):
               for x in range(w):
-                  r, g, b, a = px[x, y]
-                  near_white = r >= 242 and g >= 242 and b >= 242
-                  sufficiently_opaque = a >= 242
-                  dst[x, y] = 1 if near_white and sufficiently_opaque else 0
+                  r, g, b, a = p[x,y]
+                  if a < 242:
+                      continue
+                  if r < 230 or g < 230 or b < 230:
+                      continue
+                  if max(abs(r-bg[0]), abs(g-bg[1]), abs(b-bg[2])) <= tolerance:
+                      continue
+                  q[x,y] = 1
 
           out.save('work/logo.pbm')
-          print(f'Prepared {w}x{h} bitmap using near-white + opacity threshold')
+          print('Background reference:', bg)
+          print('Saved extracted bitmap:', w, 'x', h)
           PY
 
       - name: Convert bitmap to SVG
         run: |
           potrace work/logo.pbm --svg --output assets/images/kagamito-logo.svg
           test -s assets/images/kagamito-logo.svg
-          head -n 5 assets/images/kagamito-logo.svg
+
+      - name: Normalize SVG fill
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('assets/images/kagamito-logo.svg')
+          s = p.read_text()
+          s = s.replace('fill="black"', 'fill="#FFFFFF"')
+          p.write_text(s)
+          PY
 
       - name: Commit SVG
         run: |
@@ -61,5 +78,5 @@ jobs:
             echo "SVG is already up to date"
             exit 0
           fi
-          git commit -m "Refine vectorized Kagamito logo"
+          git commit -m "Improve Kagamito logo vectorization"
           git push
