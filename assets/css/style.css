@@ -6,7 +6,8 @@ body { margin: 0; color: #222; background: #fafafa; line-height: 1.7; }
 body.menu-open { overflow: hidden; }
 a { color: inherit; }
 .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 300; display: flex; justify-content: space-between; align-items: center; gap: 1rem; height: 68px; padding: 0 1.1rem 0 1.5rem; background: #174b4d; color: #fff; border-bottom: 2px solid #2b6667; }
-.site-title { color: #fff; font-weight: 750; text-decoration: none; }
+.site-title { color: #fff; font-family: "Shippori Mincho", serif; font-weight: 600; text-decoration: none; }
+.site-title-ja { display: inline; }
 .site-header nav { display: flex; align-items: center; position: relative; }
 .site-header nav > a { display: none; }
 .menu-toggle { position: relative; z-index: 310; display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #fff; cursor: pointer; }
@@ -89,3 +90,4 @@ html[lang="en"] .menu-main { display: flex; align-items: center; min-height: 54p
 @media (max-width: 480px) { .menu-main { font-size: 24px; } .item-name { font-size: 17px; } .item-epithet { font-size: 11px; } }
 @media (max-width: 700px) { .home-hero-inner { padding-top: 115px; } .home-hero-inner::before { top: 105px; width: 82vw; height: 82vw; } .home-logo { width: 90.2vw; } .home-intro { margin-top: 70px; } .home-enter { margin-top: 90px; } .home-gradient { height: clamp(720px,140vw,1000px); } .home-description { padding: 80px 8vw 55px; } .home-description p { line-height: 2.05; margin-bottom: 26px; } .home-links { padding: 30px 8vw 110px; } .home-links nav { grid-template-columns: 1fr; gap: 10px; } .home-links a { min-height: 72px; font-size: 18px; } }
 @media (max-width: 600px) { .site-header { height: 64px; padding: 0 1rem; } .mobile-menu-overlay { top: 64px; } .mobile-menu-panel { top: 64px; width: min(90vw, 380px); height: calc(100dvh - 64px); } .container { width: min(960px, calc(100% - 1.5rem)); padding-top: 104px; } .entity-navigation a { padding: .6rem .75rem; } }
+@media (min-width: 1px) { html[lang="en"] .site-title-ja { display: none; } }
