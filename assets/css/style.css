@@ -68,5 +68,24 @@ html[lang="en"] .menu-main { display: flex; align-items: center; min-height: 54p
 .entity-navigation { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid #ddd; }
 .entity-navigation a { display: inline-block; padding: .7rem 1rem; background: #fff; border: 1px solid #ddd; border-radius: 0; text-decoration: none; }
 .entity-navigation a:hover { border-color: #76509a; }
+.home-page { background: #f8f7f3; }
+.home-hero { background: #174b4d; overflow: hidden; }
+.home-hero-inner { position: relative; overflow: hidden; background: #174b4d; padding: 125px 0 0; }
+.home-hero-inner::before { content: ""; position: absolute; z-index: 0; width: min(74vw,720px); height: min(74vw,720px); min-width: 360px; min-height: 360px; left: 50%; top: 125px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle at 45% 42%,rgba(255,255,255,.12),rgba(255,255,255,.055) 48%,rgba(9,41,43,.08) 74%,rgba(9,41,43,0) 75%); border: 1px solid rgba(255,255,255,.09); box-shadow: 0 0 90px rgba(5,30,31,.18); }
+.home-logo { position: relative; z-index: 1; width: min(81.4vw,792px); margin: 0 auto; }
+.home-logo img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 28px rgba(0,0,0,.18)); }
+.home-intro { position: relative; z-index: 1; width: min(760px,84vw); margin: clamp(70px,8vw,105px) auto 0; text-align: center; }
+.home-intro p,.home-enter p { margin: 0; font-family: "Shippori Mincho",serif; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.18); }
+.home-intro p { font-size: clamp(16px,2.2vw,23px); line-height: 2.15; letter-spacing: .08em; }
+.home-enter { position: relative; z-index: 1; width: min(900px,88vw); margin: clamp(90px,10vw,125px) auto 0; text-align: center; }
+.home-enter p { font-size: clamp(18px,2.5vw,26px); letter-spacing: .11em; }
+.home-gradient { height: clamp(720px,96vw,1200px); background: linear-gradient(to bottom,#174b4d,#f8f7f3); }
+.home-description { max-width: 860px; margin: 0 auto; padding: 110px 7vw 70px; background: #f8f7f3; font-family: "Shippori Mincho",serif; }
+.home-description p { margin: 0 0 32px; font-size: clamp(16px,2vw,20px); line-height: 2.25; letter-spacing: .06em; }
+.home-description p:last-child { margin-bottom: 0; }
+.home-links { max-width: 900px; margin: 0 auto; padding: 40px 7vw 150px; background: #f8f7f3; }
+.home-links nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.home-links a { display: flex; min-height: 92px; align-items: center; justify-content: center; text-decoration: none; color: #f8f7f3; background: rgba(18,61,64,.92); box-shadow: 0 10px 28px rgba(15,39,40,.12); font-family: "Shippori Mincho",serif; font-size: 20px; }
 @media (max-width: 480px) { .menu-main { font-size: 24px; } .item-name { font-size: 17px; } .item-epithet { font-size: 11px; } }
+@media (max-width: 700px) { .home-hero-inner { padding-top: 115px; } .home-hero-inner::before { top: 105px; width: 82vw; height: 82vw; } .home-logo { width: 90.2vw; } .home-intro { margin-top: 70px; } .home-enter { margin-top: 90px; } .home-gradient { height: clamp(720px,140vw,1000px); } .home-description { padding: 80px 8vw 55px; } .home-description p { line-height: 2.05; margin-bottom: 26px; } .home-links { padding: 30px 8vw 110px; } .home-links nav { grid-template-columns: 1fr; gap: 10px; } .home-links a { min-height: 72px; font-size: 18px; } }
 @media (max-width: 600px) { .site-header { height: 64px; padding: 0 1rem; } .mobile-menu-overlay { top: 64px; } .mobile-menu-panel { top: 64px; width: min(90vw, 380px); height: calc(100dvh - 64px); } .container { width: min(960px, calc(100% - 1.5rem)); padding-top: 104px; } .entity-navigation a { padding: .6rem .75rem; } }
