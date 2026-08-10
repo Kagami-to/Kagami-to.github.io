@@ -2,7 +2,7 @@ from pathlib import Path
 import csv, html
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / 'kagamito' / 'pages'
+DATA = ROOT / 'data'
 
 
 def rows(name):
@@ -11,16 +11,8 @@ def rows(name):
 
 
 def url_id(value):
-    """Return the URL identifier defined by the CSV.
-
-    url_id is the canonical public filename. Do not derive filenames from
-    display names or numeric IDs. The existing site uses values such as
-    yaya, kotone, kt01 and kt001.
-    """
     value = (value or '').strip()
-    if not value:
-        return ''
-    return value.lower()
+    return value.lower() if value else ''
 
 
 def esc(value):
@@ -33,15 +25,8 @@ def layout(title, body, depth=0):
 
 
 def remove_stale_pages(out, valid_ids):
-    """Delete only generated individual HTML files that are no longer in CSV.
-
-    index.html is intentionally preserved and regenerated separately. No
-    other file types are touched, so manually maintained assets are safe.
-    """
     for path in out.glob('*.html'):
-        if path.name == 'index.html':
-            continue
-        if path.stem not in valid_ids:
+        if path.name != 'index.html' and path.stem not in valid_ids:
             path.unlink()
             print(f'Removed stale page: {path.relative_to(ROOT)}')
 
@@ -50,33 +35,21 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
     data = rows(csv_name)
     out = ROOT / folder
     out.mkdir(parents=True, exist_ok=True)
-
-    # url_id values in the CSV are the sole source of truth for generated
-    # individual-page filenames. Remove old generated pages before writing
-    # the current set so renamed/deleted CSV entries cannot remain published.
-    valid_ids = {
-        url_id(r.get('url_id'))
-        for r in data
-        if url_id(r.get('url_id'))
-    }
+    valid_ids = {url_id(r.get('url_id')) for r in data if url_id(r.get('url_id'))}
     remove_stale_pages(out, valid_ids)
-
     items = []
     for r in data:
         uid = url_id(r.get('url_id'))
         if not uid:
             continue
-        ja = r.get(ja_col, '')
-        en = r.get(en_col, '')
+        ja, en = r.get(ja_col, ''), r.get(en_col, '')
         items.append((uid, ja, en, r))
-
         detail = f'''<div class="character-header"><h1>{esc(ja or en)}</h1><p class="character-english">{esc(en)}</p></div>'''
         for key, val in r.items():
             if key in {id_col, ja_col, en_col, 'url_id'} or not val:
                 continue
             detail += f'<section class="character-section"><h2>{esc(key)}</h2><p>{esc(val)}</p></section>'
         (out / f'{uid}.html').write_text(layout(ja or en, detail, 1), encoding='utf-8')
-
     listing = f'<h1>{esc(label)}</h1><ul class="character-list">'
     for uid, ja, en, _ in items:
         listing += f'<li><a href="{esc(uid)}.html"><span class="list-main">{esc(ja or en)}</span><span class="list-japanese">{esc(en)}</span></a></li>'
