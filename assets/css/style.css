@@ -4,7 +4,19 @@ body { margin: 0; color: #222; background: #fafafa; line-height: 1.7; }
 a { color: inherit; }
 .site-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: #fff; border-bottom: 1px solid #ddd; }
 .site-title { font-weight: 700; text-decoration: none; }
-nav { display: flex; gap: 1rem; }
+.site-header nav { display: flex; align-items: center; gap: 1rem; position: relative; }
+.site-header nav > a { text-decoration: none; }
+.site-header nav > a:hover { text-decoration: underline; }
+.language-switch { display: flex; align-items: center; }
+.menu-toggle { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; padding: 0; border: 1px solid #ddd; border-radius: 8px; background: #fff; color: #222; font-size: 1.35rem; line-height: 1; cursor: pointer; }
+.menu-toggle:hover { border-color: #999; }
+.language-options { display: none; }
+.site-header nav:not(.menu-open) > a { display: none; }
+.site-header nav.menu-open { flex-wrap: wrap; justify-content: flex-end; }
+.site-header nav.menu-open > a { display: block; }
+.site-header nav.menu-open .language-options { display: flex; align-items: center; gap: .45rem; }
+.language-options button { border: 0; background: transparent; padding: .35rem .2rem; color: inherit; cursor: pointer; font: inherit; }
+.language-options button:hover { text-decoration: underline; }
 .container { width: min(960px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 4rem; }
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
 .card { display: block; padding: 1.25rem; background: #fff; border: 1px solid #ddd; border-radius: 10px; text-decoration: none; }
@@ -25,4 +37,11 @@ nav { display: flex; gap: 1rem; }
 .entity-navigation { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid #ddd; }
 .entity-navigation a { display: inline-block; padding: .7rem 1rem; background: #fff; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; }
 .entity-navigation a:hover { border-color: #999; }
-@media (max-width: 600px) { .site-header { flex-direction: column; align-items: flex-start; } nav { flex-wrap: wrap; } .entity-navigation a { padding: .6rem .75rem; } }
+@media (max-width: 600px) {
+  .site-header { flex-direction: row; align-items: center; }
+  .site-header nav { gap: .6rem; }
+  .site-header nav.menu-open { width: 100%; justify-content: flex-end; }
+  .site-header nav.menu-open > a { width: 100%; text-align: right; padding: .25rem 0; }
+  .site-header nav.menu-open .language-options { width: 100%; justify-content: flex-end; }
+  .entity-navigation a { padding: .6rem .75rem; }
+}
