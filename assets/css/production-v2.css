@@ -10,6 +10,7 @@
 .list-main{display:block;font-family:"Shippori Mincho",serif;font-size:21px;font-weight:600;line-height:1.45}
 .list-japanese,.list-subtitle,.item-secondary{display:block;margin-top:5px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080;font-weight:400}
 .character-epithet{display:block;margin-bottom:4px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080}
-.home-logo{width:min(96.2vw,936px)}
-@media(max-width:700px){.home-logo{width:106.6vw}.character-list{grid-template-columns:1fr}}
+.home-logo{position:absolute;z-index:1;left:50%;top:50%;width:min(81.4vw,792px);margin:0;transform:translate(-50%,-50%)}
+.home-logo img{display:block;width:100%;height:auto}
+@media(max-width:700px){.home-logo{width:90.2vw}.character-list{grid-template-columns:1fr}}
 @media(max-width:600px){.container{width:min(980px,calc(100% - 1.5rem));padding-top:104px}.page-heading h1{font-size:31px}.character-list a{min-height:112px}.item-secondary{font-size:11px}}
