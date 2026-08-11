@@ -10,7 +10,9 @@
 .list-main{display:block;font-family:"Shippori Mincho",serif;font-size:21px;font-weight:600;line-height:1.45}
 .list-japanese,.list-subtitle,.item-secondary{display:block;margin-top:5px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080;font-weight:400}
 .character-epithet{display:block;margin-bottom:4px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080}
-.home-logo{position:absolute;z-index:1;left:50%;top:50%;width:min(81.4vw,792px);margin:0;transform:translate(-50%,-50%)}
+.home-hero-inner{padding-top:125px;padding-bottom:125px}
+.home-logo{position:absolute;z-index:1;left:50%;top:calc(125px + min(74vw,720px)/2);width:min(81.4vw,792px);margin:0;transform:translate(-50%,-50%)}
 .home-logo img{display:block;width:100%;height:auto}
-@media(max-width:700px){.home-logo{width:90.2vw}.character-list{grid-template-columns:1fr}}
+.home-intro{margin-top:calc(min(74vw,720px) + 125px)}
+@media(max-width:700px){.home-hero-inner{padding-top:105px;padding-bottom:105px}.home-hero-inner::before{top:105px;width:82vw;height:82vw}.home-logo{top:calc(105px + 82vw/2);width:90.2vw}.home-intro{margin-top:82vw}.character-list{grid-template-columns:1fr}}
 @media(max-width:600px){.container{width:min(980px,calc(100% - 1.5rem));padding-top:104px}.page-heading h1{font-size:31px}.character-list a{min-height:112px}.item-secondary{font-size:11px}}
