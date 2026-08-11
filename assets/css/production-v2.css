@@ -8,8 +8,8 @@
 .character-list a{min-height:112px;background:#fff;border:0;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:22px 20px;display:flex;flex-direction:column;justify-content:center;text-decoration:none;color:#263d3d}
 .character-list a:hover{background:#fff;border-left-color:#2d6869}
 .list-main{display:block;font-family:"Shippori Mincho",serif;font-size:21px;font-weight:600;line-height:1.45}
-.list-japanese,.list-subtitle{display:block;margin-top:5px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080;font-weight:400}
+.list-japanese,.list-subtitle,.item-secondary{display:block;margin-top:5px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080;font-weight:400}
 .character-epithet{display:block;margin-bottom:4px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080}
 .home-logo{width:min(96.2vw,936px)}
 @media(max-width:700px){.home-logo{width:106.6vw}.character-list{grid-template-columns:1fr}}
-@media(max-width:600px){.container{width:min(980px,calc(100% - 1.5rem));padding-top:104px}.page-heading h1{font-size:31px}.character-list a{min-height:112px}}
+@media(max-width:600px){.container{width:min(980px,calc(100% - 1.5rem));padding-top:104px}.page-heading h1{font-size:31px}.character-list a{min-height:112px}.item-secondary{font-size:11px}}
