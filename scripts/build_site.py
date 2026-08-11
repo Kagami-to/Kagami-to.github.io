@@ -19,9 +19,9 @@ def esc(value):
     return html.escape(value or '', quote=True)
 
 
-def layout(title, body, depth=0, extra_head=''):
+def layout(title, body, depth=0, extra_head='', extra_body=''):
     prefix = '../' * depth
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/production-v2.css">{extra_head}</head><body><header class="site-header"><a href="{prefix}" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header><main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script><script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/production-v2.css">{extra_head}</head><body><header class="site-header"><a href="{prefix}" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header><main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def remove_stale_pages(out, valid_ids):
@@ -31,7 +31,7 @@ def remove_stale_pages(out, valid_ids):
             print(f'Removed stale page: {path.relative_to(ROOT)}')
 
 
-def detail_page(title_ja, title_en, rows_data, id_col, ja_col, en_col, uid, folder):
+def detail_page(title_ja, title_en, rows_data, id_col, ja_col, en_col, uid):
     detail = f'''<div class="character-header"><h1>{esc(title_ja or title_en)}</h1><p class="character-english">{esc(title_en)}</p></div>'''
     row = next((r for r in rows_data if url_id(r.get('url_id')) == uid), {})
     for key, val in row.items():
@@ -51,7 +51,7 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
         uid = url_id(r.get('url_id'))
         if not uid:
             continue
-        detail = detail_page(r.get(ja_col,''), r.get(en_col,''), data, id_col, ja_col, en_col, uid, folder)
+        detail = detail_page(r.get(ja_col,''), r.get(en_col,''), data, id_col, ja_col, en_col, uid)
         (out / f'{uid}.html').write_text(layout(r.get(ja_col,'') or r.get(en_col,''), detail, 1), encoding='utf-8')
 
     if folder == 'characters':
@@ -64,8 +64,7 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
         body = '''<div class="page-heading"><h1 id="page-title">Songs</h1><div class="page-sub" id="page-sub">楽曲</div></div><ul id="entity-list" class="character-list"></ul>'''
         script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-title').textContent=t('songs');document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';</script><script>renderList('songs').catch(e=>console.error(e));</script>'''
 
-    page = layout(label, body, 1)[:-7] + script + '</body></html>'
-    (out / 'index.html').write_text(page, encoding='utf-8')
+    (out / 'index.html').write_text(layout(label, body, 1, extra_body=script), encoding='utf-8')
 
 
 def main():
