@@ -91,3 +91,25 @@ html[lang="en"] .menu-main { display: flex; align-items: center; min-height: 54p
 @media (max-width: 700px) { .home-hero-inner { padding-top: 115px; } .home-hero-inner::before { top: 105px; width: 82vw; height: 82vw; } .home-logo { width: 90.2vw; } .home-intro { margin-top: 70px; } .home-enter { margin-top: 90px; } .home-gradient { height: clamp(720px,140vw,1000px); } .home-description { padding: 80px 8vw 55px; } .home-description p { line-height: 2.05; margin-bottom: 26px; } .home-links { padding: 30px 8vw 110px; } .home-links nav { grid-template-columns: 1fr; gap: 10px; } .home-links a { min-height: 72px; font-size: 18px; } }
 @media (max-width: 600px) { .site-header { height: 64px; padding: 0 1rem; } .mobile-menu-overlay { top: 64px; } .mobile-menu-panel { top: 64px; width: min(90vw, 380px); height: calc(100dvh - 64px); } .container { width: min(960px, calc(100% - 1.5rem)); padding-top: 104px; } .entity-navigation a { padding: .6rem .75rem; } }
 @media (min-width: 1px) { html[lang="en"] .site-title-ja { display: none; } }
+
+/* Production refinements merged from production-v2.css */
+.container{width:min(980px,calc(100% - 2rem));padding-top:110px}
+.page-heading{text-align:center;border-bottom:2px solid #2d6869;padding-bottom:18px;margin-bottom:30px}
+.page-heading h1{margin:0;color:#174b4d;font:600 38px/1.3 "Shippori Mincho",serif}
+.page-heading .page-sub{margin-top:6px;color:#657676;letter-spacing:.16em;font:400 14px/1.5 "Zen Kaku Gothic New",sans-serif}
+.character-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+.character-list li{min-width:0}
+.character-list a{min-height:112px;background:#fff;border:0;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:22px 20px;display:flex;flex-direction:column;justify-content:center;text-decoration:none;color:#263d3d}
+.character-list a:hover{background:#fff;border-left-color:#2d6869}
+.list-main{display:block;font-family:"Shippori Mincho",serif;font-size:21px;font-weight:600;line-height:1.45}
+.list-japanese,.list-subtitle,.item-secondary{display:block;margin-top:5px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080;font-weight:400}
+.character-epithet{display:block;margin-bottom:4px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;line-height:1.5;color:#718080}
+.home-hero-inner{padding-top:125px;padding-bottom:125px}
+.home-logo{position:absolute;z-index:1;left:50%;top:calc(125px + min(74vw,720px)/2);width:min(81.4vw,792px);margin:0;transform:translate(-50%,-50%)}
+.home-logo img{display:block;width:100%;height:auto}
+.home-intro{margin-top:calc(min(74vw,720px) + 125px + 3lh)}
+.home-gradient{height:400px;margin:0;padding:0;background:linear-gradient(to bottom,#174b4d,#f8f7f3)}
+.home-gradient:before,.home-gradient:after{content:none!important}
+.home-gradient-inner{padding-top:0;padding-bottom:0}
+@media(max-width:700px){.home-hero-inner{padding-top:105px;padding-bottom:105px}.home-hero-inner::before{top:105px;width:82vw;height:82vw}.home-logo{top:calc(105px + 82vw/2);width:90.2vw}.home-intro{margin-top:calc(82vw + 3lh)}.character-list{grid-template-columns:1fr}}
+@media(max-width:600px){.container{width:min(980px,calc(100% - 1.5rem));padding-top:104px}.page-heading h1{font-size:31px}.character-list a{min-height:112px}.item-secondary{font-size:11px}}
