@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kagamito Official — Home vmin Preview</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+*{box-sizing:border-box}
+html{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{margin:0;color:#222;background:#f8f7f3;line-height:1.7}
+.preview-note{position:relative;z-index:20;margin:0;padding:10px 16px;background:#222;color:#fff;text-align:center;font:12px/1.5 "Zen Kaku Gothic New",sans-serif}
+.home-page{background:#f8f7f3}
+.home-hero{background:#174b4d;overflow:hidden}
+.home-hero-inner{position:relative;overflow:hidden;background:#174b4d;padding:0 0 125px}
+.home-hero-inner::before{content:"";position:absolute;z-index:0;width:var(--hero-size);height:var(--hero-size);left:50%;top:125px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 45% 42%,rgba(255,255,255,.12),rgba(255,255,255,.055) 48%,rgba(9,41,43,.08) 74%,rgba(9,41,43,0) 75%);border:1px solid rgba(255,255,255,.09);box-shadow:0 0 90px rgba(5,30,31,.18)}
+.home-hero{--hero-size:min(74vmin,720px)}
+.home-logo{position:absolute;z-index:1;left:50%;top:calc(125px + var(--hero-size)/2);width:min(calc(var(--hero-size) * 1.1),792px);margin:0;transform:translate(-50%,-50%)}
+.home-logo img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 28px rgba(0,0,0,.18))}
+.home-intro{position:relative;z-index:1;width:min(760px,84vw);margin:calc(var(--hero-size) + 125px + 3lh) auto 0;text-align:center}
+.home-intro p,.home-enter p{margin:0;font-family:"Shippori Mincho",serif;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.18)}
+.home-intro p{font-size:clamp(16px,2.2vw,23px);line-height:2.15;letter-spacing:.08em}
+.home-enter{position:relative;z-index:1;width:min(900px,88vw);margin:clamp(90px,10vw,125px) auto 0;text-align:center}
+.home-enter p{font-size:clamp(18px,2.5vw,26px);letter-spacing:.11em}
+.home-gradient{height:400px;background:linear-gradient(to bottom,#174b4d,#f8f7f3)}
+.home-description{max-width:860px;margin:0 auto;padding:110px 7vw 70px;background:#f8f7f3;font-family:"Shippori Mincho",serif}
+.home-description p{margin:0 0 32px;font-size:clamp(16px,2vw,20px);line-height:2.25;letter-spacing:.06em}
+.home-description p:last-child{margin-bottom:0}
+.home-links{max-width:900px;margin:0 auto;padding:40px 7vw 150px;background:#f8f7f3}
+.home-links nav{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.home-links a{display:flex;min-height:92px;align-items:center;justify-content:center;text-decoration:none;color:#f8f7f3;background:rgba(18,61,64,.92);box-shadow:0 10px 28px rgba(15,39,40,.12);font-family:"Shippori Mincho",serif;font-size:20px}
+@media(max-width:700px){
+ .home-hero{--hero-size:min(82vmin,720px)}
+ .home-hero-inner{padding-bottom:105px}
+ .home-hero-inner::before{top:105px}
+ .home-logo{top:calc(105px + var(--hero-size)/2);width:min(calc(var(--hero-size) * 1.1),792px)}
+ .home-intro{margin-top:calc(var(--hero-size) + 105px + 3lh)}
+ .home-gradient{height:400px}
+ .home-description{padding:80px 8vw 55px}
+ .home-description p{line-height:2.05;margin-bottom:26px}
+ .home-links{padding:30px 8vw 110px}
+ .home-links nav{grid-template-columns:1fr;gap:10px}
+ .home-links a{min-height:72px;font-size:18px}
+}
+</style>
+</head>
+<body class="home-page">
+<div class="preview-note">HOME vmin PREVIEW — 本番サイトには影響しません。「幅と高さの小さい方」を基準にロゴと円を配置する案です。</div>
+<main class="home-hero">
+<div class="home-hero-inner">
+<div class="home-logo"><img src="../1000019929.svg" alt="鏡外"></div>
+<section class="home-intro"><p>少女は鏡の外へと誘われた<br>まるで最初から、<br>そう決まっていたかのように</p></section>
+<section class="home-enter"><p>そして、あなたも。</p></section>
+</div>
+<div class="home-gradient" aria-hidden="true"></div>
+</main>
+<section class="home-description">
+<p>鏡の向こうの世界、「鏡外」へようこそ。作者の時雨々と申します。</p>
+<p>「鏡外」は、日本神話における三種の神器の1つ、八咫鏡の向こう側にある世界を描く、時雨々による一次創作作品です。</p>
+<p>このHPはそんな「鏡外」を楽しむ為の入口です。キャラクター設定や音楽、ショートストーリーなどを通して、少しでも「鏡外」に興味を持ってくださったら幸いです。</p>
+</section>
+<section class="home-links"><nav><a href="#">Characters</a><a href="#">Works</a><a href="#">Songs</a></nav></section>
+</body>
+</html>
