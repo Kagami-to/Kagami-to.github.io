@@ -4,15 +4,11 @@
 .character-092-wrap{width:min(1040px,calc(100% - 32px));margin:auto;padding:24px 0 60px}
 .character-092-card{background:#f2f5f3;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:48px 52px 58px;position:relative;overflow:hidden}
 .character-092-card:after{content:"CHARACTERS";position:absolute;right:-28px;top:90px;writing-mode:vertical-rl;font:400 72px/1 "Shippori Mincho",serif;letter-spacing:.08em;color:rgba(45,104,105,.045);pointer-events:none}
-.character-092-pager{position:fixed;top:50%;transform:translateY(-50%);z-index:30;cursor:pointer;width:58px;height:82px;border:0;background:rgba(45,104,105,.58);color:#fff;font:400 34px/1 "Shippori Mincho",serif;display:flex;align-items:center;justify-content:center;gap:6px}
+.character-092-pager{position:fixed;top:50%;transform:translateY(-50%);z-index:30;cursor:pointer;width:58px;height:82px;border:0;background:rgba(45,104,105,.58);color:#fff;text-decoration:none;font:400 34px/1 "Shippori Mincho",serif;display:flex;align-items:center;justify-content:center}
 .character-092-pager:focus-visible{outline:2px solid #2d6869;outline-offset:2px}
 .character-092-pager-prev{left:-22px;border-radius:0 8px 8px 0;padding-left:20px}
 .character-092-pager-next{right:-22px;border-radius:8px 0 0 8px;padding-right:20px}
-.character-092-pager-arrow{font:400 34px/1 "Shippori Mincho",serif;flex:none}
-.character-092-pager-label{display:none;position:absolute;white-space:nowrap;font:400 11px/1.3 "Zen Kaku Gothic New",sans-serif;background:rgba(45,104,105,.92);padding:7px 9px;pointer-events:none}
-.character-092-pager-prev .character-092-pager-label{left:42px}
-.character-092-pager-next .character-092-pager-label{right:42px}
-.character-092-pager:hover .character-092-pager-label{display:block}
+.character-092-pager-arrow{font:400 34px/1 "Shippori Mincho",serif;flex:none;text-decoration:none}
 .character-092-hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:58px;align-items:stretch}
 .character-092-hero-info{padding:10px 0 0;display:flex;flex-direction:column;min-width:0}
 .character-092-identity-group{min-width:0;border-left:3px solid #2d6869;padding-left:24px}
@@ -44,26 +40,4 @@
 .character-092-heading{margin:0 0 15px;padding:0;border:0;color:#222;font:500 25px/1.4 "Shippori Mincho",serif;letter-spacing:.08em}
 .character-092-profile{font:400 15px/2.15 "Zen Kaku Gothic New",sans-serif;max-width:760px}
 @media(max-width:760px){
-  .character-detail-page{padding-top:78px}
-  .character-092-wrap{width:calc(100% - 20px);padding:14px 0 44px}
-  .character-092-card{padding:32px 26px 44px}
-  .character-092-card:after{font-size:46px;right:-18px;top:90px}
-  .character-092-pager{width:50px;height:68px;font-size:28px}
-  .character-092-pager-prev{left:-18px;padding-left:16px}
-  .character-092-pager-next{right:-18px;padding-right:16px}
-  .character-092-pager-arrow{font-size:28px}
-  .character-092-pager-label{font-size:10px}
-  .character-092-hero{display:flex;flex-direction:column;gap:0}
-  .character-092-hero-info{display:contents}
-  .character-092-identity-group{order:1;width:100%;padding:0 17px;border-left:3px solid #2d6869}
-  .character-092-identity-content{padding:0}
-  .character-092-portrait{order:2;min-height:0;aspect-ratio:4/5;width:min(100%,340px);margin:30px auto 0}
-  .character-092-ability-wrap{order:3;margin:28px 0 0;padding:0}
-  .character-092-song-section{order:4;margin-top:20px;padding:0}
-  .character-092-divider{order:5;margin:32px 0 0}
-  .character-092-section{margin-top:42px;padding-top:32px}
-  .character-092-heading{font-size:22px}
-  .character-092-profile{font-size:14px;line-height:2}
-  .character-092-song-card,.character-092-work-card{padding:16px 18px}
-  .character-092-card-title{font-size:18px}
-}
+.character-detail-page{padding-top:78px}.character-092-wrap{width:calc(100% - 20px);padding:14px 0 44px}.character-092-card{padding:32px 26px 44px}.character-092-card:after{font-size:46px;right:-18px;top:90px}.character-092-pager{width:50px;height:68px;font-size:28px}.character-092-pager-prev{left:-18px;padding-left:16px}.character-092-pager-next{right:-18px;padding-right:16px}.character-092-pager-arrow{font-size:28px}.character-092-hero{display:flex;flex-direction:column;gap:0}.character-092-hero-info{display:contents}.character-092-identity-group{order:1;width:100%;padding:0 17px;border-left:3px solid #2d6869}.character-092-identity-content{padding:0}.character-092-portrait{order:2;min-height:0;aspect-ratio:4/5;width:min(100%,340px);margin:30px auto 0}.character-092-ability-wrap{order:3;margin:28px 0 0;padding:0}.character-092-song-section{order:4;margin-top:20px;padding:0}.character-092-divider{order:5;margin:32px 0 0}.character-092-section{margin-top:42px;padding-top:32px}.character-092-heading{font-size:22px}.character-092-profile{font-size:14px;line-height:2}.character-092-song-card,.character-092-work-card{padding:16px 18px}.character-092-card-title{font-size:18px}}
