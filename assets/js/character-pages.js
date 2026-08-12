@@ -1,3 +1,4 @@
+function parseCSV(text){const rows=[];let row=[],field='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'){if(text[i+1]==='"'){field+='"';i++}else quoted=false}else field+=c}else if(c==='"')quoted=true;else if(c===','){row.push(field);field=''}else if(c==='\n'){row.push(field);rows.push(row);row=[];field=''}else if(c!=='\r')field+=c}if(field.length||row.length){row.push(field);rows.push(row)}const headers=(rows.shift()||[]).map(v=>v.trim());return rows.filter(r=>r.some(v=>v.trim()!=='')).map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])))}
 async function loadCharacterCSV(path){const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error(`CSVを読み込めませんでした (${r.status})`);return parseCSV(await r.text())}
 function characterIds(v){return String(v||'').split(/[、,;\s]+/).filter(Boolean)}
 function characterUrl(v){return String(v||'').trim().toLowerCase().replace(/\./g,'-')}
@@ -9,6 +10,7 @@ function characterFit(el){const box=el.parentElement;if(!box)return;el.style.tra
 function characterFitAll(){document.querySelectorAll('.character-092-fit-text').forEach(characterFit)}
 function characterSetSection(id,headingKey,value){const section=document.getElementById(id+'-section');if(!section)return;section.style.display=value?'':'none';if(value){document.getElementById(id+'-heading').textContent=t(headingKey);document.getElementById(id).innerHTML=escapeHtml(value).replace(/\n/g,'<br>')}}
 function characterSetRelated(targetId,sectionId,items,renderer){const section=document.getElementById(sectionId);const target=document.getElementById(targetId);if(!section||!target)return;target.innerHTML=items.map(x=>`<div>${renderer(x)}</div>`).join('');section.style.display=items.length?'':'none'}
+function characterSetNav(current,characters){const index=characters.findIndex(x=>characterUrl(x.url_id)===characterUrl(current.url_id));const prev=index>0?characters[index-1]:null;const next=index>=0&&index<characters.length-1?characters[index+1]:null;const en=getLanguage()==='en';const set=(id,item,side)=>{const el=document.getElementById(id);if(!el)return;if(item){el.href=`./${characterUrl(item.url_id)}.html`;el.style.display='';const label=el.querySelector('.character-092-nav-label')||el.querySelector('[id$="-label"]');if(label)label.textContent=en?(item.name_en||item.name_ja||''):(item.name_ja||item.name_en||'')}else{el.style.display='none'}};set('character-prev',prev,'prev');set('character-next',next,'next');set('character-prev-bottom',prev,'prev');set('character-next-bottom',next,'next');const labels=[['character-prev-bottom-label',prev],['character-next-bottom-label',next]];labels.forEach(([id,item])=>{const el=document.getElementById(id);if(el)el.textContent=item?(en?(item.name_en||item.name_ja||''):(item.name_ja||item.name_en||'')):''})}
 
 async function renderCharacter(id){
   const [characters,songs,works]=await Promise.all([loadCharacterCSV('../data/characters.csv'),loadCharacterCSV('../data/songs.csv'),loadCharacterCSV('../data/works.csv')]);
@@ -18,10 +20,12 @@ async function renderCharacter(id){
   const name=en?(c.name_en||''):(c.name_ja||'');
   document.documentElement.lang=en?'en':'ja';
   document.title=`${name} - Kagamito Official`;
+  characterSetNav(c,characters);
   const epithet=en?(c.epithet_en||''):(c.epithet_ja||'');
   const secondary=en?(c.name_ja||''):'';
   const reading=en?'':(c.reading_ja||'');
   const ability=en?(c.ability_en||''):(c.ability_ja||'');
+  const abilityDetail=en?(c.ability_detail_en||''):(c.ability_detail_ja||'');
   const position=en?(c.position_en||''):(c.position_ja||'');
   const profile=en?(c.profile_en||''):(c.profile_ja||'');
   const themeIds=characterIds(c.theme_song_ids);
@@ -37,7 +41,9 @@ async function renderCharacter(id){
   document.getElementById('character-secondary-wrap').style.display=secondary?'':'none';
   document.getElementById('character-reading-wrap').style.display=reading?'':'none';
   document.getElementById('character-ability').textContent=ability;
-  document.getElementById('character-ability-wrap').style.display=ability?'':'none';
+  document.getElementById('character-ability-wrap').style.display=ability||abilityDetail?'':'none';
+  const detailEl=document.getElementById('character-ability-detail');
+  if(detailEl){detailEl.textContent=abilityDetail;detailEl.style.display=abilityDetail?'':'none'}
   characterSetRelated('character-songs','character-song-section',themes,characterSongCard);
 
   const portrait=document.getElementById('character-portrait');
