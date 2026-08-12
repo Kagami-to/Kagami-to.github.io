@@ -35,19 +35,11 @@ def character_pager(prev_row, next_row):
     if prev_row:
         uid = url_id(prev_row.get('url_id'))
         name = prev_row.get('name_ja') or prev_row.get('name_en') or uid
-        parts.append(
-            f'<a class="character-092-pager character-092-pager-prev" href="{esc(uid)}.html" aria-label="前のキャラクター: {esc(name)}">'
-            f'<span class="character-092-pager-arrow" aria-hidden="true">←</span>'
-            f'<span class="character-092-pager-label">{esc(name)}</span></a>'
-        )
+        parts.append(f'<a class="character-092-pager character-092-pager-prev" href="./{esc(uid)}.html" aria-label="前のキャラクター: {esc(name)}"><span class="character-092-pager-arrow" aria-hidden="true">〈</span></a>')
     if next_row:
         uid = url_id(next_row.get('url_id'))
         name = next_row.get('name_ja') or next_row.get('name_en') or uid
-        parts.append(
-            f'<a class="character-092-pager character-092-pager-next" href="{esc(uid)}.html" aria-label="次のキャラクター: {esc(name)}">'
-            f'<span class="character-092-pager-arrow" aria-hidden="true">→</span>'
-            f'<span class="character-092-pager-label">{esc(name)}</span></a>'
-        )
+        parts.append(f'<a class="character-092-pager character-092-pager-next" href="./{esc(uid)}.html" aria-label="次のキャラクター: {esc(name)}"><span class="character-092-pager-arrow" aria-hidden="true">〉</span></a>')
     return ''.join(parts)
 
 
@@ -75,13 +67,7 @@ def build_character_pages(data, out):
         uid = url_id(r.get('url_id'))
         prev_row = valid[pos - 1][1] if pos > 0 else None
         next_row = valid[pos + 1][1] if pos + 1 < len(valid) else None
-        html_text = character_detail_layout(
-            r.get('name_ja','') or r.get('name_en',''),
-            uid,
-            template,
-            prev_row=prev_row,
-            next_row=next_row,
-        )
+        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), uid, template, prev_row=prev_row, next_row=next_row)
         (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
 
 
@@ -89,7 +75,6 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
     data = rows(csv_name)
     out = SITE / folder
     out.mkdir(parents=True, exist_ok=True)
-
     if folder == 'characters':
         build_character_pages(data, out)
         body = '<div class="page-heading"><h1 id="page-title">Characters</h1><div class="page-sub" id="page-sub">キャラクター</div></div><ul id="character-list" class="character-list"></ul>'
@@ -107,7 +92,6 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
         else:
             body = '<div class="page-heading"><h1 id="page-title">Songs</h1><div class="page-sub" id="page-sub">楽曲</div></div><ul id="entity-list" class="character-list"></ul>'
             script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';renderList('songs').catch(e=>console.error(e));</script>'''
-
     (SITE / folder / 'index.html').write_text(layout(label, body, 1, extra_body=script), encoding='utf-8')
 
 
@@ -119,14 +103,9 @@ def prepare_site():
         source = ROOT / directory
         if source.exists():
             shutil.copytree(source, SITE / directory, dirs_exist_ok=True)
-
-    # Publish every historical preview as an isolated, read-only snapshot under
-    # /preview/<number>/. The preview tree never becomes part of the production
-    # generation process and cannot overwrite production files.
     preview_source = ROOT / 'preview'
     if preview_source.exists():
         shutil.copytree(preview_source, SITE / 'preview', dirs_exist_ok=True)
-
     data_out = SITE / 'data'
     data_out.mkdir(parents=True, exist_ok=True)
     for name in ('characters.csv', 'songs.csv', 'works.csv'):
