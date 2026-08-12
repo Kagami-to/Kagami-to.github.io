@@ -11,7 +11,8 @@ function characterFit(el){const box=el.parentElement;if(!box)return;el.style.tra
 function characterFitAll(){document.querySelectorAll('.character-092-fit-text').forEach(characterFit)}
 function characterSetSection(id,headingKey,value){const section=document.getElementById(id+'-section');if(!section)return;section.style.display=value?'':'none';if(value){document.getElementById(id+'-heading').textContent=t(headingKey);document.getElementById(id).innerHTML=escapeHtml(value).replace(/\n/g,'<br>')}}
 function characterSetRelated(targetId,sectionId,items,renderer){const section=document.getElementById(sectionId);const target=document.getElementById(targetId);if(!section||!target)return;target.innerHTML=items.map(x=>`<div>${renderer(x)}</div>`).join('');section.style.display=items.length?'':'none'}
-function characterSetNav(current,characters){const index=characters.findIndex(x=>characterUrl(x.url_id)===characterUrl(current.url_id));const prev=index>0?characters[index-1]:null;const next=index>=0&&index<characters.length-1?characters[index+1]:null;const en=getLanguage()==='en';const set=(id,item)=>{const el=document.getElementById(id);if(!el)return;if(item){el.href=`./${characterUrl(item.url_id)}.html`;el.style.display='';const label=el.querySelector('.character-092-nav-label')||el.querySelector('[id$="-label"]');if(label)label.textContent=en?(item.name_en||item.name_ja||''):(item.name_ja||item.name_en||'')}else el.style.display='none'};set('character-prev',prev);set('character-next',next);set('character-prev-bottom',prev);set('character-next-bottom',next);[['character-prev-bottom-label',prev],['character-next-bottom-label',next]].forEach(([id,item])=>{const el=document.getElementById(id);if(el)el.textContent=item?(en?(item.name_en||item.name_ja||''):(item.name_ja||item.name_en||'')):''})}
+function characterSetNav(current,characters){const index=characters.findIndex(x=>characterUrl(x.url_id)===characterUrl(current.url_id));const prev=index>0?characters[index-1]:null;const next=index>=0&&index<characters.length-1?characters[index+1]:null;const en=getLanguage()==='en';const set=(id,item)=>{const el=document.getElementById(id);if(!el)return;if(item){el.dataset.href=`./${characterUrl(item.url_id)}.html`;el.style.display='';const label=document.getElementById(id==='character-prev'?'character-prev-label':'character-next-label');if(label)label.textContent=en?(item.name_en||item.name_ja||''):(item.name_ja||item.name_en||'')}else{el.dataset.href='';el.style.display='none'}};set('character-prev',prev);set('character-next',next)}
+function characterPagerClick(id){const el=document.getElementById(id);if(!el)return;const href=el.dataset.href;if(href)window.location.href=href}
 
 async function renderCharacter(id){
   const [characters,songs,works]=await Promise.all([loadCharacterCSV('../data/characters.csv'),loadCharacterCSV('../data/songs.csv'),loadCharacterCSV('../data/works.csv')]);
@@ -60,3 +61,6 @@ async function renderCharacter(id){
   characterSetRelated('character-works','character-works-section',appearances,characterWorkCard);
   characterFitAll();
 }
+
+document.getElementById('character-prev')?.addEventListener('click',()=>characterPagerClick('character-prev'));
+document.getElementById('character-next')?.addEventListener('click',()=>characterPagerClick('character-next'));
