@@ -90,6 +90,14 @@ def prepare_site():
         source = ROOT / directory
         if source.exists():
             shutil.copytree(source, SITE / directory, dirs_exist_ok=True)
+
+    # Publish every historical preview as an isolated, read-only snapshot under
+    # /preview/<number>/. The preview tree never becomes part of the production
+    # generation process and cannot overwrite production files.
+    preview_source = ROOT / 'preview'
+    if preview_source.exists():
+        shutil.copytree(preview_source, SITE / 'preview', dirs_exist_ok=True)
+
     data_out = SITE / 'data'
     data_out.mkdir(parents=True, exist_ok=True)
     for name in ('characters.csv', 'songs.csv', 'works.csv'):
