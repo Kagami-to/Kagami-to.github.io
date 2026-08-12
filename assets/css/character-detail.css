@@ -1,0 +1,32 @@
+/* Character detail page */
+.character-detail-page{width:min(1040px,calc(100% - 2rem));margin:0 auto;padding:110px 0 4rem}
+.character-toolbar{margin-bottom:18px}
+.character-back{display:inline-block;color:#2d6869;text-decoration:none;font:400 13px/1.5 "Shippori Mincho",serif}
+.character-back:hover{text-decoration:underline}
+.character-card{background:#f2f5f3;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:48px 52px 58px;position:relative;overflow:hidden}
+.character-card:after{content:"CHARACTERS";position:absolute;right:-28px;top:90px;writing-mode:vertical-rl;font:400 72px/1 "Shippori Mincho",serif;letter-spacing:.08em;color:rgba(45,104,105,.045);pointer-events:none}
+.character-hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:58px;align-items:stretch}
+.character-info{padding:10px 0 0;display:flex;flex-direction:column;min-width:0}
+.character-identity{min-width:0;border-left:3px solid #2d6869;padding-left:24px}
+.character-epithet-detail{margin:0 0 6px;font:400 14px/1.5 "Zen Kaku Gothic New",sans-serif;color:#555;letter-spacing:.08em}
+.character-name-detail{margin:0;font:500 clamp(42px,5.5vw,68px)/1.16 "Shippori Mincho",serif;letter-spacing:.08em}
+.character-name-secondary{margin:5px 0 0;font:400 12px/1.6 "Zen Kaku Gothic New",sans-serif;color:#777;letter-spacing:.06em}
+.character-reading-detail{margin:7px 0 0;font:400 11px/1.5 "Zen Kaku Gothic New",sans-serif;color:#777;letter-spacing:.13em}
+.character-ability{margin:28px 0 0;font:400 24px/1.7 "Shippori Mincho",serif;letter-spacing:.06em}
+.character-song-area{margin-top:auto;padding-top:28px}
+.character-related-list{display:grid;gap:10px;list-style:none;padding:0;margin:0}
+.character-related-list li{margin:0}
+.character-song-card,.character-work-card{display:block;background:#fff;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:17px 20px;color:#263d3d;text-decoration:none;min-height:76px}
+.character-song-card:hover,.character-work-card:hover{background:#fdfefe}
+.character-card-title{font:600 20px/1.45 "Shippori Mincho",serif}
+.character-card-subtitle{margin-top:4px;font:400 12px/1.55 "Zen Kaku Gothic New",sans-serif;color:#6b7472}
+.character-portrait{height:100%;min-height:490px;background:#e8ecea;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#999;font:400 10px/1.5 "Zen Kaku Gothic New",sans-serif;letter-spacing:.12em;text-align:center}
+.character-portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.character-divider{position:relative;z-index:1;display:flex;align-items:center;gap:14px;margin:64px 0 56px;color:#2d6869;font:400 15px/1 "Shippori Mincho",serif;letter-spacing:.12em}
+.character-divider:before,.character-divider:after{content:"";height:1px;background:rgba(45,104,105,.48);flex:1}
+.character-diamond{font-size:16px;line-height:1;display:inline-block;color:#2d6869}
+.character-section{position:relative;z-index:1;margin:0 0 44px;padding:0;border:0}
+.character-section:last-child{margin-bottom:0}
+.character-section h2{margin:0 0 15px;padding:0;border:0;color:#222;font:500 25px/1.4 "Shippori Mincho",serif;letter-spacing:.08em}
+.character-profile{font:400 15px/2.15 "Zen Kaku Gothic New",sans-serif;max-width:760px}
+@media(max-width:760px){.character-detail-page{width:calc(100% - 20px);padding:104px 0 3rem}.character-card{padding:32px 26px 44px}.character-card:after{font-size:46px;right:-18px;top:90px}.character-hero{display:flex;flex-direction:column;gap:0}.character-info{display:contents}.character-identity{order:1;width:100%;padding:0 17px;border-left:3px solid #2d6869}.character-portrait{order:2;min-height:0;aspect-ratio:4/5;width:min(100%,340px);margin:30px auto 0}.character-ability{order:3;margin:28px 0 0}.character-song-area{order:4;margin-top:20px;padding:0}.character-divider{margin:44px 0 40px}.character-section{margin-bottom:36px}.character-section h2{font-size:22px}.character-profile{font-size:14px;line-height:2}.character-song-card,.character-work-card{padding:16px 18px}.character-card-title{font-size:18px}}
