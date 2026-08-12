@@ -112,18 +112,7 @@ def prepare_site():
         source = DATA / name
         if source.exists():
             shutil.copy2(source, data_out / name)
-    for name in ('index.html', 'robots.txt', 'sitemap.xml', 'favicon.ico'):
+    for name in ('index.html', 'robots.txt', 'sitemap.xml', 'favicon.ico', '1000019929.svg'):
         source = ROOT / name
         if source.exists():
             shutil.copy2(source, SITE / name)
-
-
-def main():
-    prepare_site()
-    build_entity('characters.csv', 'characters', 'character_id', 'name_ja', 'name_en', 'Characters')
-    build_entity('works.csv', 'works', 'work_id', 'title_ja', 'title_en', 'Works')
-    build_entity('songs.csv', 'songs', 'song_id', 'title_ja', 'title_en', 'Songs')
-
-
-if __name__ == '__main__':
-    main()
