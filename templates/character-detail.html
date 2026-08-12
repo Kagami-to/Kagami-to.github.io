@@ -1,8 +1,10 @@
 <div class="character-detail-092">
   <div class="character-092-wrap">
-    <div class="character-092-toolbar">
-      <a class="character-092-back" href="./">← Back to Character List</a>
-    </div>
+    <nav class="character-092-nav" aria-label="Character navigation">
+      <a class="character-092-nav-link character-092-nav-prev" id="character-prev" href="./" aria-label="Previous character"><span class="character-092-nav-arrow">←</span><span class="character-092-nav-label" id="character-prev-label"></span></a>
+      <a class="character-092-back" href="./">Characters</a>
+      <a class="character-092-nav-link character-092-nav-next" id="character-next" href="./" aria-label="Next character"><span class="character-092-nav-label" id="character-next-label"></span><span class="character-092-nav-arrow">→</span></a>
+    </nav>
     <article class="character-092-card">
       <section class="character-092-hero">
         <div class="character-092-hero-info">
@@ -16,6 +18,7 @@
           </div>
           <div class="character-092-ability-wrap" id="character-ability-wrap">
             <div class="character-092-fit-box"><p class="character-092-ability character-092-fit-text" id="character-ability"></p></div>
+            <div class="character-092-ability-detail" id="character-ability-detail"></div>
           </div>
           <div class="character-092-song-section" id="character-song-section">
             <div id="character-songs" class="character-092-related-list"></div>
@@ -38,6 +41,10 @@
         <h2 class="character-092-heading" id="character-works-heading"></h2>
         <div id="character-works" class="character-092-related-list"></div>
       </section>
+      <div class="character-092-bottom-nav" aria-label="Character navigation">
+        <a class="character-092-bottom-link" id="character-prev-bottom" href="./"><span>←</span><span id="character-prev-bottom-label"></span></a>
+        <a class="character-092-bottom-link" id="character-next-bottom" href="./"><span id="character-next-bottom-label"></span><span>→</span></a>
+      </div>
     </article>
   </div>
 </div>
