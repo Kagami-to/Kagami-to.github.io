@@ -3,6 +3,7 @@ import csv, html
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
+TEMPLATES = ROOT / 'templates'
 
 
 def rows(name):
@@ -19,9 +20,20 @@ def esc(value):
     return html.escape(value or '', quote=True)
 
 
+def site_header(prefix):
+    return f'''<header class="site-header"><a href="{prefix}" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header>'''
+
+
 def layout(title, body, depth=0, extra_head='', extra_body=''):
     prefix = '../' * depth
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{extra_head}</head><body><header class="site-header"><a href="{prefix}" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header><main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+
+
+def character_detail_layout(title, body, depth=1):
+    prefix = '../' * depth
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
+    scripts = '''<script src="../assets/js/character-pages.js"></script>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/language.js"></script>{scripts}<script>renderCharacter({esc(url_id(title))!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script><script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def remove_stale_pages(out, valid_ids):
@@ -43,15 +55,12 @@ def generic_detail(title_ja, title_en, row, id_col, ja_col, en_col):
 def build_character_pages(data, out):
     valid_ids = {url_id(r.get('url_id')) for r in data if url_id(r.get('url_id'))}
     remove_stale_pages(out, valid_ids)
-    head = '<link rel="stylesheet" href="../assets/css/character-detail.css">'
+    template = (TEMPLATES / 'character-detail.html').read_text(encoding='utf-8')
     for r in data:
         uid = url_id(r.get('url_id'))
         if not uid:
             continue
-        body = '<div id="character-page" class="character-detail-page"><p>読み込み中...</p></div>'
-        scripts = '<script src="../assets/js/character-pages.js"></script>'
-        scripts += f'<script>renderCharacter({uid!r}).catch(e=>{{document.getElementById("character-page").innerHTML=`<p>${{escapeHtml(e.message)}}</p>`}});</script>'
-        html_text = layout(r.get('name_ja','') or r.get('name_en',''), body, 1, head, scripts)
+        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), template.replace('{{CHARACTER_ID}}', uid))
         (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
 
 
