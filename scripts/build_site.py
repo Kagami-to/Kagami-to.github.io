@@ -30,11 +30,33 @@ def layout(title, body, depth=0, extra_head='', extra_body=''):
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
-def character_detail_layout(title, character_id, body, depth=1):
+def character_pager(prev_row, next_row):
+    parts = []
+    if prev_row:
+        uid = url_id(prev_row.get('url_id'))
+        name = prev_row.get('name_ja') or prev_row.get('name_en') or uid
+        parts.append(
+            f'<a class="character-092-pager character-092-pager-prev" href="{esc(uid)}.html" aria-label="前のキャラクター: {esc(name)}">'
+            f'<span class="character-092-pager-arrow" aria-hidden="true">←</span>'
+            f'<span class="character-092-pager-label">{esc(name)}</span></a>'
+        )
+    if next_row:
+        uid = url_id(next_row.get('url_id'))
+        name = next_row.get('name_ja') or next_row.get('name_en') or uid
+        parts.append(
+            f'<a class="character-092-pager character-092-pager-next" href="{esc(uid)}.html" aria-label="次のキャラクター: {esc(name)}">'
+            f'<span class="character-092-pager-arrow" aria-hidden="true">→</span>'
+            f'<span class="character-092-pager-label">{esc(name)}</span></a>'
+        )
+    return ''.join(parts)
+
+
+def character_detail_layout(title, character_id, body, prev_row=None, next_row=None, depth=1):
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
+    pager = character_pager(prev_row, next_row)
     scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def generic_detail(title_ja, title_en, row, id_col, ja_col, en_col):
@@ -48,11 +70,18 @@ def generic_detail(title_ja, title_en, row, id_col, ja_col, en_col):
 
 def build_character_pages(data, out):
     template = (TEMPLATES / 'character-detail.html').read_text(encoding='utf-8')
-    for r in data:
+    valid = [(i, r) for i, r in enumerate(data) if url_id(r.get('url_id'))]
+    for pos, (_, r) in enumerate(valid):
         uid = url_id(r.get('url_id'))
-        if not uid:
-            continue
-        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), uid, template)
+        prev_row = valid[pos - 1][1] if pos > 0 else None
+        next_row = valid[pos + 1][1] if pos + 1 < len(valid) else None
+        html_text = character_detail_layout(
+            r.get('name_ja','') or r.get('name_en',''),
+            uid,
+            template,
+            prev_row=prev_row,
+            next_row=next_row,
+        )
         (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
 
 
