@@ -11,7 +11,7 @@ function characterSetSection(id,headingKey,value){const section=document.getElem
 function characterSetRelated(targetId,sectionId,items,renderer){const section=document.getElementById(sectionId);const target=document.getElementById(targetId);if(!section||!target)return;target.innerHTML=items.map(x=>`<div>${renderer(x)}</div>`).join('');section.style.display=items.length?'':'none'}
 
 async function renderCharacter(id){
-  const [characters,songs,works]=await Promise.all([loadCharacterCSV('../kagamito/pages/characters.csv'),loadCharacterCSV('../kagamito/pages/songs.csv'),loadCharacterCSV('../kagamito/pages/works.csv')]);
+  const [characters,songs,works]=await Promise.all([loadCharacterCSV('../data/characters.csv'),loadCharacterCSV('../data/songs.csv'),loadCharacterCSV('../data/works.csv')]);
   const c=characters.find(x=>characterUrl(x.url_id)===characterUrl(id));
   if(!c)throw new Error(t('notFound'));
   const en=getLanguage()==='en';
