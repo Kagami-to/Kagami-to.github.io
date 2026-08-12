@@ -112,6 +112,11 @@ def prepare_site():
         source = DATA / name
         if source.exists():
             shutil.copy2(source, data_out / name)
+    pages_out = SITE / 'pages'
+    pages_out.mkdir(parents=True, exist_ok=True)
+    site_text = ROOT / 'pages' / 'site_text.csv'
+    if site_text.exists():
+        shutil.copy2(site_text, pages_out / 'site_text.csv')
     for name in ('index.html', 'robots.txt', 'sitemap.xml', 'favicon.ico', '1000019929.svg'):
         source = ROOT / name
         if source.exists():
