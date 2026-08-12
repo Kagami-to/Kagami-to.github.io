@@ -7,8 +7,8 @@ function characterSongCard(s){const main=characterValue(s,'title_ja','title_en')
 function characterWorkCard(w){const main=characterValue(w,'title_ja','title_en')||w.work_id;const sub=getLanguage()==='en'?(w.title_ja||''):(w.title_en||'');return characterRelatedCard(`../works/${characterUrl(w.url_id)}.html`,main,sub,'work')}
 function characterFit(el){const box=el.parentElement;if(!box)return;el.style.transform='none';el.style.width='auto';el.style.whiteSpace='nowrap';const probe=el.cloneNode(true);probe.style.cssText='position:absolute;left:-100000px;visibility:hidden;white-space:nowrap;width:max-content;transform:none';document.body.appendChild(probe);const natural=probe.getBoundingClientRect().width;probe.remove();const available=box.clientWidth;if(!available||natural<=available)return;const scale=available/natural;if(scale>=0.5)el.style.transform=`scaleX(${scale})`;else{el.style.width='100%';el.style.whiteSpace='normal'}}
 function characterFitAll(){document.querySelectorAll('.character-092-fit-text').forEach(characterFit)}
-function characterSetSection(id,heading,value){const section=document.getElementById(id+'-section');if(!section)return;section.style.display=value?'':'none';if(value){document.getElementById(id+'-heading').textContent=t(id==='position'?'position':id==='profile'?'profile':'appearances');document.getElementById(id).innerHTML=escapeHtml(value).replace(/\n/g,'<br>')}}
-function characterSetRelated(id,items,renderer){const section=document.getElementById(id+'-section');const target=document.getElementById(id);if(!section||!target)return;target.innerHTML=items.map(x=>`<div>${renderer(x)}</div>`).join('');section.style.display=items.length?'':'none'}
+function characterSetSection(id,headingKey,value){const section=document.getElementById(id+'-section');if(!section)return;section.style.display=value?'':'none';if(value){document.getElementById(id+'-heading').textContent=t(headingKey);document.getElementById(id).innerHTML=escapeHtml(value).replace(/\n/g,'<br>')}}
+function characterSetRelated(targetId,sectionId,items,renderer){const section=document.getElementById(sectionId);const target=document.getElementById(targetId);if(!section||!target)return;target.innerHTML=items.map(x=>`<div>${renderer(x)}</div>`).join('');section.style.display=items.length?'':'none'}
 
 async function renderCharacter(id){
   const [characters,songs,works]=await Promise.all([loadCharacterCSV('../kagamito/pages/characters.csv'),loadCharacterCSV('../kagamito/pages/songs.csv'),loadCharacterCSV('../kagamito/pages/works.csv')]);
@@ -38,12 +38,10 @@ async function renderCharacter(id){
   document.getElementById('character-reading-wrap').style.display=reading?'':'none';
   document.getElementById('character-ability').textContent=ability;
   document.getElementById('character-ability-wrap').style.display=ability?'':'none';
-  characterSetRelated('character-songs',themes,characterSongCard);
-  document.getElementById('character-songs').parentElement.style.display=themes.length?'':'none';
+  characterSetRelated('character-songs','character-song-section',themes,characterSongCard);
 
   const portrait=document.getElementById('character-portrait');
-  const oldImage=portrait.querySelector('img');
-  oldImage?.remove();
+  portrait.querySelector('img')?.remove();
   const imagePath=String(c.appearance_image||'').trim();
   portrait.classList.toggle('has-image',Boolean(imagePath));
   document.getElementById('character-portrait-label').textContent=en?'IMAGE':'画像';
@@ -51,9 +49,7 @@ async function renderCharacter(id){
 
   characterSetSection('character-position','position',position);
   characterSetSection('character-profile','profile',profile);
-  const worksSection=document.getElementById('character-works-section');
   document.getElementById('character-works-heading').textContent=t('appearances');
-  document.getElementById('character-works').innerHTML=appearances.map(w=>`<div>${characterWorkCard(w)}</div>`).join('');
-  worksSection.style.display=appearances.length?'':'none';
+  characterSetRelated('character-works','character-works-section',appearances,characterWorkCard);
   characterFitAll();
 }
