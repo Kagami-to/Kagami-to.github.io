@@ -1,9 +1,10 @@
 from pathlib import Path
-import csv, html
+import csv, html, shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
 TEMPLATES = ROOT / 'templates'
+SITE = ROOT / '_site'
 
 
 def rows(name):
@@ -36,13 +37,6 @@ def character_detail_layout(title, character_id, body, depth=1):
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
-def remove_stale_pages(out, valid_ids):
-    for path in out.glob('*.html'):
-        if path.name != 'index.html' and path.stem not in valid_ids:
-            path.unlink()
-            print(f'Removed stale page: {path.relative_to(ROOT)}')
-
-
 def generic_detail(title_ja, title_en, row, id_col, ja_col, en_col):
     detail = f'''<div class="character-header"><h1>{esc(title_ja or title_en)}</h1><p class="character-english">{esc(title_en)}</p></div>'''
     for key, val in row.items():
@@ -53,8 +47,6 @@ def generic_detail(title_ja, title_en, row, id_col, ja_col, en_col):
 
 
 def build_character_pages(data, out):
-    valid_ids = {url_id(r.get('url_id')) for r in data if url_id(r.get('url_id'))}
-    remove_stale_pages(out, valid_ids)
     template = (TEMPLATES / 'character-detail.html').read_text(encoding='utf-8')
     for r in data:
         uid = url_id(r.get('url_id'))
@@ -66,7 +58,7 @@ def build_character_pages(data, out):
 
 def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
     data = rows(csv_name)
-    out = ROOT / folder
+    out = SITE / folder
     out.mkdir(parents=True, exist_ok=True)
 
     if folder == 'characters':
@@ -74,8 +66,6 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
         body = '<div class="page-heading"><h1 id="page-title">Characters</h1><div class="page-sub" id="page-sub">キャラクター</div></div><ul id="character-list" class="character-list"></ul>'
         script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'キャラクター';renderList('characters').catch(e=>console.error(e));</script>'''
     else:
-        valid_ids = {url_id(r.get('url_id')) for r in data if url_id(r.get('url_id'))}
-        remove_stale_pages(out, valid_ids)
         for r in data:
             uid = url_id(r.get('url_id'))
             if not uid:
@@ -89,10 +79,25 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
             body = '<div class="page-heading"><h1 id="page-title">Songs</h1><div class="page-sub" id="page-sub">楽曲</div></div><ul id="entity-list" class="character-list"></ul>'
             script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';renderList('songs').catch(e=>console.error(e));</script>'''
 
-    (out / 'index.html').write_text(layout(label, body, 1, extra_body=script), encoding='utf-8')
+    (SITE / folder / 'index.html').write_text(layout(label, body, 1, extra_body=script), encoding='utf-8')
+
+
+def prepare_site():
+    if SITE.exists():
+        shutil.rmtree(SITE)
+    SITE.mkdir(parents=True)
+    for directory in ('assets', 'kagamito', 'images'):
+        source = ROOT / directory
+        if source.exists():
+            shutil.copytree(source, SITE / directory, dirs_exist_ok=True)
+    for name in ('index.html', 'robots.txt', 'sitemap.xml', 'favicon.ico'):
+        source = ROOT / name
+        if source.exists():
+            shutil.copy2(source, SITE / name)
 
 
 def main():
+    prepare_site()
     build_entity('characters.csv', 'characters', 'character_id', 'name_ja', 'name_en', 'Characters')
     build_entity('works.csv', 'works', 'work_id', 'title_ja', 'title_en', 'Works')
     build_entity('songs.csv', 'songs', 'song_id', 'title_ja', 'title_en', 'Songs')
