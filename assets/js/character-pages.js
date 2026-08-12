@@ -48,8 +48,19 @@ async function renderCharacter(id){
   portrait.querySelector('img')?.remove();
   const imagePath=String(c.appearance_image||'').trim();
   portrait.classList.toggle('has-image',Boolean(imagePath));
-  document.getElementById('character-portrait-label').textContent=en?'IMAGE':'画像';
-  if(imagePath){const img=document.createElement('img');img.src=/^(\/|https?:)/i.test(imagePath)?imagePath:`../${imagePath}`;img.alt=name;portrait.insertBefore(img,portrait.firstChild)}
+  const portraitLabel=document.getElementById('character-portrait-label');
+  portraitLabel.textContent=imagePath?(en?'IMAGE':'画像'):(en?'IMAGE COMING SOON':'画像準備中');
+  if(imagePath){
+    const img=document.createElement('img');
+    img.src=/^(\/|https?:)/i.test(imagePath)?imagePath:`../${imagePath}`;
+    img.alt=name;
+    portrait.insertBefore(img,portrait.firstChild);
+    img.addEventListener('error',()=>{
+      portrait.classList.remove('has-image');
+      portraitLabel.textContent=en?'IMAGE COMING SOON':'画像準備中';
+      img.remove();
+    });
+  }
 
   characterSetSection('character-position','position',position);
   characterSetSection('character-profile','profile',profile);
