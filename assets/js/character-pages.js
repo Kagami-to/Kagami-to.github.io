@@ -11,56 +11,13 @@ function characterFit(el){const box=el.parentElement;if(!box)return;el.style.tra
 function characterFitAll(){document.querySelectorAll('.character-092-fit-text').forEach(characterFit)}
 function characterSetSection(id,headingKey,value){const section=document.getElementById(id+'-section');if(!section)return;section.style.display=value?'':'none';if(value){document.getElementById(id+'-heading').textContent=t(headingKey);document.getElementById(id).innerHTML=escapeHtml(value).replace(/\n/g,'<br>')}}
 function characterSetRelated(targetId,sectionId,items,renderer){const section=document.getElementById(sectionId);const target=document.getElementById(targetId);if(!section||!target)return;target.innerHTML=items.map(x=>`<div>${renderer(x)}</div>`).join('');section.style.display=items.length?'':'none'}
-function characterSetNav(current,characters){const index=characters.findIndex(x=>characterUrl(x.url_id)===characterUrl(current.url_id));const prev=index>0?characters[index-1]:null;const next=index>=0&&index<characters.length-1?characters[index+1]:null;const en=getLanguage()==='en';const set=(id,item)=>{const el=document.getElementById(id);if(!el)return;if(item){el.dataset.href=`./${characterUrl(item.url_id)}.html`;el.style.display='';const label=document.getElementById(id==='character-prev'?'character-prev-label':'character-next-label');if(label)label.textContent=en?(item.name_en||item.name_ja||''):(item.name_ja||item.name_en||'')}else{el.dataset.href='';el.style.display='none'}};set('character-prev',prev);set('character-next',next)}
+function characterMovePagerToBody(){['character-prev','character-next'].forEach(id=>{const el=document.getElementById(id);if(el&&el.parentElement!==document.body)document.body.appendChild(el)})}
+function characterSetNav(current,characters){characterMovePagerToBody();const index=characters.findIndex(x=>characterUrl(x.url_id)===characterUrl(current.url_id));const prev=index>0?characters[index-1]:null;const next=index>=0&&index<characters.length-1?characters[index+1]:null;const en=getLanguage()==='en';const set=(id,item)=>{const el=document.getElementById(id);if(!el)return;if(item){el.dataset.href=`./${characterUrl(item.url_id)}.html`;el.style.display='';const label=document.getElementById(id==='character-prev'?'character-prev-label':'character-next-label');if(label)label.textContent=en?(item.name_en||item.name_ja||''):(item.name_ja||item.name_en||'')}else{el.dataset.href='';el.style.display='none'}};set('character-prev',prev);set('character-next',next)}
 function characterPagerClick(id){const el=document.getElementById(id);if(!el)return;const href=el.dataset.href;if(href)window.location.href=href}
-
 async function renderCharacter(id){
   const [characters,songs,works]=await Promise.all([loadCharacterCSV('../data/characters.csv'),loadCharacterCSV('../data/songs.csv'),loadCharacterCSV('../data/works.csv')]);
-  const c=characters.find(x=>characterUrl(x.url_id)===characterUrl(id));
-  if(!c)throw new Error(t('notFound'));
-  const en=getLanguage()==='en';
-  const name=en?(c.name_en||''):(c.name_ja||'');
-  document.documentElement.lang=en?'en':'ja';
-  document.title=`${name} - Kagamito Official`;
-  characterSetNav(c,characters);
-  const epithet=en?(c.epithet_en||''):(c.epithet_ja||'');
-  const secondary=en?(c.name_ja||''):'';
-  const reading=en?'':(c.reading_ja||'');
-  const ability=en?(c.ability_en||''):(c.ability_ja||'');
-  const abilityDetail=en?(c.ability_detail_en||''):(c.ability_detail_ja||'');
-  const position=en?(c.position_en||''):(c.position_ja||'');
-  const profile=en?(c.profile_en||''):(c.profile_ja||'');
-  const themeIds=characterIds(c.theme_song_ids);
-  const themes=themeIds.map(songId=>songs.find(s=>s.song_id===songId)).filter(Boolean);
-  const workIds=characterIds(c.appearance_work_ids);
-  if(c.debut_work_id&&!workIds.includes(c.debut_work_id))workIds.unshift(c.debut_work_id);
-  const appearances=workIds.map(workId=>works.find(w=>w.work_id===workId)).filter(Boolean);
-
-  document.getElementById('character-epithet').textContent=epithet;
-  document.getElementById('character-name').textContent=name;
-  document.getElementById('character-secondary').textContent=secondary;
-  document.getElementById('character-reading').textContent=reading;
-  document.getElementById('character-secondary-wrap').style.display=secondary?'':'none';
-  document.getElementById('character-reading-wrap').style.display=reading?'':'none';
-  document.getElementById('character-ability').textContent=ability;
-  document.getElementById('character-ability-wrap').style.display=ability||abilityDetail?'':'none';
-  const detailEl=document.getElementById('character-ability-detail');
-  if(detailEl){detailEl.textContent=abilityDetail;detailEl.style.display=abilityDetail?'':'none'}
-  characterSetRelated('character-songs','character-song-section',themes,characterSongCard);
-
-  const portrait=document.getElementById('character-portrait');
-  portrait.querySelector('img')?.remove();
-  const imagePath=String(c.appearance_image||'').trim();
-  portrait.classList.toggle('has-image',Boolean(imagePath));
-  document.getElementById('character-portrait-label').textContent=en?'IMAGE':'画像';
-  if(imagePath){const img=document.createElement('img');img.src=/^(\/|https?:)/i.test(imagePath)?imagePath:`../${imagePath}`;img.alt=name;portrait.insertBefore(img,portrait.firstChild)}
-
-  characterSetSection('character-position','position',position);
-  characterSetSection('character-profile','profile',profile);
-  document.getElementById('character-works-heading').textContent=t('appearances');
-  characterSetRelated('character-works','character-works-section',appearances,characterWorkCard);
-  characterFitAll();
-}
-
-document.getElementById('character-prev')?.addEventListener('click',()=>characterPagerClick('character-prev'));
-document.getElementById('character-next')?.addEventListener('click',()=>characterPagerClick('character-next'));
+  const c=characters.find(x=>characterUrl(x.url_id)===characterUrl(id));if(!c)throw new Error(t('notFound'));const en=getLanguage()==='en';const name=en?(c.name_en||''):(c.name_ja||'');document.documentElement.lang=en?'en':'ja';document.title=`${name} - Kagamito Official`;characterSetNav(c,characters);
+  const epithet=en?(c.epithet_en||''):(c.epithet_ja||'');const secondary=en?(c.name_ja||''):'';const reading=en?'':(c.reading_ja||'');const ability=en?(c.ability_en||''):(c.ability_ja||'');const abilityDetail=en?(c.ability_detail_en||''):(c.ability_detail_ja||'');const position=en?(c.position_en||''):(c.position_ja||'');const profile=en?(c.profile_en||''):(c.profile_ja||'');const themeIds=characterIds(c.theme_song_ids);const themes=themeIds.map(songId=>songs.find(s=>s.song_id===songId)).filter(Boolean);const workIds=characterIds(c.appearance_work_ids);if(c.debut_work_id&&!workIds.includes(c.debut_work_id))workIds.unshift(c.debut_work_id);const appearances=workIds.map(workId=>works.find(w=>w.work_id===workId)).filter(Boolean);
+  document.getElementById('character-epithet').textContent=epithet;document.getElementById('character-name').textContent=name;document.getElementById('character-secondary').textContent=secondary;document.getElementById('character-reading').textContent=reading;document.getElementById('character-secondary-wrap').style.display=secondary?'':'none';document.getElementById('character-reading-wrap').style.display=reading?'':'none';document.getElementById('character-ability').textContent=ability;document.getElementById('character-ability-wrap').style.display=ability||abilityDetail?'':'none';const detailEl=document.getElementById('character-ability-detail');if(detailEl){detailEl.textContent=abilityDetail;detailEl.style.display=abilityDetail?'':'none'}characterSetRelated('character-songs','character-song-section',themes,characterSongCard);
+  const portrait=document.getElementById('character-portrait');portrait.querySelector('img')?.remove();const imagePath=String(c.appearance_image||'').trim();portrait.classList.toggle('has-image',Boolean(imagePath));document.getElementById('character-portrait-label').textContent=en?'IMAGE':'画像';if(imagePath){const img=document.createElement('img');img.src=/^(\/|https?:)/i.test(imagePath)?imagePath:`../${imagePath}`;img.alt=name;portrait.insertBefore(img,portrait.firstChild)}characterSetSection('character-position','position',position);characterSetSection('character-profile','profile',profile);document.getElementById('character-works-heading').textContent=t('appearances');characterSetRelated('character-works','character-works-section',appearances,characterWorkCard);characterFitAll();}
+document.getElementById('character-prev')?.addEventListener('click',()=>characterPagerClick('character-prev'));document.getElementById('character-next')?.addEventListener('click',()=>characterPagerClick('character-next'));
