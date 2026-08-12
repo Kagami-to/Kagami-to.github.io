@@ -49,8 +49,9 @@ def build_character_pages(data, out):
         if not uid:
             continue
         body = '<div id="character-page" class="character-detail-page"><p>読み込み中...</p></div>'
-        script = f'<script>renderCharacter({uid!r}).catch(e=>{{document.getElementById("character-page").innerHTML=`<p>${{escapeHtml(e.message)}}</p>`}});</script>'
-        html_text = layout(r.get('name_ja','') or r.get('name_en',''), body, 1, head, script)
+        scripts = '<script src="../assets/js/character-pages.js"></script>'
+        scripts += f'<script>renderCharacter({uid!r}).catch(e=>{{document.getElementById("character-page").innerHTML=`<p>${{escapeHtml(e.message)}}</p>`}});</script>'
+        html_text = layout(r.get('name_ja','') or r.get('name_en',''), body, 1, head, scripts)
         (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
 
 
