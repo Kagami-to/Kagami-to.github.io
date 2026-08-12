@@ -29,11 +29,11 @@ def layout(title, body, depth=0, extra_head='', extra_body=''):
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
-def character_detail_layout(title, body, depth=1):
+def character_detail_layout(title, character_id, body, depth=1):
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
-    scripts = '''<script src="../assets/js/character-pages.js"></script>'''
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/language.js"></script>{scripts}<script>renderCharacter({esc(url_id(title))!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script><script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def remove_stale_pages(out, valid_ids):
@@ -60,7 +60,7 @@ def build_character_pages(data, out):
         uid = url_id(r.get('url_id'))
         if not uid:
             continue
-        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), template.replace('{{CHARACTER_ID}}', uid))
+        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), uid, template)
         (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
 
 
