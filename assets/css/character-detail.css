@@ -1,35 +1,57 @@
-/* Character detail page — based on preview 092 */
-.character-detail-page{width:min(1040px,calc(100% - 32px));margin:0 auto;padding:24px 0 60px}
-.character-toolbar{display:flex;align-items:center;margin-bottom:18px}
-.character-back{display:inline-block;color:#2d6869;text-decoration:none;font:400 13px/1.5 "Shippori Mincho",serif}
-.character-back:hover{text-decoration:underline}
-.character-card{background:#f2f5f3;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:48px 52px 58px;position:relative;overflow:hidden}
-.character-card:after{content:"CHARACTERS";position:absolute;right:-28px;top:90px;writing-mode:vertical-rl;font:400 72px/1 "Shippori Mincho",serif;letter-spacing:.08em;color:rgba(45,104,105,.045);pointer-events:none}
-.character-hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:58px;align-items:stretch}
-.character-info{padding:10px 0 0;display:flex;flex-direction:column;min-width:0}
-.character-identity{min-width:0;border-left:3px solid #2d6869;padding-left:24px}
-.character-identity-content{min-width:0;padding-right:17px}
-.character-fit-box{position:relative;width:100%;min-width:0}
-.character-fit-text{display:block;transform-origin:left center;will-change:transform}
-.character-epithet-detail{margin:0 0 6px;font:400 14px/1.5 "Zen Kaku Gothic New",sans-serif;color:#555;letter-spacing:.08em}
-.character-name-detail{margin:0;font:500 clamp(42px,5.5vw,68px)/1.16 "Shippori Mincho",serif;letter-spacing:.08em}
-.character-name-secondary{margin:5px 0 0;font:400 12px/1.6 "Zen Kaku Gothic New",sans-serif;color:#777;letter-spacing:.06em}
-.character-reading-detail{margin:7px 0 0;font:400 11px/1.5 "Zen Kaku Gothic New",sans-serif;color:#777;letter-spacing:.13em}
-.character-ability-wrap{margin:28px 0 0}
-.character-ability{margin:0;font:400 24px/1.7 "Shippori Mincho",serif;letter-spacing:.06em}
-.character-song-area{margin-top:auto;padding-top:28px}
-.character-related-list{display:grid;gap:10px;list-style:none;padding:0;margin:0}
-.character-related-list>div{margin:0}
-.character-song-card,.character-work-card{display:block;background:#fff;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:17px 20px;color:#263d3d;text-decoration:none;min-height:76px}
-.character-song-card:hover,.character-work-card:hover{background:#fdfefe}
-.character-card-title{font:600 20px/1.45 "Shippori Mincho",serif}
-.character-card-subtitle{margin-top:4px;font:400 12px/1.55 "Zen Kaku Gothic New",sans-serif;color:#6b7472}
-.character-portrait{height:100%;min-height:490px;background:#e8ecea;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#999;font:400 10px/1.5 "Zen Kaku Gothic New",sans-serif;letter-spacing:.12em;text-align:center}
-.character-portrait img{width:100%;height:100%;object-fit:cover;display:block}
-.character-divider{position:relative;z-index:1;display:flex;align-items:center;gap:14px;margin:38px 0 4px;color:#2d6869;font:400 15px/1 "Shippori Mincho",serif;letter-spacing:.12em}
-.character-divider:before,.character-divider:after{content:"";height:1px;background:rgba(45,104,105,.48);flex:1}
-.character-diamond{font-size:16px;line-height:1;display:inline-block;color:#2d6869}
-.character-section{position:relative;z-index:1;margin-top:54px;border-top:1px solid #d9dfdc;padding-top:38px}
-.character-section h2{margin:0 0 15px;padding:0;border:0;color:#222;font:500 25px/1.4 "Shippori Mincho",serif;letter-spacing:.08em}
-.character-profile{font:400 15px/2.15 "Zen Kaku Gothic New",sans-serif;max-width:760px}
-@media(max-width:760px){.character-detail-page{width:calc(100% - 20px);padding:14px 0 44px}.character-card{padding:32px 26px 44px}.character-card:after{font-size:46px;right:-18px;top:90px}.character-hero{display:flex;flex-direction:column;gap:0}.character-info{display:contents}.character-identity{order:1;width:100%;padding:0 17px;border-left:3px solid #2d6869}.character-identity-content{padding:0}.character-portrait{order:2;min-height:0;aspect-ratio:4/5;width:min(100%,340px);margin:30px auto 0}.character-ability-wrap{order:3;margin:28px 0 0;padding:0}.character-song-area{order:4;margin-top:20px;padding:0}.character-divider{order:5;margin:32px 0 0}.character-section{margin-top:42px;padding-top:32px}.character-section h2{font-size:22px}.character-profile{font-size:14px;line-height:2}.character-song-card,.character-work-card{padding:16px 18px}.character-card-title{font-size:18px}}
+/* Character detail — preview 092 visual system, production navigation outside this scope */
+.character-detail-page{width:100%;margin:0;padding:92px 0 0}
+.character-detail-092{background:#fafafa;color:#222;font-family:"Zen Kaku Gothic New",sans-serif}
+.character-092-wrap{width:min(1040px,calc(100% - 32px));margin:auto;padding:24px 0 60px}
+.character-092-toolbar{display:flex;align-items:center;margin-bottom:18px}
+.character-092-back{display:inline-block;color:#2d6869;text-decoration:none;font:400 13px/1.5 "Shippori Mincho",serif}
+.character-092-back:hover{text-decoration:underline}
+.character-092-card{background:#f2f5f3;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:48px 52px 58px;position:relative;overflow:hidden}
+.character-092-card:after{content:"CHARACTERS";position:absolute;right:-28px;top:90px;writing-mode:vertical-rl;font:400 72px/1 "Shippori Mincho",serif;letter-spacing:.08em;color:rgba(45,104,105,.045);pointer-events:none}
+.character-092-hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:58px;align-items:stretch}
+.character-092-hero-info{padding:10px 0 0;display:flex;flex-direction:column;min-width:0}
+.character-092-identity-group{min-width:0;border-left:3px solid #2d6869;padding-left:24px}
+.character-092-identity-content{min-width:0;padding-right:17px}
+.character-092-fit-box{position:relative;width:100%;min-width:0}
+.character-092-fit-text{display:block;transform-origin:left center;will-change:transform}
+.character-092-epithet{margin:0 0 6px;font:400 14px/1.5 "Zen Kaku Gothic New",sans-serif;color:#555;letter-spacing:.08em}
+.character-092-name{margin:0;font:500 clamp(42px,5.5vw,68px)/1.16 "Shippori Mincho",serif;letter-spacing:.08em}
+.character-092-secondary-name{margin:5px 0 0;font:400 12px/1.6 "Zen Kaku Gothic New",sans-serif;color:#777;letter-spacing:.06em}
+.character-092-reading{margin:7px 0 0;font:400 11px/1.5 "Zen Kaku Gothic New",sans-serif;color:#777;letter-spacing:.13em}
+.character-092-ability-wrap{margin:28px 0 0}
+.character-092-ability{margin:0;font:400 24px/1.7 "Shippori Mincho",serif;letter-spacing:.06em}
+.character-092-song-section{margin-top:auto;padding-top:28px}
+.character-092-related-list{display:grid;gap:10px;list-style:none;padding:0;margin:0}
+.character-092-related-list>div{margin:0}
+.character-092-song-card,.character-092-work-card{display:block;background:#fff;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:17px 20px;color:#263d3d;text-decoration:none;min-height:76px}
+.character-092-song-card:hover,.character-092-work-card:hover{background:#fdfefe}
+.character-092-card-title{font:600 20px/1.45 "Shippori Mincho",serif}
+.character-092-card-subtitle{margin-top:4px;font:400 12px/1.55 "Zen Kaku Gothic New",sans-serif;color:#6b7472}
+.character-092-portrait{height:100%;min-height:490px;background:#e8ecea;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#999;font:400 10px/1.5 "Zen Kaku Gothic New",sans-serif;letter-spacing:.12em;text-align:center}
+.character-092-portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.character-092-portrait-label{padding:10px;background:rgba(232,236,234,.82)}
+.character-092-portrait.has-image .character-092-portrait-label{display:none}
+.character-092-divider{position:relative;z-index:1;display:flex;align-items:center;gap:14px;margin:38px 0 4px;color:#2d6869;font:400 15px/1 "Shippori Mincho",serif;letter-spacing:.12em}
+.character-092-divider:before,.character-092-divider:after{content:"";height:1px;background:rgba(45,104,105,.48);flex:1}
+.character-092-diamond{font-size:16px;line-height:1;display:inline-block;color:#2d6869}
+.character-092-section{position:relative;z-index:1;margin-top:54px;border-top:1px solid #d9dfdc;padding-top:38px}
+.character-092-heading{margin:0 0 15px;padding:0;border:0;color:#222;font:500 25px/1.4 "Shippori Mincho",serif;letter-spacing:.08em}
+.character-092-profile{font:400 15px/2.15 "Zen Kaku Gothic New",sans-serif;max-width:760px}
+@media(max-width:760px){
+  .character-detail-page{padding-top:78px}
+  .character-092-wrap{width:calc(100% - 20px);padding:14px 0 44px}
+  .character-092-card{padding:32px 26px 44px}
+  .character-092-card:after{font-size:46px;right:-18px;top:90px}
+  .character-092-hero{display:flex;flex-direction:column;gap:0}
+  .character-092-hero-info{display:contents}
+  .character-092-identity-group{order:1;width:100%;padding:0 17px;border-left:3px solid #2d6869}
+  .character-092-identity-content{padding:0}
+  .character-092-portrait{order:2;min-height:0;aspect-ratio:4/5;width:min(100%,340px);margin:30px auto 0}
+  .character-092-ability-wrap{order:3;margin:28px 0 0;padding:0}
+  .character-092-song-section{order:4;margin-top:20px;padding:0}
+  .character-092-divider{order:5;margin:32px 0 0}
+  .character-092-section{margin-top:42px;padding-top:32px}
+  .character-092-heading{font-size:22px}
+  .character-092-profile{font-size:14px;line-height:2}
+  .character-092-song-card,.character-092-work-card{padding:16px 18px}
+  .character-092-card-title{font-size:18px}
+}
