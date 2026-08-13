@@ -3,7 +3,6 @@ const UI_TEXT={ja:{characters:'キャラクター',works:'作品',songs:'楽曲'
 function getLanguage(){return localStorage.getItem('kagamito-language')||((navigator.language||'').toLowerCase().startsWith('en')?'en':'ja')}
 function setLanguage(lang){localStorage.setItem('kagamito-language',lang);document.documentElement.lang=lang;location.reload()}
 function t(key){return(UI_TEXT[getLanguage()]||UI_TEXT.ja)[key]||key}
-function pick(row,jaKey,enKey){return getLanguage()==='en'?(row[enKey]||''):(row[jaKey]||'')}
 
 async function loadSiteText(){try{const rows=await loadCSV('/pages/site_text.csv');return Object.fromEntries(rows.map(r=>[r.key,getLanguage()==='en'?r.en:r.ja]))}catch(e){console.error('Failed to load site_text.csv',e);return{}}}
 
