@@ -27,7 +27,7 @@ def site_header(prefix):
 
 def layout(title, body, depth=0, extra_head='', extra_body=''):
     prefix = '../' * depth
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def character_pager(prev_row, next_row):
@@ -48,7 +48,7 @@ def character_detail_layout(title, character_id, body, prev_row=None, next_row=N
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
     pager = character_pager(prev_row, next_row)
     scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def generic_detail(title_ja, title_en, row, id_col, ja_col, en_col):
