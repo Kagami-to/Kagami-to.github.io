@@ -1,3 +1,4 @@
+# C001 detail sections. Entity IDs in relation fields resolve through the corresponding CSV.
 id: C001
 sections:
   - title_ja: 立場
