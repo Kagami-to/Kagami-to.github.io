@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Song Preview 006 - Kagamito Official</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/character-detail.css">
+  <style>
+    .song-preview-page{width:100%;padding:92px 0 0;background:#fafafa;color:#222;font-family:"Zen Kaku Gothic New",sans-serif}
+    .song-preview-wrap{width:min(1040px,calc(100% - 32px));margin:auto;padding:24px 0 60px}
+    .song-preview-card{background:#f2f5f3;box-shadow:0 4px 15px rgba(23,75,77,.12);padding:48px 52px 58px;position:relative;overflow:hidden}
+    .song-preview-card:after{content:"SONGS";position:absolute;right:-28px;top:90px;writing-mode:vertical-rl;font:400 72px/1 "Shippori Mincho",serif;letter-spacing:.08em;color:rgba(45,104,105,.045);pointer-events:none}
+    .preview-label{position:relative;z-index:2;margin:0 0 30px;color:#718080;font-size:12px;letter-spacing:.12em}
+    .song-title-group{position:relative;z-index:2;border-left:3px solid #2d6869;padding-left:24px;margin:0;min-width:0}
+    .song-fit{display:block;max-width:100%;transform-origin:left top;will-change:transform}
+    .song-scene-top{margin:0 0 6px;font:400 14px/1.5 "Zen Kaku Gothic New",sans-serif;color:#555;letter-spacing:.08em}
+    .song-title{margin:0;font:500 clamp(42px,5.5vw,68px)/1.16 "Shippori Mincho",serif;letter-spacing:.08em;color:#174b4d}
+    .song-title-sub{margin:5px 0 0;font:400 12px/1.6 "Zen Kaku Gothic New",sans-serif;color:#777;letter-spacing:.06em}
+    .song-video{position:relative;z-index:2;width:100%;margin-top:42px}
+    .song-video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#dbe5e3;box-shadow:0 4px 15px rgba(23,75,77,.12);overflow:hidden}
+    .song-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .song-info{position:relative;z-index:2;margin-top:42px}
+    .song-info-section{margin:0 0 30px}
+    .song-info-label{margin:0 0 8px;font:500 25px/1.4 "Shippori Mincho",serif;letter-spacing:.08em;color:#222}
+    .song-link-stack{display:grid;gap:14px}
+    .song-divider{display:flex;align-items:center;gap:14px;margin:48px 0 42px;color:#2d6869;font:400 15px/1 "Shippori Mincho",serif;letter-spacing:.12em}
+    .song-divider:before,.song-divider:after{content:"";height:1px;background:rgba(45,104,105,.48);flex:1}
+    .song-divider span{font-size:16px;line-height:1}
+    .song-detail-placeholder{position:relative;z-index:2;min-height:120px;color:#718080;font-size:14px;line-height:1.9}
+    .old-youtube{position:relative;z-index:2;margin-top:42px;padding-top:24px;border-top:1px solid #d9dfdc;color:#718080;font-size:12px;line-height:1.8}
+    .old-youtube a{color:#315f61}
+    @media (max-width:700px){
+      .song-preview-wrap{width:min(1040px,calc(100% - 20px));padding-top:14px}
+      .song-preview-card{padding:32px 26px 44px}
+      .song-preview-card:after{right:-18px;top:120px;font-size:46px}
+      .song-title-group{padding-left:17px}
+      .song-title{font-size:clamp(42px,12vw,58px)}
+      .song-video{margin-top:30px}
+      .song-info{margin-top:30px}
+      .song-info-section{margin-bottom:26px}
+      .song-info-label{font-size:22px}
+      .song-divider{margin:38px 0 32px}
+      .song-detail-placeholder{min-height:100px}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a>
+    <nav></nav>
+  </header>
+  <main class="song-preview-page">
+    <div class="song-preview-wrap">
+      <article class="song-preview-card" id="song-page"><p>Loading…</p></article>
+    </div>
+  </main>
+  <script src="../../assets/js/data.js"></script>
+  <script src="../../assets/js/language.js"></script>
+  <script src="../../assets/js/entity-pages.js"></script>
+  <script src="../../assets/js/character-pages.js"></script>
+  <script>
+    const PREVIEW_SONG_ID='M029';
+    const FIT_MIN_SCALE=.5;
+
+    function songEscape(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+    function songValue(row,ja,en){return getLanguage()==='en'?(row[en]||row[ja]||''):(row[ja]||row[en]||'')}
+    function youtubeEmbedUrl(url){try{const u=new URL(url);let id='';if(u.hostname==='youtu.be')id=u.pathname.slice(1);else if(u.hostname.includes('youtube.com'))id=u.searchParams.get('v')||u.pathname.split('/').filter(Boolean).pop();if(!id)return '';return `https://www.youtube.com/embed/${encodeURIComponent(id)}`}catch(e){return ''}}
+
+    // Keep the original font size. First try one line, then 2, 3, ... lines.
+    // For each line count, use scaleX() only as much as necessary, down to 50%.
+    function fitSongText(el){
+      if(!el)return;
+      const parent=el.parentElement;if(!parent)return;
+      const available=parent.clientWidth;if(!available)return;
+      const computed=getComputedStyle(el);
+      const fontSize=computed.fontSize;
+      const lineHeight=computed.lineHeight;
+      const letterSpacing=computed.letterSpacing;
+      const fontFamily=computed.fontFamily;
+      const fontWeight=computed.fontWeight;
+      const text=el.textContent;
+      if(!text.trim())return;
+
+      const probe=document.createElement('span');
+      probe.textContent=text;
+      probe.style.cssText=`position:absolute;visibility:hidden;left:-100000px;top:0;display:block;white-space:nowrap;width:max-content;font:${fontWeight} ${fontSize} ${fontFamily};line-height:${lineHeight};letter-spacing:${letterSpacing};`;
+      document.body.appendChild(probe);
+      const naturalWidth=probe.getBoundingClientRect().width;
+      probe.remove();
+      el.style.transform='none';el.style.width='auto';el.style.whiteSpace='nowrap';
+      if(naturalWidth<=available){return}
+
+      const lineFits=(lines,scale)=>{
+        const p=document.createElement('span');
+        p.textContent=text;
+        p.style.cssText=`position:absolute;visibility:hidden;left:-100000px;top:0;display:block;white-space:normal;overflow-wrap:anywhere;width:${available/scale}px;font:${fontWeight} ${fontSize} ${fontFamily};line-height:${lineHeight};letter-spacing:${letterSpacing};`;
+        document.body.appendChild(p);
+        const h=p.getBoundingClientRect().height;
+        const lh=parseFloat(getComputedStyle(p).lineHeight)||parseFloat(fontSize)*1.2;
+        const actualLines=Math.max(1,Math.round(h/lh));
+        p.remove();
+        return actualLines<=lines;
+      };
+
+      let chosenLines=1,chosenScale=1;
+      for(let lines=1;lines<=10;lines++){
+        if(lineFits(lines,1)){chosenLines=lines;chosenScale=1;break;}
+        if(lineFits(lines,FIT_MIN_SCALE)){
+          let lo=FIT_MIN_SCALE,hi=1;
+          for(let i=0;i<18;i++){
+            const mid=(lo+hi)/2;
+            if(lineFits(lines,mid))lo=mid;else hi=mid;
+          }
+          chosenLines=lines;chosenScale=lo;break;
+        }
+      }
+
+      // Set an explicit content width so the browser creates exactly the tested wrapping,
+      // then compress the resulting block horizontally. This is different from shrinking font-size.
+      el.style.whiteSpace='normal';
+      el.style.overflowWrap='anywhere';
+      el.style.width=`${100/chosenScale}%`;
+      el.style.transform=`scaleX(${chosenScale})`;
+      el.style.transformOrigin='left top';
+    }
+
+    function fitAllSongText(){document.querySelectorAll('.song-fit').forEach(fitSongText)}
+
+    async function renderSong(){
+      const [songs,chars,works]=await Promise.all([loadCSV('../../data/songs.csv'),loadCSV('../../data/characters.csv'),loadCSV('../../data/works.csv')]);
+      const song=songs.find(r=>(r.song_id||'').trim()===PREVIEW_SONG_ID);const target=document.getElementById('song-page');if(!song){target.innerHTML='<p>Song data not found.</p>';return}
+      const en=getLanguage()==='en';
+      const title=songValue(song,'title_ja','title_en');
+      const scene=songValue(song,'scene_ja','scene_en');
+      const japaneseTitle=en?(song.title_ja||''):'';
+      const work=works.find(r=>(r.work_id||'').trim()===(song.work_id||'').trim());
+      const charIds=String(song.theme_character_ids||'').split(/[、,;\s]+/).filter(Boolean);
+      const themeChars=charIds.map(id=>chars.find(r=>(r.character_id||'').trim()===id.trim()||(r.url_id||'').trim().toLowerCase()===id.trim().toLowerCase())).filter(Boolean);
+      const video=youtubeEmbedUrl(song.youtube_url);
+      const charCards=themeChars.map(c=>{const main=characterValue(c,'name_ja','name_en')||c.character_id;const sub=en?(c.name_ja||''):(c.name_en||'');return characterRelatedCard(`/characters/${characterUrl(c.url_id)}.html`,main,sub,'work')}).join('');
+      const workCard=work?characterRelatedCard(`/works/${characterUrl(work.url_id)}.html`,characterValue(work,'title_ja','title_en')||work.work_id,en?(work.title_ja||''):(work.title_en||''),'work'):'';
+      target.innerHTML=`
+        <p class="preview-label">PREVIEW 006 / SONG DETAIL — LONG TITLE TEST: M029</p>
+        <div class="song-title-group">
+          <p class="song-scene-top song-fit">${songEscape(scene)}</p>
+          <h1 class="song-title song-fit">${songEscape(title)}</h1>
+          ${japaneseTitle?`<p class="song-title-sub song-fit">${songEscape(japaneseTitle)}</p>`:''}
+        </div>
+        <div class="song-video">${video?`<div class="song-video-frame"><iframe src="${songEscape(video)}" title="${songEscape(title)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`:'<p>Current YouTube video is not available.</p>'}</div>
+        <div class="song-info">
+          ${themeChars.length?`<section class="song-info-section"><h2 class="song-info-label">${en?'Theme Character':'テーマキャラクター'}</h2><div class="song-link-stack">${charCards}</div></section>`:''}
+          ${work?`<section class="song-info-section"><h2 class="song-info-label">${en?'Work':'作品'}</h2><div class="song-link-stack">${workCard}</div></section>`:''}
+        </div>
+        <div class="song-divider" aria-hidden="true"><span>◆</span></div>
+        <section class="song-detail-placeholder"><p>${en?'Additional song details will be placed here.':'今後、楽曲に関する詳細情報をここに追加します。'}</p></section>
+        ${song.old_youtube_url?`<aside class="old-youtube"><strong>${en?'Older YouTube':'旧YouTube'}</strong><br>${en?'Previous video: ':'以前の動画：'}<a href="${songEscape(song.old_youtube_url)}" target="_blank" rel="noopener">${songEscape(song.old_youtube_url)}</a></aside>`:''}
+      `;
+      fitAllSongText();
+    }
+    document.documentElement.lang=getLanguage();
+    renderSong().catch(e=>{document.getElementById('song-page').innerHTML=`<p>${songEscape(e.message)}</p>`});
+    window.addEventListener('resize',fitAllSongText);
+  </script>
+  <script src="../../assets/js/menu.js"></script>
+</body>
+</html>
