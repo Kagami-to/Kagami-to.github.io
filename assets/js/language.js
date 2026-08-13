@@ -5,8 +5,6 @@ function setLanguage(lang){localStorage.setItem('kagamito-language',lang);docume
 function t(key){return(UI_TEXT[getLanguage()]||UI_TEXT.ja)[key]||key}
 function pick(row,jaKey,enKey){return getLanguage()==='en'?(row[enKey]||''):(row[jaKey]||'')}
 
-function parseCSV(text){const rows=[];let row=[],field='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'){if(text[i+1]==='"'){field+='"';i++}else quoted=false}else field+=c}else{if(c==='"')quoted=true;else if(c===','){row.push(field);field=''}else if(c==='\n'){row.push(field);rows.push(row);row=[];field=''}else if(c!=='\r')field+=c}}if(field.length||row.length){row.push(field);rows.push(row)}const headers=(rows.shift()||[]).map(v=>v.trim());return rows.filter(r=>r.some(v=>v.trim()!=='')).map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])))}
-
-async function loadSiteText(){try{const res=await fetch('/pages/site_text.csv',{cache:'no-store'});if(!res.ok)throw new Error(`HTTP ${res.status}`);const rows=parseCSV(await res.text());return Object.fromEntries(rows.map(r=>[r.key,getLanguage()==='en'?r.en:r.ja]))}catch(e){console.error('Failed to load site_text.csv',e);return{}}}
+async function loadSiteText(){try{const rows=await loadCSV('/pages/site_text.csv');return Object.fromEntries(rows.map(r=>[r.key,getLanguage()==='en'?r.en:r.ja]))}catch(e){console.error('Failed to load site_text.csv',e);return{}}}
 
 document.addEventListener('DOMContentLoaded',async()=>{const lang=getLanguage();document.documentElement.lang=lang;const siteText=await loadSiteText();document.querySelectorAll('[data-home-key]').forEach(e=>{const key=e.dataset.homeKey;if(siteText[key])e.textContent=siteText[key]})});
