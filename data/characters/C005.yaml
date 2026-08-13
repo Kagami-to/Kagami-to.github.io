@@ -1,0 +1,13 @@
+id: C005
+sections:
+  - title_ja: 立場
+    title_en: Position
+    content_ja: |
+      上白川文庫・秘書
+    content_en: |
+      Secretary at Kamishirakawa Bunko
+  - title_ja: 登場作品
+    title_en: Appearances
+    works:
+      - P001
+      - P003
