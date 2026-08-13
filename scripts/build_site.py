@@ -99,13 +99,9 @@ def prepare_site():
     if SITE.exists():
         shutil.rmtree(SITE)
     SITE.mkdir(parents=True)
-    for directory in ('assets', 'images'):
-        source = ROOT / directory
-        if source.exists():
-            shutil.copytree(source, SITE / directory, dirs_exist_ok=True)
-    preview_source = ROOT / 'preview'
-    if preview_source.exists():
-        shutil.copytree(preview_source, SITE / 'preview', dirs_exist_ok=True)
+    source = ROOT / 'assets'
+    if source.exists():
+        shutil.copytree(source, SITE / 'assets', dirs_exist_ok=True)
     data_out = SITE / 'data'
     data_out.mkdir(parents=True, exist_ok=True)
     for name in ('characters.csv', 'songs.csv', 'works.csv'):
