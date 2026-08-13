@@ -44,12 +44,36 @@ def character_pager(prev_row, next_row):
     return ''.join(parts)
 
 
+def song_pager(prev_row, next_row):
+    parts = []
+    if prev_row:
+        uid = url_id(prev_row.get('url_id'))
+        label = prev_row.get('title_ja') or prev_row.get('title_en') or uid
+        parts.append(f'<a class="character-092-pager character-092-pager-prev" href="./{esc(uid)}.html" aria-label="前の楽曲: {esc(label)}"><span class="character-092-pager-arrow" aria-hidden="true">〈</span></a>')
+    if next_row:
+        uid = url_id(next_row.get('url_id'))
+        label = next_row.get('title_ja') or next_row.get('title_en') or uid
+        parts.append(f'<a class="character-092-pager character-092-pager-next" href="./{esc(uid)}.html" aria-label="次の楽曲: {esc(label)}"><span class="character-092-pager-arrow" aria-hidden="true">〉</span></a>')
+    return ''.join(parts)
+
+
 def character_detail_layout(title, character_id, body, prev_row=None, next_row=None, depth=1):
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
     pager = character_pager(prev_row, next_row)
     scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+
+
+def song_detail_layout(row, prev_row=None, next_row=None, depth=1):
+    template = (TEMPLATES / 'song-detail.html').read_text(encoding='utf-8')
+    uid = url_id(row.get('url_id'))
+    body = template.replace('{{SONG_ID}}', esc(row.get('song_id')))
+    pager = song_pager(prev_row, next_row)
+    prefix = '../' * depth
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css">'
+    scripts = f'''<script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}{body}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def generic_detail(title_ja, title_en, row, id_col, ja_col, en_col):
@@ -72,6 +96,20 @@ def build_character_pages(data, out):
         (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
 
 
+def build_song_pages(data, out):
+    # Pages remain available for every row with a URL ID, but pager navigation skips rows without a Japanese title.
+    valid = [(i, r) for i, r in enumerate(data) if url_id(r.get('url_id')) and (r.get('title_ja') or '').strip()]
+    for r in data:
+        uid = url_id(r.get('url_id'))
+        if not uid:
+            continue
+        pos = next((p for p, (_, v) in enumerate(valid) if v is r), None)
+        prev_row = valid[pos - 1][1] if pos is not None and pos > 0 else None
+        next_row = valid[pos + 1][1] if pos is not None and pos + 1 < len(valid) else None
+        html_text = song_detail_layout(r, prev_row=prev_row, next_row=next_row)
+        (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
+
+
 def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
     data = rows(csv_name)
     out = SITE / folder
@@ -80,6 +118,10 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
         build_character_pages(data, out)
         body = '<div class="page-heading"><h1 id="page-title">Characters</h1><div class="page-sub" id="page-sub">キャラクター</div></div><ul id="character-list" class="character-list"></ul>'
         script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'キャラクター';renderList('characters').catch(e=>console.error(e));</script>'''
+    elif folder == 'songs':
+        build_song_pages(data, out)
+        body = '<div class="page-heading"><h1 id="page-title">Songs</h1><div class="page-sub" id="page-sub">楽曲</div></div><ul id="entity-list" class="character-list"></ul>'
+        script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';renderList('songs').catch(e=>console.error(e));</script>'''
     else:
         for r in data:
             uid = url_id(r.get('url_id'))
@@ -87,12 +129,8 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
                 continue
             detail = generic_detail(r.get(ja_col,''), r.get(en_col,''), r, id_col, ja_col, en_col)
             (out / f'{uid}.html').write_text(layout(r.get(ja_col,'') or r.get(en_col,''), detail, 1), encoding='utf-8')
-        if folder == 'works':
-            body = '<div class="page-heading"><h1 id="page-title">Works</h1><div class="page-sub" id="page-sub">作品</div></div><ul id="entity-list" class="character-list"></ul>'
-            script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'作品';renderList('works').catch(e=>console.error(e));</script>'''
-        else:
-            body = '<div class="page-heading"><h1 id="page-title">Songs</h1><div class="page-sub" id="page-sub">楽曲</div></div><ul id="entity-list" class="character-list"></ul>'
-            script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';renderList('songs').catch(e=>console.error(e));</script>'''
+        body = '<div class="page-heading"><h1 id="page-title">Works</h1><div class="page-sub" id="page-sub">作品</div></div><ul id="entity-list" class="character-list"></ul>'
+        script = '''<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'作品';renderList('works').catch(e=>console.error(e));</script>'''
     (SITE / folder / 'index.html').write_text(layout(label, body, 1, extra_body=script), encoding='utf-8')
 
 
