@@ -28,7 +28,7 @@ def site_header(prefix):
 
 def layout(title, body, depth=0, extra_head='', extra_body=''):
     prefix = '../' * depth
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def character_pager(prev_row, next_row):
@@ -74,8 +74,8 @@ def character_detail_layout(title, character_id, body, prev_row=None, next_row=N
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
     pager = character_pager(prev_row, next_row)
-    scripts = f'''<script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def song_detail_layout(row, prev_row=None, next_row=None, depth=1):
@@ -84,8 +84,8 @@ def song_detail_layout(row, prev_row=None, next_row=None, depth=1):
     pager = song_pager(prev_row, next_row)
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css">'
-    scripts = f'''<script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}{body}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    scripts = f'''<script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{head}</head><body>{site_header(prefix)}{pager}{body}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def work_detail_layout(row, prev_row=None, next_row=None, depth=1):
@@ -93,8 +93,8 @@ def work_detail_layout(row, prev_row=None, next_row=None, depth=1):
     pager = work_pager(prev_row, next_row)
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/work-detail.css">'
-    scripts = f'''<script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/work-pages.js"></script><script>document.documentElement.lang=getLanguage();renderWork({esc(row.get('work_id'))!r}).catch(e=>{{const target=document.getElementById('work-page');if(target)target.textContent=e.message;}});</script>'''
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}{template}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    scripts = f'''<script src="{prefix}assets/js/work-pages.js"></script><script>document.documentElement.lang=getLanguage();renderWork({esc(row.get('work_id'))!r}).catch(e=>{{const target=document.getElementById('work-page');if(target)target.textContent=e.message;}});</script>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{head}</head><body>{site_header(prefix)}{pager}{template}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def build_character_pages(data, out):
