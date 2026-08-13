@@ -1,8 +1,8 @@
 /* Shared entity link cards — one visual system for Characters, Works, Songs and future entities. */
-.entity-card{display:flex;position:relative;overflow:hidden;box-sizing:border-box;min-height:112px;padding:18px 28px 18px 20px;align-items:center;justify-content:flex-end;background:#fff;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);color:#263d3d;text-decoration:none;text-align:right}
+.entity-card{display:flex;position:relative;overflow:hidden;box-sizing:border-box;min-height:112px;padding:18px 28px 18px 20px;align-items:center;justify-content:flex-start;background:#fff;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);color:#263d3d;text-decoration:none;text-align:left}
 .entity-card:hover{background:#fdfefe}
 .entity-card-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);z-index:0;font:400 62px/1 "Shippori Mincho",serif;color:rgba(45,104,105,.10);pointer-events:none}
-.entity-card-text{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px}
+.entity-card-text{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px}
 .entity-card-line{max-width:100%;overflow-wrap:anywhere}
 .entity-card-line-1{font:500 22px/1.35 "Shippori Mincho",serif;color:#263d3d}
 .entity-card-line-2,.entity-card-line-3{font:400 12px/1.55 "Zen Kaku Gothic New",sans-serif;color:#6b7472}
