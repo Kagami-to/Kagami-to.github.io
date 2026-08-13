@@ -1,5 +1,3 @@
-function parseCSV(text){const rows=[];let row=[],field='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'){if(text[i+1]==='"'){field+='"';i++}else quoted=false}else field+=c}else if(c==='"')quoted=true;else if(c===','){row.push(field);field=''}else if(c==='\n'){row.push(field);rows.push(row);row=[];field=''}else if(c!=='\r')field+=c}if(field.length||row.length){row.push(field);rows.push(row)}const headers=(rows.shift()||[]).map(v=>v.trim());return rows.filter(r=>r.some(v=>v.trim()!=='')).map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])))}
-async function loadCharacterCSV(path){const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw new Error(`CSVを読み込めませんでした (${r.status})`);return parseCSV(await r.text())}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function characterIds(v){return String(v||'').split(/[、,;\s]+/).filter(Boolean)}
 function characterUrl(v){return String(v||'').trim().toLowerCase().replace(/\./g,'-')}
@@ -12,7 +10,7 @@ function characterFitAll(){document.querySelectorAll('.character-092-fit-text').
 function characterSetSection(id,headingKey,value){const section=document.getElementById(id+'-section');if(!section)return;section.style.display=value?'':'none';if(value){document.getElementById(id+'-heading').textContent=t(headingKey);document.getElementById(id).innerHTML=escapeHtml(value).replace(/\n/g,'<br>')}}
 function characterSetRelated(targetId,sectionId,items,renderer){const section=document.getElementById(sectionId);const target=document.getElementById(targetId);if(!section||!target)return;target.innerHTML=items.map(x=>`<div>${renderer(x)}</div>`).join('');section.style.display=items.length?'':'none'}
 async function renderCharacter(id){
-  const [characters,songs,works]=await Promise.all([loadCharacterCSV('../data/characters.csv'),loadCharacterCSV('../data/songs.csv'),loadCharacterCSV('../data/works.csv')]);
+  const [characters,songs,works]=await Promise.all([loadCSV('../data/characters.csv'),loadCSV('../data/songs.csv'),loadCSV('../data/works.csv')]);
   const c=characters.find(x=>characterUrl(x.url_id)===characterUrl(id));
   if(!c)throw new Error(t('notFound'));
   const en=getLanguage()==='en';
