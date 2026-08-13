@@ -61,18 +61,17 @@ def character_detail_layout(title, character_id, body, prev_row=None, next_row=N
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
     pager = character_pager(prev_row, next_row)
-    scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
+    scripts = f'''<script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def song_detail_layout(row, prev_row=None, next_row=None, depth=1):
     template = (TEMPLATES / 'song-detail.html').read_text(encoding='utf-8')
-    uid = url_id(row.get('url_id'))
     body = template.replace('{{SONG_ID}}', esc(row.get('song_id')))
     pager = song_pager(prev_row, next_row)
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css">'
-    scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
+    scripts = f'''<script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css">{head}</head><body>{site_header(prefix)}{pager}{body}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
@@ -97,7 +96,6 @@ def build_character_pages(data, out):
 
 
 def build_song_pages(data, out):
-    # Pages remain available for every row with a URL ID, but pager navigation skips rows without a Japanese title.
     valid = [(i, r) for i, r in enumerate(data) if url_id(r.get('url_id')) and (r.get('title_ja') or '').strip()]
     for r in data:
         uid = url_id(r.get('url_id'))
@@ -159,7 +157,6 @@ def prepare_site():
 
 
 def publish_previews():
-    """Publish versioned preview directories as-is under /preview/."""
     if not PREVIEW.exists():
         return
     target = SITE / 'preview'
