@@ -54,7 +54,7 @@
     }
 
     async function renderSongPreview() {
-      const rows = await loadCsv('../../data/songs.csv');
+      const rows = await loadCSV('../../data/songs.csv');
       const row = rows.find(r => (r.song_id || '').trim() === SONG_ID);
       const target = document.getElementById('song-page');
       if (!row) {
