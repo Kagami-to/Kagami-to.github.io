@@ -1,5 +1,5 @@
 from pathlib import Path
-import csv, html, re, shutil
+import csv, html, shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
@@ -125,104 +125,10 @@ def build_entity(csv_name, folder, id_col, ja_col, en_col, label):
     (SITE / folder / 'index.html').write_text(layout(label, body, 1, extra_body=script), encoding='utf-8')
 
 
-def _find_matching_brace(text, start):
-    depth = 0
-    quote = None
-    escape = False
-    for i in range(start, len(text)):
-        ch = text[i]
-        if quote:
-            if escape:
-                escape = False
-            elif ch == '\\':
-                escape = True
-            elif ch == quote:
-                quote = None
-            continue
-        if ch in ('"', "'"):
-            quote = ch
-        elif ch == '{':
-            depth += 1
-        elif ch == '}':
-            depth -= 1
-            if depth == 0:
-                return i
-    return -1
-
-
-def _prefix_css_rules(block, prefix):
-    out = []
-    pos = 0
-    while pos < len(block):
-        open_brace = block.find('{', pos)
-        if open_brace < 0:
-            out.append(block[pos:])
-            break
-        selector = block[pos:open_brace].strip()
-        close_brace = _find_matching_brace(block, open_brace)
-        if close_brace < 0:
-            out.append(block[pos:])
-            break
-        body = block[open_brace + 1:close_brace]
-        if selector.startswith('@'):
-            out.append(selector + '{' + body + '}')
-        else:
-            selectors = [s.strip() for s in selector.split(',') if s.strip()]
-            out.append(','.join(prefix + ' ' + s for s in selectors) + '{' + body + '}')
-        pos = close_brace + 1
-    return ''.join(out)
-
-
-def rewrite_responsive_css(css):
-    """Convert viewport-width media queries into load/orientation state selectors.
-
-    The original responsive rules use the live CSS viewport, which changes under
-    browser zoom.  We instead key them off html[data-layout-mode], whose value is
-    captured once at load and refreshed only on orientation changes.
-    """
-    pattern = re.compile(r'@media\s*\(\s*max-width\s*:\s*[^\)]+\)', re.I)
-    out = []
-    pos = 0
-    while True:
-        match = pattern.search(css, pos)
-        if not match:
-            out.append(css[pos:])
-            break
-        out.append(css[pos:match.start()])
-        open_brace = css.find('{', match.end())
-        if open_brace < 0:
-            out.append(css[match.start():])
-            break
-        close_brace = _find_matching_brace(css, open_brace)
-        if close_brace < 0:
-            out.append(css[match.start():])
-            break
-        block = css[open_brace + 1:close_brace]
-        out.append(_prefix_css_rules(block, 'html[data-layout-mode="mobile"]'))
-        pos = close_brace + 1
-    return ''.join(out)
-
-
-def copy_assets_with_locked_responsive_behavior(source, destination):
-    destination.mkdir(parents=True, exist_ok=True)
-    for path in source.rglob('*'):
-        rel = path.relative_to(source)
-        target = destination / rel
-        if path.is_dir():
-            target.mkdir(parents=True, exist_ok=True)
-            continue
-        target.parent.mkdir(parents=True, exist_ok=True)
-        if path.suffix.lower() == '.css':
-            text = path.read_text(encoding='utf-8')
-            target.write_text(rewrite_responsive_css(text), encoding='utf-8')
-        else:
-            shutil.copy2(path, target)
-
-
 def prepare_site():
     if SITE.exists(): shutil.rmtree(SITE)
     SITE.mkdir(parents=True); source = ROOT / 'assets'
-    if source.exists(): copy_assets_with_locked_responsive_behavior(source, SITE / 'assets')
+    if source.exists(): shutil.copytree(source, SITE / 'assets', dirs_exist_ok=True)
     data_out = SITE / 'data'; data_out.mkdir(parents=True, exist_ok=True)
     for name in ('characters.csv', 'songs.csv', 'works.csv'):
         source = DATA / name
