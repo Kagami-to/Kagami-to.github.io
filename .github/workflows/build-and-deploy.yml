@@ -26,6 +26,8 @@ jobs:
           python-version: '3.x'
       - name: Regenerate CSV-driven pages
         run: python scripts/build_site.py
+      - name: Build Glossary list
+        run: python scripts/build_glossary.py
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
