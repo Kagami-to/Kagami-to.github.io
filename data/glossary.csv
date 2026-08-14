@@ -1,2 +1,2 @@
-term_id,term_ja,reading_ja,term_en,category,url_id,sort_order,related_work_ids,related_character_ids,related_song_ids
-T001,鏡外,かがみと,Kagamito,concept,kagamito,1,,,
+term_id,term_ja,reading_ja,term_en,category,url_id,sort_order,related_work_ids,related_character_ids,related_song_ids,related_glossary_ids
+T001,鏡外,かがみと,Kagamito,concept,kagamito,1,,,,
