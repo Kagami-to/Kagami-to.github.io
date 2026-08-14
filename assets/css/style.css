@@ -48,6 +48,7 @@ html[lang="en"] .menu-main { display: flex; align-items: center; min-height: 54p
 .item-copy { display: flex; flex-direction: column; min-width: 0; width: 100%; }
 .item-name { order: 2; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 600; line-height: 1.3; text-align: left; }
 .item-epithet { order: 1; margin: 0 0 2px; font-family: "Zen Kaku Gothic New", sans-serif; font-size: 12px; line-height: 1.3; color: #557072; font-weight: 450; text-align: left; }
+.menu-group[data-menu-key^="glossary:"] > .menu-trigger .item-name { font-family: "Zen Kaku Gothic New", sans-serif; font-size: 16px; font-weight: 600; }
 .divider { height: 1px; background: #bfd1cf; margin: 18px 0; }
 .lang-label { font-size: 12px; color: #557072; margin: 0 8px 8px; }
 .lang-buttons { display: flex; gap: 8px; }
