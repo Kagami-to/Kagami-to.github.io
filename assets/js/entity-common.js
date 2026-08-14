@@ -14,3 +14,16 @@ function entityWorkCard(w,h){const d=workCardData(w);return characterRelatedCard
 function entitySongCard(s,h){const d=songCardData(s);return characterRelatedCard(h,d.lines[0],d.lines[1],'song')}
 function entityGlossaryCard(g,h){const d=glossaryCardData(g);return characterRelatedCard(h,d.main,d.secondary,'glossary')}
 function entityCard(h,main,japanese='',subtitle='',type='work'){return characterRelatedCard(h,main,japanese||subtitle,type)}
+
+(function(){
+  const width=window.innerWidth||document.documentElement.clientWidth||0;
+  document.documentElement.dataset.layoutMode=width<=700?'mobile':'desktop';
+  document.documentElement.style.setProperty('--locked-viewport-width',width+'px');
+  const link=document.createElement('link');
+  link.rel='stylesheet';
+  link.href=new URL('../assets/css/viewport-lock.css',location.href).href;
+  document.head.appendChild(link);
+  function refresh(){const w=window.innerWidth||document.documentElement.clientWidth||0;document.documentElement.dataset.layoutMode=w<=700?'mobile':'desktop';document.documentElement.style.setProperty('--locked-viewport-width',w+'px')}
+  window.addEventListener('orientationchange',()=>requestAnimationFrame(refresh),{passive:true});
+  if(window.screen&&window.screen.orientation)window.screen.orientation.addEventListener('change',()=>requestAnimationFrame(refresh),{passive:true});
+})();
