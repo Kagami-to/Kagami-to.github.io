@@ -1,0 +1,32 @@
+id: T004
+
+sections:
+  - title_ja: 概要
+    title_en: Overview
+    content_ja: |
+      鴨草京を統治する政治機関。また、その建物。あるいは、それに属する人々。
+
+      天皇・石凝宮なみとその関白・御虹重を長とし、その下に局や室と呼ばれる様々な部署が連なっている。
+
+      建物は旧都の時代に建てられた石凝宮の建て替え。現在は太陽神・天照宮ひめを祀る社でもある。
+    content_en: |
+      The political institution that governs Kamokusa-kyō, as well as its building and the people belonging to it.
+
+      It is headed by Emperor Ishikorimiya no Nami and her Chancellor, Mikō Kasane, with various departments known as bureaus and chambers arranged beneath them.
+
+      The building is a reconstruction of the Ishikorimiya residence built during the era of the Old Capital. It is also now a shrine dedicated to the sun goddess Tenshōgū Hime.
+
+  - content_ja:
+      - align: left
+        text: |
+          「まぁほら、私は一回都を潰したし……」
+      - align: right
+        text: |
+          ───　石凝宮なみ
+    content_en:
+      - align: left
+        text: |
+          “Well, you know, I did destroy the capital once...”
+      - align: right
+        text: |
+          ───　Ishikorimiya no Nami
