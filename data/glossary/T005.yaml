@@ -1,31 +1,36 @@
-term_id: T005
-term_ja: 上白川文庫
-reading_ja: かみしらかわぶんこ
-term_en: Kamishirakawa Library
-category: organization
-url_id: kamishirakawa-library
-sort_order: 5
-summary_ja: |
-  鴨草京にある私設の図書館。
+id: T005
 
-  地上部は一般的な図書館であり、地下には巨大な閉架が存在している。また一角には数室の居住スペースがあり、館長のアレン・ハーグリーヴズと、文筆家の上白川文音が住んでいる。
+sections:
+  - title_ja: 概要
+    title_en: Overview
+    content_ja: |
+      鴨草京にある私設の図書館。
 
-  隔世における上白川学園の対となり、この世界の存続に関わる使命を持つ組織。図書館として歴史書などを管理するのみならず、歴史書の編纂をも担っている。
+      地上部は一般的な図書館であり、地下には巨大な閉架が存在している。また一角には数室の居住スペースがあり、館長のアレン・ハーグリーヴズと、文筆家の上白川文音が住んでいる。
 
-  ちなみに、鴨草京に立地させてもらう代わりに、御虹重による統治を正当化する内容の歴史書を捏造している。
-summary_en: |
-  A private library in Kamokusa-kyō.
+      隔世における上白川学園の対となり、この世界の存続に関わる使命を持つ組織。図書館として歴史書などを管理するのみならず、歴史書の編纂をも担っている。
 
-  The above-ground section is an ordinary library, while a vast closed-stack collection lies underground. A small residential area consisting of several rooms is also located within the building, where its director, Allen Hargreaves, and the writer Ayane Kamishirakawa reside.
+      ちなみに、鴨草京に立地させてもらう代わりに、御虹重による統治を正当化する内容の歴史書を捏造している。
+    content_en: |
+      A private library in Kamokusa-kyō.
 
-  Its counterpart in the Kaku-se is Kamishirakawa Academy, and it is an organization entrusted with a mission concerning the survival of this world. In addition to preserving historical records and other materials as a library, it also compiles historical texts.
+      The above-ground section is an ordinary library, while a vast closed-stack collection lies underground. A small residential area consisting of several rooms is also located within the building, where its director, Allen Hargreaves, and the writer Ayane Kamishirakawa reside.
 
-  Incidentally, in exchange for being allowed to establish itself in Kamokusa-kyō, it fabricates historical texts that serve to legitimize Mikō Kasane's rule.
-quote_ja: 出鱈目の執筆は暇な小説家に回ってくる
-quote_en: Writing nonsense is what gets left to novelists with too much time on their hands.
-quote_author_ja: 上白川文音
-quote_author_en: Ayane Kamishirakawa
-related_work_ids: []
-related_character_ids: []
-related_song_ids: []
-related_glossary_ids: []
+      Its counterpart in the Kaku-se is Kamishirakawa Academy, and it is an organization entrusted with a mission concerning the survival of this world. In addition to preserving historical records and other materials as a library, it also compiles historical texts.
+
+      Incidentally, in exchange for being allowed to establish itself in Kamokusa-kyō, it fabricates historical texts that serve to legitimize Mikō Kasane's rule.
+
+  - content_ja:
+      - align: left
+        text: |
+          「出鱈目の執筆は暇な小説家に回ってくる」
+      - align: right
+        text: |
+          ───　上白川文音
+    content_en:
+      - align: left
+        text: |
+          “Writing nonsense is what gets left to novelists with too much time on their hands.”
+      - align: right
+        text: |
+          ───　Ayane Kamishirakawa
