@@ -16,14 +16,22 @@ function entityGlossaryCard(g,h){const d=glossaryCardData(g);return characterRel
 function entityCard(h,main,japanese='',subtitle='',type='work'){return characterRelatedCard(h,main,japanese||subtitle,type)}
 
 (function(){
-  const width=window.innerWidth||document.documentElement.clientWidth||0;
-  document.documentElement.dataset.layoutMode=width<=700?'mobile':'desktop';
-  document.documentElement.style.setProperty('--locked-viewport-width',width+'px');
-  const link=document.createElement('link');
-  link.rel='stylesheet';
-  link.href=new URL('../assets/css/viewport-lock.css',location.href).href;
-  document.head.appendChild(link);
-  function refresh(){const w=window.innerWidth||document.documentElement.clientWidth||0;document.documentElement.dataset.layoutMode=w<=700?'mobile':'desktop';document.documentElement.style.setProperty('--locked-viewport-width',w+'px')}
-  window.addEventListener('orientationchange',()=>requestAnimationFrame(refresh),{passive:true});
-  if(window.screen&&window.screen.orientation)window.screen.orientation.addEventListener('change',()=>requestAnimationFrame(refresh),{passive:true});
+  function lock(){
+    const width=window.innerWidth||document.documentElement.clientWidth||0;
+    const root=document.documentElement;
+    root.dataset.layoutMode=width<=700?'mobile':'desktop';
+    root.style.setProperty('--locked-viewport-width',width+'px');
+    root.style.width=width+'px';
+    root.style.minWidth=width+'px';
+    root.style.maxWidth=width+'px';
+    if(document.body){
+      document.body.style.width=width+'px';
+      document.body.style.minWidth=width+'px';
+      document.body.style.maxWidth=width+'px';
+    }
+  }
+  lock();
+  window.addEventListener('load',lock,{once:true,passive:true});
+  window.addEventListener('orientationchange',()=>requestAnimationFrame(lock),{passive:true});
+  if(window.screen&&window.screen.orientation)window.screen.orientation.addEventListener('change',()=>requestAnimationFrame(lock),{passive:true});
 })();
