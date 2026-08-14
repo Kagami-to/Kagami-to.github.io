@@ -1,0 +1,9 @@
+id: T001
+
+sections:
+  - title_ja: 概要
+    title_en: Overview
+    content_ja: |
+      鏡外に関する説明をここに記載します。
+    content_en: |
+      A description of Kagamito will be placed here.
