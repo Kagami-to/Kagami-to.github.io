@@ -6,4 +6,6 @@ function t(key){return(UI_TEXT[getLanguage()]||UI_TEXT.ja)[key]||key}
 
 async function loadSiteText(){try{const rows=await loadCSV('/pages/site_text.csv');return Object.fromEntries(rows.map(r=>[r.key,getLanguage()==='en'?r.en:r.ja]))}catch(e){console.error('Failed to load site_text.csv',e);return{}}}
 
-document.addEventListener('DOMContentLoaded',async()=>{const lang=getLanguage();document.documentElement.lang=lang;const siteText=await loadSiteText();document.querySelectorAll('[data-home-key]').forEach(e=>{const key=e.dataset.homeKey;if(siteText[key])e.textContent=siteText[key]})});
+function applyDetailBackLinkLanguage(lang){document.querySelectorAll('.detail-back-link-ja').forEach(e=>{e.style.display=lang==='en'?'none':'inline'});document.querySelectorAll('.detail-back-link-en').forEach(e=>{e.style.display=lang==='en'?'inline':'none'})}
+
+document.addEventListener('DOMContentLoaded',async()=>{const lang=getLanguage();document.documentElement.lang=lang;applyDetailBackLinkLanguage(lang);const siteText=await loadSiteText();document.querySelectorAll('[data-home-key]').forEach(e=>{const key=e.dataset.homeKey;if(siteText[key])e.textContent=siteText[key]})});
