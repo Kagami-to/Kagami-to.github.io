@@ -1,0 +1,32 @@
+id: T003
+
+sections:
+  - title_ja: 概要
+    title_en: Overview
+    content_ja: |
+      『虹鏡』の舞台となる都市。また、その都市の政治を担う人や機関のこと。
+
+      元は千年ほど前に廃れてしまったかつての都の跡地で、旧都と呼ばれていた。事件の数年前に再興され、現在の姿となる。その立地は隔世では京都市とほぼ対応する。
+
+      政治を行う施設である天照宮と、そこから南へ向けて一直線に伸びる朱雀大路を中心に、南北と東西に貫く無数の直線道路により構成され、その様子は碁盤の目と称される。
+    content_en: |
+      The city in which Nijikagami takes place, as well as the people and institutions responsible for governing it.
+
+      Originally the site of a former capital that fell into decline roughly a thousand years ago, it was known as the Old Capital. It was restored several years before the incident and became the city it is today. Its location corresponds roughly to that of Kyoto City in the Kakusē.
+
+      Centered around Tenshōgū, the seat of government, and Suzaku-oji Avenue, which extends in a straight line southward from it, the city is laid out along countless straight roads running north–south and east–west. This orderly arrangement is known as a grid pattern.
+
+  - content_ja:
+      - align: left
+        text: |
+          「鴨草京の連中に血は通ってない」
+      - align: right
+        text: |
+          ───　深韴傷瑕
+    content_en:
+      - align: left
+        text: |
+          “The people of Kamokusa-kyō have no blood running through their veins.”
+      - align: right
+        text: |
+          ───　Mifutsu Shōka
