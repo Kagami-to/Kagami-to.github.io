@@ -1,31 +1,40 @@
 from pathlib import Path
-import csv, html, shutil
+import csv, shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
 SITE = ROOT / '_site'
-TEMPLATE = ROOT / 'templates' / 'glossary-list.html'
+LIST_TEMPLATE = ROOT / 'templates' / 'glossary-list.html'
+DETAIL_TEMPLATE = ROOT / 'templates' / 'glossary-detail.html'
 
-CATEGORIES = {
-    'place': ('地名・施設・場所', 'Places'),
-    'organization': ('組織', 'Organizations'),
-    'item': ('道具・物品', 'Items'),
-    'concept': ('概念', 'Concepts'),
-    'other': ('その他', 'Other'),
-}
 
-def esc(v):
-    return html.escape(v or '', quote=True)
-
-def layout(body):
+def list_layout(body):
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glossary - Kagamito Official</title><link rel="stylesheet" href="../assets/css/style.css"><link rel="stylesheet" href="../assets/css/entity-cards.css"><link rel="stylesheet" href="../assets/css/glossary-list.css"></head><body><header class="site-header"><a href="../" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header><main class="container">{body}</main><script src="../assets/js/data.js"></script><script src="../assets/js/language.js"></script><script src="../assets/js/entity-common.js"></script><script src="../assets/js/glossary-pages.js"></script><script>document.documentElement.lang=getLanguage();initGlossaryList().catch(e=>console.error(e));</script><script src="../assets/js/menu.js"></script></body></html>'''
+
+
+def detail_layout(body, term_id):
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glossary - Kagamito Official</title><link rel="stylesheet" href="../assets/css/style.css"><link rel="stylesheet" href="../assets/css/entity-cards.css"><link rel="stylesheet" href="../assets/css/glossary-detail.css"></head><body data-glossary-id="{term_id}"><header class="site-header"><a href="../" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header><main class="container">{body}</main><script src="../assets/js/data.js"></script><script src="../assets/js/language.js"></script><script src="../assets/js/entity-common.js"></script><script src="../assets/js/glossary-detail.js"></script><script src="../assets/js/menu.js"></script></body></html>'''
+
 
 def main():
     src = DATA / 'glossary.csv'
     if not src.exists(): return
     out = SITE / 'glossary'; out.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(src, SITE / 'data' / 'glossary.csv')
-    body = TEMPLATE.read_text(encoding='utf-8')
-    (out / 'index.html').write_text(layout(body), encoding='utf-8')
+    site_data = SITE / 'data'; site_data.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, site_data / 'glossary.csv')
+    yaml_src = DATA / 'glossary'
+    yaml_dst = site_data / 'glossary'; yaml_dst.mkdir(parents=True, exist_ok=True)
+    for y in yaml_src.glob('*.yaml'):
+        shutil.copy2(y, yaml_dst / y.name)
+    body = LIST_TEMPLATE.read_text(encoding='utf-8')
+    (out / 'index.html').write_text(list_layout(body), encoding='utf-8')
+    detail_body = DETAIL_TEMPLATE.read_text(encoding='utf-8')
+    with src.open(encoding='utf-8-sig', newline='') as f:
+        for row in csv.DictReader(f):
+            term_id = (row.get('term_id') or '').strip()
+            url_id = (row.get('url_id') or '').strip()
+            if not term_id or not url_id: continue
+            (out / f'{url_id}.html').write_text(detail_layout(detail_body, term_id), encoding='utf-8')
+
 
 if __name__ == '__main__': main()
