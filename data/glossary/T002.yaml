@@ -1,0 +1,28 @@
+id: T002
+
+sections:
+  - title_ja: 概要
+    title_en: Overview
+    content_ja: |
+      物語の第1部にあたる事件。また、その顛末を記したとされる書類の題名。
+
+      隔世から鴨草京に迷い込んでしまった14歳の少女・双結八耶が、自らに秘められた使命を知る物語。
+    content_en: |
+      The incident that constitutes the first part of the story, as well as the title of a document said to record the course and outcome of the incident.
+
+      It tells the story of 14-year-old Yaya Futayui, a girl who wandered into Kamokusa-kyō from the Kakusē and came to learn of the mission hidden within her.
+
+  - content_ja:
+      - align: left
+        text: |
+          「強者による発言の記録だけを、歴史と呼ぶのよ」
+      - align: right
+        text: |
+          ───　御虹単
+    content_en:
+      - align: left
+        text: |
+          “Only the records of the words spoken by the powerful are called history.”
+      - align: right
+        text: |
+          ───　Mikō Hitoe
