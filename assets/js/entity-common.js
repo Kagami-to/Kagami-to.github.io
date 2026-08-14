@@ -19,65 +19,51 @@ function entityCard(h,main,japanese='',subtitle='',type='work'){return character
   const root=document.documentElement;
   const initialWidth=window.innerWidth||root.clientWidth||0;
   const initialHeight=window.innerHeight||root.clientHeight||0;
-  const initialMode=initialWidth<=700?'mobile':'desktop';
   const vmin=Math.min(initialWidth,initialHeight);
   const vmax=Math.max(initialWidth,initialHeight);
-  root.dataset.layoutMode=initialMode;
+  root.dataset.layoutMode=initialWidth<=700?'mobile':'desktop';
   root.style.setProperty('--locked-viewport-width',initialWidth+'px');
   root.style.setProperty('--locked-viewport-height',initialHeight+'px');
   root.style.setProperty('--locked-viewport-vmin',vmin+'px');
   root.style.setProperty('--locked-viewport-vmax',vmax+'px');
+  root.style.width=initialWidth+'px';
+  root.style.minWidth=initialWidth+'px';
+  root.style.maxWidth=initialWidth+'px';
+  if(document.body){document.body.style.width=initialWidth+'px';document.body.style.minWidth=initialWidth+'px';document.body.style.maxWidth=initialWidth+'px'}
 
-  function lockDimensions(){
-    root.style.width=initialWidth+'px';
-    root.style.minWidth=initialWidth+'px';
-    root.style.maxWidth=initialWidth+'px';
-    if(document.body){
-      document.body.style.width=initialWidth+'px';
-      document.body.style.minWidth=initialWidth+'px';
-      document.body.style.maxWidth=initialWidth+'px';
-    }
-  }
-  lockDimensions();
-
-  function transformViewportUnits(css){
-    css=css.replace(/(-?(?:\d+\.?\d*|\.\d+))vmin\b/gi,(m,n)=>`calc(var(--locked-viewport-vmin) * ${Number(n)/100})`);
-    css=css.replace(/(-?(?:\d+\.?\d*|\.\d+))vmax\b/gi,(m,n)=>`calc(var(--locked-viewport-vmax) * ${Number(n)/100})`);
-    css=css.replace(/(-?(?:\d+\.?\d*|\.\d+))vw\b/gi,(m,n)=>`calc(var(--locked-viewport-width) * ${Number(n)/100})`);
-    css=css.replace(/(-?(?:\d+\.?\d*|\.\d+))vh\b/gi,(m,n)=>`calc(var(--locked-viewport-height) * ${Number(n)/100})`);
-    return css;
+  function lockedUnitCss(text){
+    return text
+      .replace(/(-?(?:\d+\.?\d*|\.\d+))vmin\b/gi,(m,n)=>`calc(var(--locked-viewport-vmin) * ${Number(n)/100})`)
+      .replace(/(-?(?:\d+\.?\d*|\.\d+))vmax\b/gi,(m,n)=>`calc(var(--locked-viewport-vmax) * ${Number(n)/100})`)
+      .replace(/(-?(?:\d+\.?\d*|\.\d+))vw\b/gi,(m,n)=>`calc(var(--locked-viewport-width) * ${Number(n)/100})`)
+      .replace(/(-?(?:\d+\.?\d*|\.\d+))vh\b/gi,(m,n)=>`calc(var(--locked-viewport-height) * ${Number(n)/100})`)
+      .replace(/(-?(?:\d+\.?\d*|\.\d+))dvh\b/gi,(m,n)=>`calc(var(--locked-viewport-height) * ${Number(n)/100})`);
   }
 
-  function transformWidthMedia(css){
-    return css.replace(/@media\s*\(\s*max-width\s*:\s*([0-9.]+)px\s*\)/gi,(m,n)=>Number(n)>=initialWidth?'@media all':'@media not all')
-              .replace(/@media\s*\(\s*min-width\s*:\s*([0-9.]+)px\s*\)/gi,(m,n)=>Number(n)<=initialWidth?'@media all':'@media not all');
-  }
-
-  async function lockLocalStyles(){
-    const links=[...document.querySelectorAll('link[rel="stylesheet"][href]')];
-    for(const link of links){
+  function processRules(rules){
+    for(const rule of rules){
       try{
-        const url=new URL(link.href,location.href);
-        if(url.origin!==location.origin)continue;
-        const response=await fetch(url.href,{cache:'force-cache'});
-        if(!response.ok)continue;
-        const text=await response.text();
-        const style=document.createElement('style');
-        style.dataset.lockedViewportCss='true';
-        style.textContent=transformViewportUnits(transformWidthMedia(text));
-        link.disabled=true;
-        link.insertAdjacentElement('afterend',style);
-      }catch(e){console.warn('Viewport-lock CSS transform skipped:',e)}
+        if(rule.type===CSSRule.STYLE_RULE){
+          const before=rule.style.cssText;
+          const after=lockedUnitCss(before);
+          if(before!==after)rule.style.cssText=after;
+        }else if(rule.cssRules){
+          processRules(rule.cssRules);
+        }
+      }catch(e){/* Ignore cross-origin or non-modifiable rules. */}
     }
-    document.querySelectorAll('style:not([data-locked-viewport-css])').forEach(style=>{
-      if(style.textContent&&(/(?:vw|vh|vmin|vmax)\b|@media\s*\(\s*(?:max|min)-width\s*:/i).test(style.textContent)){
-        style.textContent=transformViewportUnits(transformWidthMedia(style.textContent));
-      }
-    });
   }
 
-  lockLocalStyles();
-  const reloadOnRotate=()=>{location.reload()};
+  function processSheets(){
+    for(const sheet of Array.from(document.styleSheets)){
+      try{if(sheet.cssRules)processRules(sheet.cssRules)}catch(e){/* Cross-origin stylesheets are intentionally skipped. */}
+    }
+  }
+
+  processSheets();
+  const observer=new MutationObserver(()=>processSheets());
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+  const reloadOnRotate=()=>location.reload();
   window.addEventListener('orientationchange',reloadOnRotate,{passive:true});
   if(window.screen&&window.screen.orientation)window.screen.orientation.addEventListener('change',reloadOnRotate,{passive:true});
 })();
