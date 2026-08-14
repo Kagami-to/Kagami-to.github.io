@@ -21,6 +21,7 @@
 | 鴨草京 | Kamokusa-kyō | 地名 |
 | 難波 | Naniwa | 地名・名称構成要素 |
 | 玉造 | Tamatsukuri | 地名・名称構成要素 |
+| 朱雀大路 | Suzaku-oji Avenue | 道路名 |
 
 ## 組織・施設
 
