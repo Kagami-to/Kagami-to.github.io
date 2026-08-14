@@ -1,0 +1,13 @@
+id: C017
+sections:
+  - title_ja: 立場
+    title_en: Position
+    content_ja: |
+      イオニア会
+    content_en: |
+      Ionian Order
+  - title_ja: 登場作品
+    title_en: Appearances
+    works:
+      - P002
+      - P003

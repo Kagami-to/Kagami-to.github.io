@@ -1,0 +1,14 @@
+id: C010
+sections:
+  - title_ja: 立場
+    title_en: Position
+    content_ja: |
+      鴨草京天照宮清涼殿・太閤
+    content_en: |
+      Taikō of the Seiryōden at Tenshōgū in Kamokusa-kyō
+  - title_ja: 登場作品
+    title_en: Appearances
+    works:
+      - P001
+      - P002
+      - P003
