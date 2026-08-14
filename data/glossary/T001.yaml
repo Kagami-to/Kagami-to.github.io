@@ -12,14 +12,17 @@ sections:
 
       In the mythological age, it was merely a reflection of the Kakusē in the mirror, to the extent that it was questionable whether it could even be called another world. Later, Nami Ishikokoronomiya, the creator of the Yata Mirror, weakened its connection to the Kakusē, transforming it into an alternate world that would follow a different history.
 
-  - align: left
-    content_ja: |
-      「私に言わせれば、こっちこそ鏡の外だよ」
-    content_en: |
-      “If you ask me, this side is the one outside the mirror.”
-
-  - align: right
-    content_ja: |
-      ───　御虹重
-    content_en: |
-      ───　Mikō Kasane
+  - content_ja:
+      - align: left
+        text: |
+          「私に言わせれば、こっちこそ鏡の外だよ」
+      - align: right
+        text: |
+          ───　御虹重
+    content_en:
+      - align: left
+        text: |
+          “If you ask me, this side is the one outside the mirror.”
+      - align: right
+        text: |
+          ───　Mikō Kasane
