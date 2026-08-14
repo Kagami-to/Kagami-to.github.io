@@ -13,6 +13,7 @@ html[data-layout-mode="desktop"] .glossary-detail-card,html[data-layout-mode="de
 html[data-layout-mode="desktop"] .glossary-detail-identity h1{font-size:clamp(42px,calc(var(--locked-viewport-width)*.06),68px)}
 html[data-layout-mode="desktop"] .character-092-name,html[data-layout-mode="desktop"] .song-title,html[data-layout-mode="desktop"] .work-title{font-size:clamp(42px,calc(var(--locked-viewport-width)*.055),68px)}
 html[data-layout-mode="desktop"] .glossary-detail-heading{font-size:clamp(24px,calc(var(--locked-viewport-width)*.03),34px)}
+html[data-layout-mode="desktop"] .mobile-menu-panel{width:min(calc(var(--locked-viewport-width)*.88),400px)}
 
 /* Mobile mode: preserve the mobile layout even if zoom makes the live viewport wider than 700px. */
 html[data-layout-mode="mobile"] .home-hero{--hero-size:min(calc(var(--locked-viewport-width)*.82),720px)}
@@ -91,7 +92,7 @@ html[data-layout-mode="mobile"] .item-name{font-size:17px}
 html[data-layout-mode="mobile"] .item-epithet{font-size:11px}
 html[data-layout-mode="mobile"] .site-header{height:64px;padding:0 1rem}
 html[data-layout-mode="mobile"] .mobile-menu-overlay{top:64px}
-html[data-layout-mode="mobile"] .mobile-menu-panel{top:64px;width:min(90vw,380px);height:calc(100dvh - 64px)}
+html[data-layout-mode="mobile"] .mobile-menu-panel{top:64px;width:min(calc(var(--locked-viewport-width)*.9),380px);height:calc(100dvh - 64px)}
 html[data-layout-mode="mobile"] .entity-navigation a{padding:.6rem .75rem}
 html[data-layout-mode="mobile"] .page-heading h1{font-size:31px}
 html[data-layout-mode="mobile"] .item-secondary{font-size:11px}
@@ -99,7 +100,7 @@ html[data-layout-mode="mobile"] .item-secondary{font-size:11px}
 /* Override viewport-relative mobile rules while staying in desktop mode. */
 html[data-layout-mode="desktop"] .site-header{height:68px;padding:0 1.1rem 0 1.5rem}
 html[data-layout-mode="desktop"] .mobile-menu-overlay{top:68px}
-html[data-layout-mode="desktop"] .mobile-menu-panel{top:68px;width:min(88vw,400px);height:calc(100dvh - 68px)}
+html[data-layout-mode="desktop"] .mobile-menu-panel{top:68px;width:min(calc(var(--locked-viewport-width)*.88),400px);height:calc(100dvh - 68px)}
 html[data-layout-mode="desktop"] .menu-main{font-size:26px}
 html[data-layout-mode="desktop"] .item-name{font-size:18px}
 html[data-layout-mode="desktop"] .item-epithet{font-size:12px}
