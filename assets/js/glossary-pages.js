@@ -1,4 +1,4 @@
-const GLOSSARY_CATEGORY_LABELS={place:{ja:'地名・施設・場所',en:'Places'},organization:{ja:'組織',en:'Organizations'},item:{ja:'道具・物品',en:'Items'},concept:{ja:'概念',en:'Concepts'},other:{ja:'その他',en:'Other'}};
+const GLOSSARY_CATEGORY_LABELS={concept:{ja:'概念',en:'Concepts'},place:{ja:'地名・施設',en:'Places'},item:{ja:'道具・物品',en:'Items'},organization:{ja:'組織',en:'Organizations'},other:{ja:'その他',en:'Other'}};
 function glossaryEsc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function glossarySort(a,b){const ar=a.reading_ja||a.term_ja||'',br=b.reading_ja||b.term_ja||'';return ar.localeCompare(br,'ja')||String(a.term_ja||'').localeCompare(String(b.term_ja||''),'ja')||String(a.term_id||'').localeCompare(String(b.term_id||''))}
 function glossaryCard(row){return entityGlossaryCard(row,`./${glossaryEsc(row.url_id)}.html`)}
