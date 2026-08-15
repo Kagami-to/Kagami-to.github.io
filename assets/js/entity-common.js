@@ -17,6 +17,8 @@ function entityGlossaryCard(g,h){const d=glossaryCardData(g);return characterRel
 function entityCard(h,main,japanese='',subtitle='',type='work'){return characterRelatedCard(h,main,japanese||subtitle,type)}
 
 (function loadDetailTitleFitAssets(){
+  const path=location.pathname;
+  if(!/\/(works|characters|songs|glossary)\/[^/]+\.html$/i.test(path))return;
   const source=document.currentScript;
   if(!source)return;
   const base=new URL('.',source.src);
