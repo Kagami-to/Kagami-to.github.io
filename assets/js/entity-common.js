@@ -1,4 +1,4 @@
-function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function escapeHtml(v){return String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]))}
 function characterIds(v){return String(v||'').split(/[、,;\s]+/).filter(Boolean)}
 function characterUrl(v){return String(v||'').trim().toLowerCase().replace(/\./g,'-')}
 function characterValue(row,ja,en){return getLanguage()==='en'?(row[en]||''):(row[ja]||'')}
@@ -15,3 +15,17 @@ function entityWorkCard(w,h){const d=workCardData(w);return characterRelatedCard
 function entitySongCard(s,h){const d=songCardData(s);return characterRelatedCard(h,d.lines[0],d.lines[1],'song')}
 function entityGlossaryCard(g,h){const d=glossaryCardData(g);return characterRelatedCard(h,d.main,d.secondary,'glossary')}
 function entityCard(h,main,japanese='',subtitle='',type='work'){return characterRelatedCard(h,main,japanese||subtitle,type)}
+
+(function loadDetailTitleFitAssets(){
+  const source=document.currentScript;
+  if(!source)return;
+  const base=new URL('.',source.src);
+  const css=document.createElement('link');
+  css.rel='stylesheet';
+  css.href=new URL('../css/detail-title-fit.css',base).href;
+  document.head.appendChild(css);
+  const script=document.createElement('script');
+  script.src=new URL('detail-title-fit.js',base).href;
+  script.defer=true;
+  document.head.appendChild(script);
+})();
