@@ -2,5 +2,6 @@ term_id,term_ja,reading_ja,term_en,category,url_id,sort_order,related_work_ids,r
 T001,鏡外,かがみと,Kagamito,concept,kagamito,1,,,,
 T002,虹鏡,にじかがみ,Nijikagami,item,nijikagami,2,P001,"C001,C005,C007,C009,C010",C010,,
 T003,鴨草京,かもくさきょう,Kamokusa-kyō,organization,kamokusa-kyo,3,,"C003,C004,C005,C006,C008,C009,C010,C021",,,
-T004,天照宮,てんしょうぐう,Tenshōgū,organization,tenshogu,4,,"C004,C008,C009,C010,C021",,,T003
-T005,上白川文庫,かみしらかわぶんこ,Kamishirakawa Bunko,organization,kamishirakawa-bunko,5,,"C005,C006",,,T003
+T004,天照宮,てんしょうぐう,Tenshōgū,organization,tenshogu,4,,"C004,C008,C009,C010,C021",,,
+T005,上白川文庫,かみしらかわぶんこ,Kamishirakawa Bunko,organization,kamishirakawa-bunko,5,,"C005,C006",,,
+T006,メモランダム,,Memorandum,concept,memorandum,6,,,,,
