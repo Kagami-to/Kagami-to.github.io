@@ -1,0 +1,42 @@
+id: T006
+
+sections:
+  - title_ja: 概要
+    title_en: Overview
+    content_ja: |
+      主に何らかのモチーフに沿って展開される、名前が付けられた一連の弾幕のこと。必殺技。いわゆるスペルカード。
+
+      【―を著す】
+      弾幕を展開する。記す、執筆するとも言う。
+
+      【―を読む】
+      弾幕に挑む。検める、校閲するとも言う。
+
+      【―を正す】
+      弾幕を避けきる。直す、校了するとも言う。
+
+      以上の比喩的な表現をせず、一般に弾幕に対して使う言葉をそのまま用いることも多い。「―を撃つ」「―を避けた」など。
+
+    content_en: |
+      A named series of danmaku (bullet patterns), typically developed around a particular motif. A special attack—essentially, what is known as a spell card.
+
+
+  - title_en: Note
+    content_en: |
+      Throughout the work, the Japanese verb arawasu (あらわす) is consistently translated as “Embodies” in the names of abilities.
+      The word can be written with several different kanji, including 著す (“to write”), 表す (“to express”), and 現す (“to reveal”), each carrying a different nuance.
+
+  - content_ja:
+      - align: left
+        text: |
+          「あらわす、ってどの漢字が正解なのかしら」
+      - align: right
+        text: |
+          ───　アレン・ハーグリーヴズ
+    content_en:
+      - align: left
+        text: |
+          “Which kanji is the right one for ‘arawasu’ again?”
+      - align: right
+        text: |
+          ───　Allen Hargreaves
