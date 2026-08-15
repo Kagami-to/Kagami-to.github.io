@@ -1,0 +1,24 @@
+/* Unified detail-page title geometry: keep all four main titles at the same visual height. */
+.work-title,
+.character-092-name,
+.song-title,
+.glossary-detail-identity h1 {
+  font-size: 48px !important;
+  line-height: 1.16;
+}
+
+.work-fit-text,
+.character-092-fit-text,
+.song-fit,
+.glossary-detail-identity h1 {
+  transform-origin: left center;
+}
+
+@media (max-width: 700px) {
+  .work-title,
+  .character-092-name,
+  .song-title,
+  .glossary-detail-identity h1 {
+    font-size: 48px !important;
+  }
+}
