@@ -1,0 +1,31 @@
+name: Finalize Latin font base
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finalize-latin-font.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set base Latin typography
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('assets/css/style.css')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;', 'font-family: "Source Serif 4", "Shippori Mincho", serif;', 1)
+          s = s.replace('  line-height: 1.7;\n}\n\nbody.menu-open', '  line-height: 1.7;\n  font-weight: 350;\n}\n\nbody.menu-open', 1)
+          p.write_text(s, encoding='utf-8')
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/css/style.css
+          git commit -m 'feat: set Source Serif 4 350 as Latin base' || exit 0
+          git push
