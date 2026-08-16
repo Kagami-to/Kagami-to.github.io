@@ -1,7 +1,7 @@
 from pathlib import Path
 import shutil
 
-from build_data import rows, url_id
+from build_data import DATA, rows, url_id
 from build_html import VIEWPORT, entity_detail_layout, esc, layout, site_header
 
 ROOT = Path(__file__).resolve().parents[1]
