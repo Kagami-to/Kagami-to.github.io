@@ -22,5 +22,5 @@
 .entity-card-icon,
 .entity-card-line-1,
 .entity-card-character-main {
-  font-family: "Source Serif 4", "Shippori Mincho", serif;
+  font-family: "Source Serif 4", "Shippori Mincho", serif !important;
 }
