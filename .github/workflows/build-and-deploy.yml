@@ -2,7 +2,7 @@ name: Build and Deploy GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, font-fallback-fix]
   workflow_dispatch:
 
 permissions:
@@ -30,12 +30,31 @@ jobs:
         run: python scripts/build_site.py
       - name: Build Glossary list
         run: python scripts/build_glossary.py
+      - name: Validate font fallback boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -R -nE 'latin-sans\.css|font-weight-adjust\.css|detail-fonts\.css' assets/css templates scripts _site --exclude='font-comparison.css'; then
+            echo 'Obsolete font CSS reference detected.'
+            exit 1
+          fi
+          if grep -R -n 'Source Serif 4",[[:space:]]*serif' assets/css --include='*.css' --exclude='font-comparison.css'; then
+            echo 'Source Serif 4 declaration without Shippori Mincho fallback detected.'
+            exit 1
+          fi
+          if grep -R -n 'IBM Plex Sans",[[:space:]]*"IBM Plex Sans"' assets/css --include='*.css'; then
+            echo 'Duplicate IBM Plex Sans stack detected.'
+            exit 1
+          fi
+          test ! -e assets/css/font-weight-adjust.css
+          test ! -e assets/css/detail-fonts.css
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
