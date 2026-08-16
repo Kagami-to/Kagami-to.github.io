@@ -20,14 +20,14 @@ def entity_pager(prev_row, next_row, label_column, label_prefix):
         uid = url_id(row.get('url_id'))
         label = row.get(label_column) or row.get('name_ja') or row.get('name_en') or row.get('title_ja') or row.get('title_en') or uid
         parts.append(
-            f'<a class="detail-pager detail-pager-{side}" href="./{esc(uid)}.html" '
+            f'<a class="detail-pager detail-pager-{side}" href="./{esc(uid)}/" '
             f'aria-label="{aria_prefix}: {esc(label)}"><span class="detail-pager-arrow" '
             f'aria-hidden="true">{direction}</span></a>'
         )
     return ''.join(parts)
 
 
-def character_detail_layout(title, character_id, body, prev_row=None, next_row=None, depth=1):
+def character_detail_layout(title, character_id, body, prev_row=None, next_row=None, depth=2):
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
     pager = entity_pager(prev_row, next_row, 'name_ja', 'キャラクター')
@@ -44,7 +44,7 @@ def character_detail_layout(title, character_id, body, prev_row=None, next_row=N
     )
 
 
-def song_pager_html(row, prev_row=None, next_row=None, depth=1):
+def song_pager_html(row, prev_row=None, next_row=None, depth=2):
     template = (TEMPLATES / 'song-detail.html').read_text(encoding='utf-8')
     body = template.replace('{{SONG_ID}}', esc(row.get('song_id')))
     pager = entity_pager(prev_row, next_row, 'title_ja', '楽曲')
@@ -54,7 +54,7 @@ def song_pager_html(row, prev_row=None, next_row=None, depth=1):
     return entity_detail_layout(row.get('title_ja') or row.get('title_en'), body, pager, head, scripts, depth=depth)
 
 
-def work_detail_layout(row, prev_row=None, next_row=None, depth=1):
+def work_detail_layout(row, prev_row=None, next_row=None, depth=2):
     template = (TEMPLATES / 'work-detail.html').read_text(encoding='utf-8')
     body = template
     pager = entity_pager(prev_row, next_row, 'title_ja', '作品')
@@ -69,8 +69,10 @@ def build_character_pages(data, out):
     valid = [(i, r) for i, r in enumerate(data) if url_id(r.get('url_id'))]
     for pos, (_, r) in enumerate(valid):
         uid = url_id(r.get('url_id')); prev_row = valid[pos - 1][1] if pos > 0 else None; next_row = valid[pos + 1][1] if pos + 1 < len(valid) else None
-        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), uid, template, prev_row=prev_row, next_row=next_row)
-        (out / f'{uid}.html').write_text(html_text, encoding='utf-8')
+        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), uid, template, prev_row=prev_row, next_row=next_row, depth=2)
+        page_dir = out / uid
+        page_dir.mkdir(parents=True, exist_ok=True)
+        (page_dir / 'index.html').write_text(html_text, encoding='utf-8')
 
 
 def build_song_pages(data, out):
@@ -80,14 +82,18 @@ def build_song_pages(data, out):
         if not uid: continue
         pos = next((p for p, (_, v) in enumerate(valid) if v is r), None)
         prev_row = valid[pos - 1][1] if pos is not None and pos > 0 else None; next_row = valid[pos + 1][1] if pos is not None and pos + 1 < len(valid) else None
-        (out / f'{uid}.html').write_text(song_pager_html(r, prev_row=prev_row, next_row=next_row), encoding='utf-8')
+        page_dir = out / uid
+        page_dir.mkdir(parents=True, exist_ok=True)
+        (page_dir / 'index.html').write_text(song_pager_html(r, prev_row=prev_row, next_row=next_row, depth=2), encoding='utf-8')
 
 
 def build_work_pages(data, out):
     valid = [(i, r) for i, r in enumerate(data) if url_id(r.get('url_id')) and (r.get('title_ja') or '').strip()]
     for pos, (_, r) in enumerate(valid):
         uid = url_id(r.get('url_id')); prev_row = valid[pos - 1][1] if pos > 0 else None; next_row = valid[pos + 1][1] if pos + 1 < len(valid) else None
-        (out / f'{uid}.html').write_text(work_detail_layout(r, prev_row=prev_row, next_row=next_row), encoding='utf-8')
+        page_dir = out / uid
+        page_dir.mkdir(parents=True, exist_ok=True)
+        (page_dir / 'index.html').write_text(work_detail_layout(r, prev_row=prev_row, next_row=next_row, depth=2), encoding='utf-8')
 
 
 ENTITY_BUILD_CONFIG = {
