@@ -5,7 +5,7 @@ function characterValue(row,ja,en){return getLanguage()==='en'?(row[en]||''):(ro
 
 (function loadDetailTitleFitAssets(){
   const path=location.pathname;
-  if(!/\/(works|characters|songs|glossary)\/[^/]+\.html$/i.test(path))return;
+  if(!/\/(works|characters|songs|glossary)\/[^/]+\/?$/i.test(path))return;
   const source=document.currentScript;
   if(!source)return;
   const base=new URL('.',source.src);
