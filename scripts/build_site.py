@@ -96,6 +96,7 @@ ENTITY_BUILD_CONFIG = {
         'label': 'Characters',
         'heading_sub': 'キャラクター',
         'list_markup': '<ul id="character-list" class="character-list"></ul>',
+        'list_css': 'entity-pages.css',
         'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'キャラクター';renderList('characters').catch(e=>console.error(e));</script>""",
     },
     'works': {
@@ -103,6 +104,7 @@ ENTITY_BUILD_CONFIG = {
         'label': 'Works',
         'heading_sub': '作品',
         'list_markup': '<ul id="entity-list" class="character-list"></ul>',
+        'list_css': 'entity-pages.css',
         'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'作品';renderList('works').catch(e=>console.error(e));</script>""",
     },
     'songs': {
@@ -110,6 +112,7 @@ ENTITY_BUILD_CONFIG = {
         'label': 'Songs',
         'heading_sub': '楽曲',
         'list_markup': '<ul id="entity-list" class="character-list"></ul>',
+        'list_css': 'entity-pages.css',
         'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';renderList('songs').catch(e=>console.error(e));</script>""",
     },
 }
@@ -126,8 +129,9 @@ def build_entity(csv_name, folder):
         f'<div class="page-sub" id="page-sub">{config["heading_sub"]}</div></div>'
         f'{config["list_markup"]}'
     )
+    extra_head = f'<link rel="stylesheet" href="../assets/css/{config["list_css"]}">' if config.get('list_css') else ''
     (out / 'index.html').write_text(
-        layout(config['label'], body, 1, extra_body=config['render_script']),
+        layout(config['label'], body, 1, extra_head=extra_head, extra_body=config['render_script']),
         encoding='utf-8',
     )
 
