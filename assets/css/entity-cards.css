@@ -1,14 +1,16 @@
+@import url("./font-weight-adjust.css");
+
 /* Shared entity link cards — one visual system for Characters, Works, Songs and future entities. */
 .entity-card{display:flex;position:relative;overflow:hidden;box-sizing:border-box;min-height:112px;padding:18px 28px 18px 20px;align-items:center;justify-content:flex-start;background:#fff;border-left:5px solid #2d6869;box-shadow:0 4px 15px rgba(23,75,77,.12);color:#263d3d;text-decoration:none;text-align:left}
 .entity-card:hover{background:#fdfefe}
-.entity-card-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);z-index:0;width:68px;height:68px;display:flex;align-items:center;justify-content:center;font:400 62px/1 "Source Serif 4",serif;color:rgba(45,104,105,.10);pointer-events:none}
+.entity-card-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);z-index:0;width:68px;height:68px;display:flex;align-items:center;justify-content:center;font:350 62px/1 "Source Serif 4",serif;color:rgba(45,104,105,.10);pointer-events:none}
 .entity-card-image{display:block;max-width:100%;max-height:100%;object-fit:contain;opacity:1}.entity-card-image-work{width:68px;height:68px}.entity-card-image-glossary{width:42px;height:54px;color:rgba(45,104,105,.16)}
 .entity-card-text{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px}
 .entity-card-line{max-width:100%;overflow-wrap:anywhere}
-.entity-card-line-1{font:500 22px/1.35 "Source Serif 4",serif;color:#000}
+.entity-card-line-1{font:450 22px/1.35 "Source Serif 4",serif;color:#000}
 .entity-card-line-2,.entity-card-line-3{font:400 12px/1.55 "Zen Kaku Gothic New",sans-serif;color:#6b7472}
 .entity-card-song .entity-card-line-1{font-size:22px;color:#000}
 .entity-card-work .entity-card-line-1{font-size:22px;color:#000}
 .entity-card-character-epithet,.entity-card-character-secondary{font:400 12px/1.55 "Zen Kaku Gothic New",sans-serif;color:#6b7472;max-width:100%;overflow-wrap:anywhere}
-.entity-card-character-main{font:500 22px/1.35 "Source Serif 4",serif;color:#000;max-width:100%;overflow-wrap:anywhere}
+.entity-card-character-main{font:450 22px/1.35 "Source Serif 4",serif;color:#000;max-width:100%;overflow-wrap:anywhere}
 @media(max-width:760px){.entity-card{min-height:104px;padding:16px 22px 16px 18px}.entity-card-icon{right:12px;width:52px;height:52px;font-size:48px}.entity-card-image-work{width:52px;height:52px}.entity-card-image-glossary{width:32px;height:42px}.entity-card-line-1,.entity-card-song .entity-card-line-1,.entity-card-work .entity-card-line-1{font-size:20px;color:#000}.entity-card-line-2,.entity-card-line-3{font-size:11px}.entity-card-character-epithet,.entity-card-character-secondary{font-size:11px}.entity-card-character-main{font-size:20px;color:#000}}
