@@ -9,63 +9,28 @@ TEMPLATES = ROOT / 'templates'
 SITE = ROOT / '_site'
 
 
-def entity_pager(prev_row, next_row, label_column, fallback_columns=('name_ja', 'name_en')):
+def entity_pager(prev_row, next_row, label_column, label_prefix):
     parts = []
-    for row, side, direction in (
-        (prev_row, 'prev', '〈'),
-        (next_row, 'next', '〉'),
+    for row, side, direction, aria_prefix in (
+        (prev_row, 'prev', '〈', f'前の{label_prefix}'),
+        (next_row, 'next', '〉', f'次の{label_prefix}'),
     ):
         if not row:
             continue
         uid = url_id(row.get('url_id'))
-        label = row.get(label_column) or next((row.get(column) for column in fallback_columns if row.get(column)), None) or uid
+        label = row.get(label_column) or row.get('name_ja') or row.get('name_en') or row.get('title_ja') or row.get('title_en') or uid
         parts.append(
             f'<a class="detail-pager detail-pager-{side}" href="./{esc(uid)}.html" '
-            f'aria-label="前の項目: {esc(label)}"' if side == 'prev' else
-            f'<a class="detail-pager detail-pager-{side}" href="./{esc(uid)}.html" '
-            f'aria-label="次の項目: {esc(label)}"'
+            f'aria-label="{aria_prefix}: {esc(label)}"><span class="detail-pager-arrow" '
+            f'aria-hidden="true">{direction}</span></a>'
         )
-        parts[-1] += f'><span class="detail-pager-arrow" aria-hidden="true">{direction}</span></a>'
-    return ''.join(parts)
-
-
-def character_pager(prev_row, next_row):
-    parts = []
-    if prev_row:
-        uid = url_id(prev_row.get('url_id')); name = prev_row.get('name_ja') or prev_row.get('name_en') or uid
-        parts.append(f'<a class="detail-pager detail-pager-prev" href="./{esc(uid)}.html" aria-label="前のキャラクター: {esc(name)}"><span class="detail-pager-arrow" aria-hidden="true">〈</span></a>')
-    if next_row:
-        uid = url_id(next_row.get('url_id')); name = next_row.get('name_ja') or next_row.get('name_en') or uid
-        parts.append(f'<a class="detail-pager detail-pager-next" href="./{esc(uid)}.html" aria-label="次のキャラクター: {esc(name)}"><span class="detail-pager-arrow" aria-hidden="true">〉</span></a>')
-    return ''.join(parts)
-
-
-def song_pager(prev_row, next_row):
-    parts = []
-    if prev_row:
-        uid = url_id(prev_row.get('url_id')); label = prev_row.get('title_ja') or prev_row.get('title_en') or uid
-        parts.append(f'<a class="detail-pager detail-pager-prev" href="./{esc(uid)}.html" aria-label="前の楽曲: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〈</span></a>')
-    if next_row:
-        uid = url_id(next_row.get('url_id')); label = next_row.get('title_ja') or next_row.get('title_en') or uid
-        parts.append(f'<a class="detail-pager detail-pager-next" href="./{esc(uid)}.html" aria-label="次の楽曲: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〉</span></a>')
-    return ''.join(parts)
-
-
-def work_pager(prev_row, next_row):
-    parts = []
-    if prev_row:
-        uid = url_id(prev_row.get('url_id')); label = prev_row.get('title_ja') or prev_row.get('title_en') or uid
-        parts.append(f'<a class="detail-pager detail-pager-prev" href="./{esc(uid)}.html" aria-label="前の作品: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〈</span></a>')
-    if next_row:
-        uid = url_id(next_row.get('url_id')); label = next_row.get('title_ja') or next_row.get('title_en') or uid
-        parts.append(f'<a class="detail-pager detail-pager-next" href="./{esc(uid)}.html" aria-label="次の作品: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〉</span></a>')
     return ''.join(parts)
 
 
 def character_detail_layout(title, character_id, body, prev_row=None, next_row=None, depth=1):
     prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
-    pager = character_pager(prev_row, next_row)
+    pager = entity_pager(prev_row, next_row, 'name_ja', 'キャラクター')
     scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="{VIEWPORT}"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{head}</head><body>{site_header(prefix)}{pager}<main class="character-detail-page">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/glossary-sort.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
@@ -73,14 +38,14 @@ def character_detail_layout(title, character_id, body, prev_row=None, next_row=N
 def song_pager_html(row, prev_row=None, next_row=None, depth=1):
     template = (TEMPLATES / 'song-detail.html').read_text(encoding='utf-8')
     body = template.replace('{{SONG_ID}}', esc(row.get('song_id')))
-    pager = song_pager(prev_row, next_row); prefix = '../' * depth
+    pager = entity_pager(prev_row, next_row, 'title_ja', '楽曲'); prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css">'
     scripts = f'''<script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="{VIEWPORT}"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{head}</head><body>{site_header(prefix)}{pager}{body}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/glossary-sort.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def work_detail_layout(row, prev_row=None, next_row=None, depth=1):
-    template = (TEMPLATES / 'work-detail.html').read_text(encoding='utf-8'); pager = work_pager(prev_row, next_row); prefix = '../' * depth
+    template = (TEMPLATES / 'work-detail.html').read_text(encoding='utf-8'); pager = entity_pager(prev_row, next_row, 'title_ja', '作品'); prefix = '../' * depth
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/work-detail.css">'
     scripts = f'''<script src="{prefix}assets/js/work-pages.js"></script><script>document.documentElement.lang=getLanguage();renderWork({esc(row.get('work_id'))!r}).catch(e=>{{const target=document.getElementById('work-page');if(target)target.textContent=e.message;}});</script>'''
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="{VIEWPORT}"><title>{esc(row.get('title_ja') or row.get('title_en'))} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{head}</head><body>{site_header(prefix)}{pager}{template}<script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/glossary-sort.js"></script>{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
