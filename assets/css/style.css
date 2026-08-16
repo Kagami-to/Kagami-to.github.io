@@ -210,7 +210,7 @@ a  {
 }
 
 .menu-sub  {
-  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-family: "IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
   font-size: 13px;
   color: #557072;
   margin-top: 5px;
@@ -228,7 +228,7 @@ html[lang="en"] .menu-main  {
 
 .chevron  {
   display: inline-block;
-  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-family: "IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
   font-size: 18px;
   line-height: 1;
   color: #315f61;
@@ -308,11 +308,11 @@ html[lang="en"] .menu-main  {
 .item-epithet  {
   order: 1;
   margin: 0 0 2px;
-  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-family: "IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
   font-size: 12px;
   line-height: 1.3;
   color: #557072;
-  font-weight: 400;
+  font-weight: 350;
   text-align: left;
 }
 
@@ -321,9 +321,9 @@ html[lang="en"] .menu-main  {
 }
 
 .menu-group[data-menu-key^="glossary:"] > .menu-trigger .item-name  {
-  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-family: "IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
   font-size: 16px;
-  font-weight: 550;
+  font-weight: 500;
 }
 
 .divider  {
@@ -384,7 +384,7 @@ html[lang="en"] .menu-main  {
   margin-top: 6px;
   color: #657676;
   letter-spacing: .16em;
-  font: 350 14px/1.5 "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font: 300 14px/1.5 "IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
 }
 
 .card-grid  {
@@ -474,17 +474,17 @@ html[lang="en"] .menu-main  {
 .list-japanese, .list-subtitle, .item-secondary  {
   display: block;
   margin-top: 5px;
-  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-family: "IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #718080;
-  font-weight: 350;
+  font-weight: 300;
 }
 
 .character-epithet  {
   display: block;
   margin-bottom: 4px;
-  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-family: "IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #718080;
