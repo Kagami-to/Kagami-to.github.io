@@ -1,6 +1,6 @@
 const DETAIL_TITLE_SELECTORS = [
   '.work-title',
-  '.character-092-name',
+  '.character-detail-name',
   '.song-title',
   '#glossary-name'
 ];
