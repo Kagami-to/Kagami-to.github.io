@@ -1,37 +1,12 @@
 from pathlib import Path
-import csv, html, shutil
+import shutil
+
+from build_data import rows, url_id
+from build_html import VIEWPORT, esc, layout, site_header
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / 'data'
 TEMPLATES = ROOT / 'templates'
 SITE = ROOT / '_site'
-
-
-def rows(name):
-    with (DATA / name).open('r', encoding='utf-8-sig', newline='') as f:
-        return list(csv.DictReader(f))
-
-
-def url_id(value):
-    value = (value or '').strip()
-    return value.lower().replace('.', '-') if value else ''
-
-
-def esc(value):
-    return html.escape(value or '', quote=True)
-
-
-def site_header(prefix):
-    return f'''<header class="site-header"><a href="{prefix}" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header>'''
-
-
-# Keep browser zoom disabled consistently on every generated page.
-VIEWPORT = 'width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'
-
-
-def layout(title, body, depth=0, extra_head='', extra_body=''):
-    prefix = '../' * depth
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="{VIEWPORT}"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{extra_head}</head><body>{site_header(prefix)}<main class="container">{body}</main><script src="{prefix}assets/js/data.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/glossary-sort.js"></script><script src="{prefix}assets/js/entity-pages.js"></script>{extra_body}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
 
 
 def character_pager(prev_row, next_row):
@@ -134,9 +109,9 @@ def prepare_site():
     if source.exists(): shutil.copytree(source, SITE / 'assets', dirs_exist_ok=True)
     data_out = SITE / 'data'; data_out.mkdir(parents=True, exist_ok=True)
     for name in ('characters.csv', 'songs.csv', 'works.csv'):
-        source = DATA / name
+        source = ROOT / 'data' / name
         if source.exists(): shutil.copy2(source, data_out / name)
-    character_yaml = DATA / 'characters'
+    character_yaml = ROOT / 'data' / 'characters'
     if character_yaml.exists(): shutil.copytree(character_yaml, data_out / 'characters', dirs_exist_ok=True)
     pages_out = SITE / 'pages'; pages_out.mkdir(parents=True, exist_ok=True)
     site_text = ROOT / 'pages' / 'site_text.csv'
