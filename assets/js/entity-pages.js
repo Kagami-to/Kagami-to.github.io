@@ -1,7 +1,7 @@
 function dataUrl(path){return new URL(path,document.baseURI).href}
-function workListCard(w){return entityWorkCard(w,`/works/${urlId(w.url_id)}.html`)}
-function songListCard(s){return entitySongCard(s,`/songs/${urlId(s.url_id)}.html`)}
-function characterListCard(c){return entityCharacterCard(c,`/characters/${urlId(c.url_id)}.html`)}
+function workListCard(w){return entityWorkCard(w,`/works/${urlId(w.url_id)}/`)}
+function songListCard(s){return entitySongCard(s,`/songs/${urlId(s.url_id)}/`)}
+function characterListCard(c){return entityCharacterCard(c,`/characters/${urlId(c.url_id)}/`)}
 
 function characterWorkLabel(work,en){return en?(work.title_en||work.title_ja||'Other / Unclassified'):(work.title_ja||work.title_en||'その他・未分類')}
 function characterWorkGroup(work,characters,en){const details=document.createElement('details');details.className='character-work-group';const summary=document.createElement('summary');const title=document.createElement('span');title.className='character-work-group-title';title.textContent=characterWorkLabel(work,en);const count=document.createElement('span');count.className='character-work-group-count';count.textContent=`${characters.length}`;summary.append(title,count);details.appendChild(summary);const list=document.createElement('ul');list.className='character-list character-work-group-list';characters.forEach(c=>{const li=document.createElement('li');li.innerHTML=characterListCard(c);list.appendChild(li)});details.appendChild(list);return details}
