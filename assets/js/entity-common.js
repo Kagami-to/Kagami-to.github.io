@@ -1,6 +1,6 @@
 function escapeHtml(v){return String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]))}
 function characterIds(v){return String(v||'').split(/[、,;\s]+/).filter(Boolean)}
-function characterUrl(v){return String(v||'').trim().toLowerCase().replace(/\./g,'-')}
+function urlId(v){return String(v||'').trim().toLowerCase().replace(/\./g,'-')}
 function characterValue(row,ja,en){return getLanguage()==='en'?(row[en]||''):(row[ja]||'')}
 
 (function loadDetailTitleFitAssets(){
