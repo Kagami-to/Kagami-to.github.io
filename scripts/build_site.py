@@ -5,7 +5,6 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
 TEMPLATES = ROOT / 'templates'
 SITE = ROOT / '_site'
-PREVIEW = ROOT / 'preview'
 
 
 def rows(name):
@@ -147,12 +146,7 @@ def prepare_site():
         if source.exists(): shutil.copy2(source, SITE / name)
 
 
-def publish_previews():
-    if not PREVIEW.exists(): return
-    shutil.copytree(PREVIEW, SITE / 'preview', dirs_exist_ok=True)
-
-
 def main():
-    prepare_site(); build_entity('characters.csv', 'characters', 'character_id', 'name_ja', 'name_en', 'Characters'); build_entity('works.csv', 'works', 'work_id', 'title_ja', 'title_en', 'Works'); build_entity('songs.csv', 'songs', 'song_id', 'title_ja', 'title_en', 'Songs'); publish_previews()
+    prepare_site(); build_entity('characters.csv', 'characters', 'character_id', 'name_ja', 'name_en', 'Characters'); build_entity('works.csv', 'works', 'work_id', 'title_ja', 'title_en', 'Works'); build_entity('songs.csv', 'songs', 'song_id', 'title_ja', 'title_en', 'Songs')
 
 if __name__ == '__main__': main()
