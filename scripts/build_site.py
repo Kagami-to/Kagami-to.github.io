@@ -9,14 +9,34 @@ TEMPLATES = ROOT / 'templates'
 SITE = ROOT / '_site'
 
 
+def entity_pager(prev_row, next_row, label_column, fallback_columns=('name_ja', 'name_en')):
+    parts = []
+    for row, side, direction in (
+        (prev_row, 'prev', '〈'),
+        (next_row, 'next', '〉'),
+    ):
+        if not row:
+            continue
+        uid = url_id(row.get('url_id'))
+        label = row.get(label_column) or next((row.get(column) for column in fallback_columns if row.get(column)), None) or uid
+        parts.append(
+            f'<a class="detail-pager detail-pager-{side}" href="./{esc(uid)}.html" '
+            f'aria-label="前の項目: {esc(label)}"' if side == 'prev' else
+            f'<a class="detail-pager detail-pager-{side}" href="./{esc(uid)}.html" '
+            f'aria-label="次の項目: {esc(label)}"'
+        )
+        parts[-1] += f'><span class="detail-pager-arrow" aria-hidden="true">{direction}</span></a>'
+    return ''.join(parts)
+
+
 def character_pager(prev_row, next_row):
     parts = []
     if prev_row:
         uid = url_id(prev_row.get('url_id')); name = prev_row.get('name_ja') or prev_row.get('name_en') or uid
-        parts.append(f'<a class="character-092-pager character-092-pager-prev" href="./{esc(uid)}.html" aria-label="前のキャラクター: {esc(name)}"><span class="character-092-pager-arrow" aria-hidden="true">〈</span></a>')
+        parts.append(f'<a class="detail-pager detail-pager-prev" href="./{esc(uid)}.html" aria-label="前のキャラクター: {esc(name)}"><span class="detail-pager-arrow" aria-hidden="true">〈</span></a>')
     if next_row:
         uid = url_id(next_row.get('url_id')); name = next_row.get('name_ja') or next_row.get('name_en') or uid
-        parts.append(f'<a class="character-092-pager character-092-pager-next" href="./{esc(uid)}.html" aria-label="次のキャラクター: {esc(name)}"><span class="character-092-pager-arrow" aria-hidden="true">〉</span></a>')
+        parts.append(f'<a class="detail-pager detail-pager-next" href="./{esc(uid)}.html" aria-label="次のキャラクター: {esc(name)}"><span class="detail-pager-arrow" aria-hidden="true">〉</span></a>')
     return ''.join(parts)
 
 
@@ -24,10 +44,10 @@ def song_pager(prev_row, next_row):
     parts = []
     if prev_row:
         uid = url_id(prev_row.get('url_id')); label = prev_row.get('title_ja') or prev_row.get('title_en') or uid
-        parts.append(f'<a class="character-092-pager character-092-pager-prev" href="./{esc(uid)}.html" aria-label="前の楽曲: {esc(label)}"><span class="character-092-pager-arrow" aria-hidden="true">〈</span></a>')
+        parts.append(f'<a class="detail-pager detail-pager-prev" href="./{esc(uid)}.html" aria-label="前の楽曲: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〈</span></a>')
     if next_row:
         uid = url_id(next_row.get('url_id')); label = next_row.get('title_ja') or next_row.get('title_en') or uid
-        parts.append(f'<a class="character-092-pager character-092-pager-next" href="./{esc(uid)}.html" aria-label="次の楽曲: {esc(label)}"><span class="character-092-pager-arrow" aria-hidden="true">〉</span></a>')
+        parts.append(f'<a class="detail-pager detail-pager-next" href="./{esc(uid)}.html" aria-label="次の楽曲: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〉</span></a>')
     return ''.join(parts)
 
 
@@ -35,10 +55,10 @@ def work_pager(prev_row, next_row):
     parts = []
     if prev_row:
         uid = url_id(prev_row.get('url_id')); label = prev_row.get('title_ja') or prev_row.get('title_en') or uid
-        parts.append(f'<a class="character-092-pager character-092-pager-prev" href="./{esc(uid)}.html" aria-label="前の作品: {esc(label)}"><span class="character-092-pager-arrow" aria-hidden="true">〈</span></a>')
+        parts.append(f'<a class="detail-pager detail-pager-prev" href="./{esc(uid)}.html" aria-label="前の作品: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〈</span></a>')
     if next_row:
         uid = url_id(next_row.get('url_id')); label = next_row.get('title_ja') or next_row.get('title_en') or uid
-        parts.append(f'<a class="character-092-pager character-092-pager-next" href="./{esc(uid)}.html" aria-label="次の作品: {esc(label)}"><span class="character-092-pager-arrow" aria-hidden="true">〉</span></a>')
+        parts.append(f'<a class="detail-pager detail-pager-next" href="./{esc(uid)}.html" aria-label="次の作品: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">〉</span></a>')
     return ''.join(parts)
 
 
