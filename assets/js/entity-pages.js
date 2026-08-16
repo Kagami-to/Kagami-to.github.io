@@ -1,4 +1,3 @@
-function urlId(v){return String(v||'').trim().toLowerCase().replace(/\./g,'-')}
 function dataUrl(path){return new URL(path,document.baseURI).href}
 function workListCard(w){return entityWorkCard(w,`/works/${urlId(w.url_id)}.html`)}
 function songListCard(s){return entitySongCard(s,`/songs/${urlId(s.url_id)}.html`)}
