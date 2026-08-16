@@ -20,7 +20,7 @@ def entity_pager(prev_row, next_row, label_column, label_prefix):
         uid = url_id(row.get('url_id'))
         label = row.get(label_column) or row.get('name_ja') or row.get('name_en') or row.get('title_ja') or row.get('title_en') or uid
         parts.append(
-            f'<a class="detail-pager detail-pager-{side}" href="./{esc(uid)}/" '
+            f'<a class="detail-pager detail-pager-{side}" href="../{esc(uid)}/" '
             f'aria-label="{aria_prefix}: {esc(label)}"><span class="detail-pager-arrow" '
             f'aria-hidden="true">{direction}</span></a>'
         )
