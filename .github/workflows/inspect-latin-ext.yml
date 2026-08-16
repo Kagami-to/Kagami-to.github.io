@@ -23,12 +23,13 @@ jobs:
           python - <<'PY'
           from fontTools.ttLib import TTFont
           from pathlib import Path
-          cps = [ord(c) for c in 'ĀāĒēĪīŌōŪū']
+
           for path in sorted(Path('assets').glob('shippori-mincho_5.3.0_latin-ext-*-normal.woff2')):
               font = TTFont(path)
               cmap = {}
               for table in font['cmap'].tables:
                   cmap.update(table.cmap)
+              codepoints = sorted(cmap)
               names = {}
               for rec in font['name'].names:
                   if rec.nameID in (1, 2):
@@ -37,5 +38,5 @@ jobs:
               print(f'GLYPHS={len(font.getGlyphOrder())}')
               print(f'FAMILY={names.get(1)}')
               print(f'SUBFAMILY={names.get(2)}')
-              print('TARGETS=' + ' '.join(f'U+{cp:04X}:{"YES" if cp in cmap else "NO"}' for cp in cps))
+              print('CODEPOINTS=' + ' '.join(f'U+{cp:04X}' for cp in codepoints))
           PY
