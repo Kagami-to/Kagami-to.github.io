@@ -1,0 +1,83 @@
+name: Normalize font fallback stacks
+
+on:
+  push:
+    branches: [font-fallback-fix]
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    if: github.event.head_commit.message != 'Apply font fallback normalization'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Normalize production font CSS
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          css_root = Path('assets/css')
+
+          # Production CSS uses Source Serif 4 for Latin and Shippori Mincho for CJK.
+          # Keep the dedicated font-comparison page untouched because it intentionally
+          # compares individual font families in isolation.
+          for path in css_root.glob('*.css'):
+              if path.name == 'font-comparison.css':
+                  continue
+              text = path.read_text(encoding='utf-8')
+              text = text.replace('"Source Serif 4",serif', '"Source Serif 4", "Shippori Mincho", serif')
+              text = text.replace('"Source Serif 4", serif', '"Source Serif 4", "Shippori Mincho", serif')
+              text = text.replace('"IBM Plex Sans", "IBM Plex Sans", "Zen Kaku Gothic New"', '"IBM Plex Sans", "Zen Kaku Gothic New"')
+              path.write_text(text, encoding='utf-8')
+
+          # Bring common Source Serif weights into the main stylesheet itself.
+          style = css_root / 'style.css'
+          text = style.read_text(encoding='utf-8')
+
+          replacements = {
+              r'(\.site-title\s*\{.*?font-weight:\s*)600(;)' : r'\g<1>550\g<2>',
+              r'(\.menu-main\s*\{.*?font-weight:\s*)600(;)' : r'\g<1>550\g<2>',
+              r'(\.all-link\s*\{.*?font-weight:\s*)750(;)' : r'\g<1>700\g<2>',
+              r'(\.item-name\s*\{.*?font-weight:\s*)600(;)' : r'\g<1>550\g<2>',
+              r'(\.page-heading h1\s*\{.*?font:\s*)600(\s+38px/1\.3)' : r'\g<1>550\g<2>',
+              r'(\.list-main\s*\{.*?font-weight:\s*)600(;)' : r'\g<1>550\g<2>',
+          }
+          for pattern, replacement in replacements.items():
+              text, count = re.subn(pattern, replacement, text, count=1, flags=re.S)
+              if count != 1:
+                  raise SystemExit(f'Expected one match for {pattern!r}, found {count}')
+          style.write_text(text, encoding='utf-8')
+
+          # Entity cards should no longer import auxiliary font override CSS.
+          cards = css_root / 'entity-cards.css'
+          text = cards.read_text(encoding='utf-8')
+          text = text.replace('@import url("./font-weight-adjust.css");\n', '')
+          text = text.replace('@import url("./latin-sans.css");\n', '')
+          cards.write_text(text, encoding='utf-8')
+
+          # These files became redundant once their responsibilities moved into style.css
+          # and the individual detail styles use their own explicit font roles.
+          for obsolete in (css_root / 'detail-fonts.css', css_root / 'font-weight-adjust.css'):
+              if obsolete.exists():
+                  obsolete.unlink()
+          
+          # Ensure the obsolete missing import does not survive anywhere in production CSS.
+          for path in css_root.glob('*.css'):
+              if 'latin-sans.css' in path.read_text(encoding='utf-8'):
+                  raise SystemExit(f'Obsolete latin-sans.css reference remains in {path}')
+
+      - name: Commit normalized CSS
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/css
+          git status --short
+          git commit -m "Apply font fallback normalization"
+          git push origin HEAD:font-fallback-fix
