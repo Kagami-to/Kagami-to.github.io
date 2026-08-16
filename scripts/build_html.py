@@ -27,5 +27,6 @@ def layout(title, body, depth=0, extra_head='', extra_body=''):
 
 def entity_detail_layout(title, body, pager, extra_head, extra_scripts, depth=1, main_open='', main_close=''):
     prefix = '../' * depth
+    header_prefix = '../' if depth > 1 else prefix
     scripts = _entity_scripts(prefix, extra_scripts)
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="{VIEWPORT}"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{extra_head}</head><body>{site_header(prefix)}{pager}{main_open}{body}{main_close}{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="{VIEWPORT}"><title>{esc(title)} - Kagamito Official</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><link rel="stylesheet" href="{prefix}assets/css/entity-cards.css">{extra_head}</head><body>{site_header(header_prefix)}{pager}{main_open}{body}{main_close}{scripts}<script src="{prefix}assets/js/menu.js"></script></body></html>'''
