@@ -14,7 +14,7 @@ def list_layout(body):
 
 
 def detail_layout(body, term_id):
-    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glossary - Kagamito Official</title><link rel="stylesheet" href="../assets/css/style.css"><link rel="stylesheet" href="../assets/css/entity-cards.css"><link rel="stylesheet" href="../assets/css/glossary-detail.css"></head><body data-glossary-id="{term_id}"><header class="site-header"><a href="../" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header><main>{body}</main><script src="../assets/js/csv.js"></script><script src="../assets/js/language.js"></script><script src="../assets/js/entity-common.js"></script><script src="../assets/js/entity-cards.js"></script><script src="../assets/js/glossary-sort.js"></script><script src="../assets/js/glossary-detail.js"></script><script src="../assets/js/menu-data.js"></script><script src="../assets/js/menu.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glossary - Kagamito Official</title><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="../../assets/css/entity-cards.css"><link rel="stylesheet" href="../../assets/css/glossary-detail.css"></head><body data-glossary-id="{term_id}"><header class="site-header"><a href="../" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header><main>{body}</main><script src="../../assets/js/csv.js"></script><script src="../../assets/js/language.js"></script><script src="../../assets/js/entity-common.js"></script><script src="../../assets/js/entity-cards.js"></script><script src="../../assets/js/glossary-sort.js"></script><script src="../../assets/js/glossary-detail.js"></script><script src="../../assets/js/menu-data.js"></script><script src="../../assets/js/menu.js"></script></body></html>'''
 
 
 def main():
@@ -43,7 +43,9 @@ def main():
             url_id = (row.get('url_id') or '').strip()
             if not term_id or not url_id:
                 continue
-            (out / f'{url_id}.html').write_text(detail_layout(detail_body, term_id), encoding='utf-8')
+            page_dir = out / url_id
+            page_dir.mkdir(parents=True, exist_ok=True)
+            (page_dir / 'index.html').write_text(detail_layout(detail_body, term_id), encoding='utf-8')
 
 
 if __name__ == '__main__': main()
