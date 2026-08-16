@@ -1,0 +1,26 @@
+/* Detail-page serif fallback.
+ * Latin glyphs use Source Serif 4; Japanese/CJK glyphs fall back to Shippori Mincho.
+ */
+.character-092-card:after,
+.character-092-pager,
+.character-092-pager-arrow,
+.character-092-name,
+.character-092-ability,
+.character-092-card-icon,
+.character-092-card-title,
+.character-092-divider,
+.character-092-heading,
+.work-detail-card:after,
+.work-title,
+.work-divider,
+.song-detail-card:after,
+.song-title,
+.song-info-label,
+.glossary-category-mark,
+.glossary-detail-identity h1,
+.glossary-detail-heading,
+.entity-card-icon,
+.entity-card-line-1,
+.entity-card-character-main {
+  font-family: "Source Serif 4", "Shippori Mincho", serif;
+}
