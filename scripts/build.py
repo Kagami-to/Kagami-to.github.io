@@ -4,8 +4,8 @@ The individual builders remain responsible for their own page families;
 this module is the single production build entrypoint used by CI.
 """
 
+from build_entities import main as build_entities
 from build_glossary import main as build_glossary
-from build_site import main as build_entities
 
 
 def main():
