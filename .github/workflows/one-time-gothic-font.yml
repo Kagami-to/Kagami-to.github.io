@@ -24,40 +24,33 @@ jobs:
           from pathlib import Path
           import re
 
-          root = Path('.')
-          css_dir = root / 'assets' / 'css'
+          css_dir = Path('assets/css')
           excluded = {'font-comparison.css'}
+          family_pattern = re.compile(r'"Zen Kaku Gothic New"\s*,\s*sans-serif')
+          weight_pattern = re.compile(r'(font-weight\s*:\s*)([1-9]\d{2})(?=\s*;)')
+          shorthand_pattern = re.compile(r'(font\s*:\s*)([1-9]\d{2})(?=\s+[^;]*?"IBM Plex Sans")')
 
           def lighter(value: int) -> int:
               return max(100, value - 50)
 
-          def transform_block(block: str) -> str:
-              if 'Zen Kaku Gothic New' not in block:
-                  return block
-
-              block = block.replace(
-                  '"Zen Kaku Gothic New", sans-serif',
-                  '"IBM Plex Sans", "Zen Kaku Gothic New", sans-serif'
+          def transform_declarations(declarations: str) -> str:
+              if 'Zen Kaku Gothic New' not in declarations:
+                  return declarations
+              declarations = family_pattern.sub(
+                  '"IBM Plex Sans", "Zen Kaku Gothic New", sans-serif',
+                  declarations,
               )
-              block = re.sub(
-                  r'(font-weight\s*:\s*)([1-9]\d{2})(?=\s*;)',
+              declarations = weight_pattern.sub(
                   lambda m: m.group(1) + str(lighter(int(m.group(2)))),
-                  block,
+                  declarations,
               )
-              block = re.sub(
-                  r'(font\s*:\s*)([1-9]\d{2})(?=\s+[^;]*?"IBM Plex Sans")',
+              declarations = shorthand_pattern.sub(
                   lambda m: m.group(1) + str(lighter(int(m.group(2)))),
-                  block,
+                  declarations,
               )
-              return block
+              return declarations
 
-          for path in sorted(css_dir.glob('*.css')):
-              if path.name in excluded:
-                  continue
-              text = path.read_text(encoding='utf-8')
-              if 'Zen Kaku Gothic New' not in text:
-                  continue
-
+          def transform_segment(text: str) -> str:
               out = []
               pos = 0
               while True:
@@ -75,10 +68,22 @@ jobs:
                           depth -= 1
                       i += 1
                   inner = text[start + 1:i - 1]
-                  out.append(transform_block(inner))
+                  if '{' in inner:
+                      inner = transform_segment(inner)
+                  else:
+                      inner = transform_declarations(inner)
+                  out.append(inner)
                   out.append('}' if depth == 0 else '')
                   pos = i
-              path.write_text(''.join(out), encoding='utf-8')
+              return ''.join(out)
+
+          for path in sorted(css_dir.glob('*.css')):
+              if path.name in excluded:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              if 'Zen Kaku Gothic New' not in text:
+                  continue
+              path.write_text(transform_segment(text), encoding='utf-8')
 
           style = css_dir / 'style.css'
           style_text = style.read_text(encoding='utf-8')
@@ -106,5 +111,5 @@ jobs:
             echo 'No changes to commit.'
             exit 0
           fi
-          git commit -m "Use IBM Plex Sans for Latin glyphs"
+          git commit -m "Apply IBM Plex Sans Latin font stack"
           git push
