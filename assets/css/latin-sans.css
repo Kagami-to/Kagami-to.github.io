@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..700&display=swap');
+
+/* Latin-only companion for Zen Kaku Gothic New.
+ * IBM Plex Sans handles Latin glyphs; Zen Kaku Gothic New remains the CJK fallback.
+ * Explicit Zen Kaku weights are shifted down by 50 for the IBM Latin glyphs.
+ */
+
+.menu-sub,
+.chevron,
+.item-epithet,
+.menu-group[data-menu-key^="glossary:"] > .menu-trigger .item-name,
+.lang-buttons button,
+.page-heading .page-sub,
+.list-japanese,
+.list-subtitle,
+.item-secondary,
+.character-epithet {
+  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+}
+
+.item-epithet { font-weight: 400; }
+.menu-group[data-menu-key^="glossary:"] > .menu-trigger .item-name { font-weight: 550; }
+.lang-buttons button { font-weight: 600; }
+.page-heading .page-sub,
+.list-japanese,
+.list-subtitle,
+.item-secondary,
+.character-epithet { font-weight: 350; }
+
+.character-detail-092,
+.work-detail-page,
+.song-detail-page,
+.glossary-detail-page {
+  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+}
+
+.character-092-epithet,
+.character-092-secondary-name,
+.character-092-reading,
+.character-092-card-subtitle,
+.character-092-profile,
+.detail-back-link,
+.work-number,
+.work-title-sub,
+.work-jacket-placeholder,
+.work-synopsis,
+.detail-back-link,
+.song-scene-top,
+.song-title-sub,
+.glossary-detail-identity p:last-child,
+.glossary-detail-text,
+.glossary-detail-empty {
+  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-weight: 350;
+}
+
+.work-collapsible summary,
+.work-collapsible summary small,
+.glossary-related-group summary,
+.glossary-related-group-count {
+  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-weight: 450;
+}
+
+.glossary-search-wrap input,
+.glossary-card-sub {
+  font-family: "IBM Plex Sans", "Zen Kaku Gothic New", sans-serif;
+  font-weight: 350;
+}
