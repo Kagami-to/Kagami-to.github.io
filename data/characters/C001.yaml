@@ -3,9 +3,90 @@ sections:
   - title_ja: 立場
     title_en: Position
     content_ja: |
-      上白川学園・中等部2年生
+      私立上白川学園・中等部2年3組
     content_en: |
-      Second-Year Student at Kamishirakawa Academy Middle School
+      Second-Year Student, Class 3, at Kamishirakawa Private Academy Middle School
+
+  - title_ja: 基本情報
+    title_en: Basic Information
+    content_ja: |
+      2000年8月8日生まれ。『鏡外[虹]』時点で13歳。得意科目は国語で、評定9以上を維持している。
+
+      学園から少し離れた商店街の外れにある、老舗の酒屋の一人娘である。目立った将来の夢はなく、親の願いを叶えるためにも、この酒屋を継ぐつもりでいる。
+    content_en: |
+      Born on August 8, 2000, Yaya is 13 years old as of The Magic of Mirror in Message. Her strongest subject is Japanese, in which she consistently maintains a grade of 9 or higher.
+
+      She is the only daughter of a long-established liquor store on the outskirts of a shopping district a little ways from the academy. She has no particular dream for the future and intends to take over the family business in order to fulfill her parents' wishes.
+
+  - title_ja: 性格
+    title_en: Personality
+    content_ja: |
+      最も親しい友人は、同じクラスの上白川琴音である。あまり友達が多い方ではないが、コミュニケーション能力に欠けているわけではない。むしろ、人との繋がりを求めるあまりに、誰とも親密になれなかったというのが正しい。
+
+      上白川琴音とは小学4年生の頃からずっと仲が良く、これは同じ境遇にある琴音が八耶の良い理解者となっているためである。
+
+      人から頼まれたことを断るのが苦手で、所属する生活委員会・バドミントン部ともに、周囲の人間に流される形で決まっている。一方で、常に学年トップ10に入る学力と、分け隔てなく多くの生徒と接することから、人望は厚い。
+    content_en: |
+      Her closest friend is her classmate, Kamishirakawa Kotone. Although she does not have many friends, this is not because she lacks communication skills. Rather, it would be more accurate to say that, in seeking connections with others, she ended up unable to become truly close to anyone.
+
+      She and Kamishirakawa Kotone have been close since the fourth grade of elementary school. This is because Kotone, who is in a similar situation, has become someone who understands Yaya well.
+
+      Yaya has difficulty turning down requests from others, and her membership in both the school life committee and the badminton club was decided largely because she was carried along by those around her. At the same time, she is well regarded by her peers because she consistently ranks among the top ten students in her grade and treats students from all walks of life without distinction.
+
+  - title_ja: 学校生活
+    title_en: School Life
+    content_ja: |
+      2年次には生活委員会の副委員長に推薦され、賛成多数によってこれを引き受けた。ただし、自ら積極的に活動することはなく、他の委員とほぼ同じ仕事内容をこなすのみに留まっている。他方、バドミントン部ではあまり成果を上げていない。
+
+      修学旅行では、上白川琴音を含む4人の行動班に入っている。これは全員が八耶と同様に、勉強が比較的できる一方で、固定の友達が少ないメンバーで構成されている。
+    content_en: |
+      In her second year, Yaya was recommended for the position of vice chair of the school life committee and accepted the position after receiving a majority of the votes. However, she does not take an active role in the committee, limiting herself to carrying out roughly the same duties as the other members. Meanwhile, she has achieved little notable success in the badminton club.
+
+      During the school trip, she is assigned to a group of four students that includes Kamishirakawa Kotone. Like Yaya, all of them are relatively strong academically but have few fixed friend groups.
+
+  - title_ja: 鏡外との出会い
+    title_en: Encounter with Kagamito
+    content_ja: |
+      修学旅行の班行動中に京都・一条戻り橋にて転倒し、運悪く鏡外に迷い込んでしまう。
+
+      自身が鏡外に入る際に発生した八咫鏡の破片を用いて形式上の攻撃を行う。この破片は殺傷能力を持たないが、鏡外における様々なエネルギーの無効化が可能である。
+    content_en: |
+      While traveling with her group during the school trip, Yaya falls at Ichijō Modoribashi in Kyoto and, unfortunately, wanders into Kagamito.
+
+      She uses a fragment of the Yata Mirror that was produced when she entered Kagamito to carry out what is, formally speaking, an attack. The fragment has no lethal power, but it can nullify various forms of energy within Kagamito.
+
+  - title_ja: ゲーム本編において
+    title_en: In the Main Games
+    content_ja: |
+      第1作『鏡外[虹]』では、最初から使用できる唯一の主人公。
+
+      第2作『鏡外[傷]』や第3作『鏡外[珠]』にもプレイアブルキャラクターとして参戦している。
+
+      『鏡外[虹]』を2人目の自機である双結零夜でプレイする場合、4面ボスとして登場する。テーマ曲は「オリジンノットオリジナル」。
+    content_en: |
+      In the first game, The Magic of Mirror in Message, she is the only protagonist available from the beginning.
+
+      She also appears as a playable character in the second game, Damaged Alice, and the third game, Cluel Admin.
+
+      When playing The Magic of Mirror in Message with Futayui Rēya as the second playable character, Yaya appears as the Stage 4 boss. Her theme song is “ORIGIN - Not Original.”
+
+  - title_ja: 秘密
+    title_en: Secret
+    display: collapsible
+    toggle_ja:
+      open: ネタバレを表示
+      close: ネタバレを隠す
+    toggle_en:
+      open: Show spoilers
+      close: Hide spoilers
+    content_ja: |
+      楽曲動画内の文では双結零夜によって少しだけ語られている通り、八耶は「八咫鏡に別の姿、すなわち双結零夜を映す特別な人間」であり、かつて世界を創造したとも言われる双結の血を継ぐ。
+
+      これこそが八耶を『鏡外[虹]』あるいはその後の物語へと巻き込む重要なポイントだが、八耶は生まれて以来、双結家の過去や自身の大きな役割について一切知らされていない。
+    content_en: |
+      As Futayui Rēya reveals in part through the text accompanying a music video, Yaya is “a special human being who can reflect another form, namely Futayui Rēya, in the Yata Mirror,” and is a descendant of the Futayui bloodline, which is said to have once created the world.
+
+      This is the key point that draws Yaya into The Magic of Mirror in Message and the stories that follow. However, since birth, Yaya has never been told anything about the history of the Futayui family or her own greater role.
 
   - title_ja: 登場作品
     title_en: Appearances
