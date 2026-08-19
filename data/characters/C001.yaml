@@ -90,12 +90,7 @@ sections:
 
   - title_ja: 登場作品
     title_en: Appearances
-    content_ja:
-      - P001
-      - P002
-      - P003
-      - P004
-    content_en:
+    content:
       - P001
       - P002
       - P003
