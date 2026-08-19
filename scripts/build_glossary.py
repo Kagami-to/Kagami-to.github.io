@@ -1,6 +1,5 @@
 from pathlib import Path
-import csv, json, shutil
-import yaml
+import csv, shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
@@ -28,8 +27,6 @@ def main():
     yaml_dst = site_data / 'glossary'; yaml_dst.mkdir(parents=True, exist_ok=True)
     for y in yaml_src.glob('*.yaml'):
         shutil.copy2(y, yaml_dst / y.name)
-        with y.open(encoding='utf-8') as f: parsed = yaml.safe_load(f) or {}
-        with (yaml_dst / f'{y.stem}.json').open('w', encoding='utf-8') as f: json.dump(parsed, f, ensure_ascii=False, indent=2)
 
     body = LIST_TEMPLATE.read_text(encoding='utf-8'); (out / 'index.html').write_text(list_layout(body), encoding='utf-8')
     detail_body = DETAIL_TEMPLATE.read_text(encoding='utf-8')
