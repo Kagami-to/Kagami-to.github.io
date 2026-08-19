@@ -80,12 +80,6 @@ def build_work_pages(data, out):
         (page_dir / 'index.html').write_text(work_detail_layout(r, prev_row=prev_row, next_row=next_row, depth=2), encoding='utf-8')
 
 
-def copy_character_data():
-    character_src = DATA / 'characters'; character_dst = SITE / 'data' / 'characters'
-    if not character_src.exists(): return
-    shutil.copytree(character_src, character_dst, dirs_exist_ok=True)
-
-
 ENTITY_BUILD_CONFIG = {
     'characters': {'build_pages': build_character_pages, 'label': 'Characters', 'heading_sub': 'キャラクター', 'list_markup': '<ul id="character-list" class="character-list"></ul>', 'list_css': 'entity-pages.css', 'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'キャラクター';renderList('characters').catch(e=>console.error(e));</script>"""},
     'works': {'build_pages': build_work_pages, 'label': 'Works', 'heading_sub': '作品', 'list_markup': '<ul id="entity-list" class="character-list"></ul>', 'list_css': 'entity-pages.css', 'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'作品';renderList('works').catch(e=>console.error(e));</script>"""},
@@ -108,7 +102,6 @@ def prepare_site():
     for name in ('characters.csv', 'songs.csv', 'works.csv'):
         source = DATA / name
         if source.exists(): shutil.copy2(source, data_out / name)
-    copy_character_data()
     pages_out = SITE / 'pages'; pages_out.mkdir(parents=True, exist_ok=True)
     site_text = ROOT / 'pages' / 'site_text.csv'
     if site_text.exists(): shutil.copy2(site_text, pages_out / 'site_text.csv')
