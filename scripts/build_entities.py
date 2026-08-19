@@ -1,6 +1,5 @@
 from pathlib import Path
-import json, shutil
-import yaml
+import shutil
 
 from build_data import DATA, rows, url_id
 from build_html import VIEWPORT, entity_detail_layout, esc, layout, site_header
@@ -85,9 +84,6 @@ def copy_character_data():
     character_src = DATA / 'characters'; character_dst = SITE / 'data' / 'characters'
     if not character_src.exists(): return
     shutil.copytree(character_src, character_dst, dirs_exist_ok=True)
-    for yaml_path in character_src.glob('*.yaml'):
-        with yaml_path.open(encoding='utf-8') as f: parsed = yaml.safe_load(f) or {}
-        with (character_dst / f'{yaml_path.stem}.json').open('w', encoding='utf-8') as f: json.dump(parsed, f, ensure_ascii=False, indent=2)
 
 
 ENTITY_BUILD_CONFIG = {
