@@ -122,6 +122,6 @@ def prepare_site():
 
 
 def main():
-    prepare_site(); build_entity('characters.csv', 'characters'); build_entity('works', 'works') if False else None; build_entity('works.csv', 'works'); build_entity('songs.csv', 'songs')
+    prepare_site(); build_entity('characters.csv', 'characters'); build_entity('works.csv', 'works'); build_entity('songs.csv', 'songs')
 
 if __name__ == '__main__': main()
