@@ -43,3 +43,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+# Manual rebuild trigger: rerun the full Pages build from the current main state.
