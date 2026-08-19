@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import re
 from typing import Any
 
 import yaml
@@ -10,6 +11,7 @@ DEFAULT_TOGGLE = {
     "ja": {"open": "内容を表示", "close": "内容を隠す"},
     "en": {"open": "Show content", "close": "Hide content"},
 }
+ENTITY_ID_RE = re.compile(r"^[PCMT]\d+$")
 
 
 def _text(value: Any) -> str:
@@ -20,21 +22,34 @@ def _text(value: Any) -> str:
     return str(value)
 
 
+def _content_item(value: Any) -> Any:
+    if isinstance(value, str):
+        text = value.strip()
+        if ENTITY_ID_RE.fullmatch(text):
+            return {"type": "entity", "id": text}
+        return {"type": "text", "text": value}
+    if isinstance(value, dict):
+        return {
+            "type": "text",
+            "align": "right" if value.get("align") == "right" else "left",
+            "text": _text(value.get("text")),
+        }
+    return None
+
+
 def _content(value: Any) -> Any:
     if isinstance(value, str):
+        text = value.strip()
+        if ENTITY_ID_RE.fullmatch(text):
+            return [{"type": "entity", "id": text}]
         return value
     if isinstance(value, list):
-        blocks = []
-        for block in value:
-            if not isinstance(block, dict):
-                continue
-            blocks.append(
-                {
-                    "align": "right" if block.get("align") == "right" else "left",
-                    "text": _text(block.get("text")),
-                }
-            )
-        return blocks
+        items = []
+        for item in value:
+            normalized = _content_item(item)
+            if normalized is not None:
+                items.append(normalized)
+        return items
     return _text(value)
 
 
