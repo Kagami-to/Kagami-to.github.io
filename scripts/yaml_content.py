@@ -44,12 +44,7 @@ def _content(value: Any) -> Any:
             return [{"type": "entity", "id": text}]
         return value
     if isinstance(value, list):
-        items = []
-        for item in value:
-            normalized = _content_item(item)
-            if normalized is not None:
-                items.append(normalized)
-        return items
+        return [normalized for item in value if (normalized := _content_item(item)) is not None]
     return _text(value)
 
 
@@ -79,20 +74,22 @@ def normalize_document(raw: Any, source_id: str = "") -> dict:
         works = raw_works if isinstance(raw_works, list) else []
         work_ids = [_text(value) for value in works if _text(value)]
 
+        raw_common = raw_section.get("content")
         raw_content_ja = raw_section.get("content_ja")
         raw_content_en = raw_section.get("content_en")
-        has_any_content = raw_content_ja is not None or raw_content_en is not None
+        has_any_content = any(value is not None for value in (raw_common, raw_content_ja, raw_content_en))
 
+        normalized_common = _content(raw_common)
         normalized_ja = _content(raw_content_ja)
         normalized_en = _content(raw_content_en)
 
-        # Legacy `works:`-only sections become normal common content in both languages.
-        # This is a compatibility transformation, not cross-language fallback: it only
-        # runs when neither language has an explicit content value.
+        # Legacy `works:`-only sections become common language-independent content.
+        # This is a compatibility transformation and never copies one language into another.
         if work_ids and not has_any_content:
             legacy_entities = [{"type": "entity", "id": work_id} for work_id in work_ids]
-            normalized_ja = legacy_entities
-            normalized_en = list(legacy_entities)
+            normalized_common = legacy_entities
+
+        section["content"] = normalized_common
 
         for lang, normalized in (("ja", normalized_ja), ("en", normalized_en)):
             raw_toggle = raw_section.get(f"toggle_{lang}")
