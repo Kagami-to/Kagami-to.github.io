@@ -75,7 +75,26 @@ def normalize_document(raw: Any, source_id: str = "") -> dict:
         display = raw_section.get("display", DEFAULT_DISPLAY)
         section["display"] = display if display in {"normal", "collapsible"} else DEFAULT_DISPLAY
 
-        for lang in ("ja", "en"):
+        raw_works = raw_section.get("related_works", raw_section.get("works", []))
+        works = raw_works if isinstance(raw_works, list) else []
+        work_ids = [_text(value) for value in works if _text(value)]
+
+        raw_content_ja = raw_section.get("content_ja")
+        raw_content_en = raw_section.get("content_en")
+        has_any_content = raw_content_ja is not None or raw_content_en is not None
+
+        normalized_ja = _content(raw_content_ja)
+        normalized_en = _content(raw_content_en)
+
+        # Legacy `works:`-only sections become normal common content in both languages.
+        # This is a compatibility transformation, not cross-language fallback: it only
+        # runs when neither language has an explicit content value.
+        if work_ids and not has_any_content:
+            legacy_entities = [{"type": "entity", "id": work_id} for work_id in work_ids]
+            normalized_ja = legacy_entities
+            normalized_en = list(legacy_entities)
+
+        for lang, normalized in (("ja", normalized_ja), ("en", normalized_en)):
             raw_toggle = raw_section.get(f"toggle_{lang}")
             if not isinstance(raw_toggle, dict):
                 raw_toggle = {}
@@ -83,12 +102,9 @@ def normalize_document(raw: Any, source_id: str = "") -> dict:
                 "open": _text(raw_toggle.get("open") or DEFAULT_TOGGLE[lang]["open"]),
                 "close": _text(raw_toggle.get("close") or DEFAULT_TOGGLE[lang]["close"]),
             }
-            section[f"content_{lang}"] = _content(raw_section.get(f"content_{lang}"))
+            section[f"content_{lang}"] = normalized
 
-        works = raw_section.get("related_works", raw_section.get("works", []))
-        if not isinstance(works, list):
-            works = []
-        section["related_works"] = [_text(value) for value in works if _text(value)]
+        section["related_works"] = work_ids
         sections.append(section)
 
     result["sections"] = sections
