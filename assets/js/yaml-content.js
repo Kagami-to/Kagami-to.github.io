@@ -111,8 +111,9 @@ function renderYamlContent(data, root, context) {
   sections.forEach(section => {
     if (!section || typeof section !== 'object') return;
 
-    const rawContent = lang === 'en' ? section.content_en : section.content_ja;
-    const blocks = yamlContentBlocks(rawContent);
+    const commonBlocks = yamlContentBlocks(section.content);
+    const languageBlocks = yamlContentBlocks(lang === 'en' ? section.content_en : section.content_ja);
+    const blocks = [...commonBlocks, ...languageBlocks];
     if (!blocks.length) return;
 
     const heading = lang === 'en' ? (section.title_en || '') : (section.title_ja || '');
@@ -187,15 +188,20 @@ function renderYamlContent(data, root, context) {
 }
 
 async function loadYamlContent(jsonUrl, root, currentId) {
+  const response = await fetch(siteDataUrl(jsonUrl), { cache: 'no-store' });
+  if (response.status === 404) {
+    if (root) root.innerHTML = '';
+    return null;
+  }
+  if (!response.ok) throw new Error('YAML content could not be loaded.');
+
+  const data = await response.json();
   const [characters, glossary, works, songs] = await Promise.all([
     loadCSV('../data/characters.csv'),
     loadCSV('../data/glossary.csv').catch(() => []),
     loadCSV('../data/works.csv'),
     loadCSV('../data/songs.csv'),
   ]);
-  const response = await fetch(siteDataUrl(jsonUrl), { cache: 'no-store' });
-  if (!response.ok) throw new Error('YAML content could not be loaded.');
-  const data = await response.json();
   renderYamlContent(data, root, { currentId, characters, glossary, works, songs });
   return data;
 }
