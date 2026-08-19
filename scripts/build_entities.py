@@ -1,7 +1,5 @@
 from pathlib import Path
-import json
-import shutil
-
+import json, shutil
 import yaml
 
 from build_data import DATA, rows, url_id
@@ -14,37 +12,21 @@ SITE = ROOT / '_site'
 
 def entity_pager(prev_row, next_row, label_column, label_prefix):
     parts = []
-    for row, side, direction, aria_prefix in (
-        (prev_row, 'prev', '〈', f'前の{label_prefix}'),
-        (next_row, 'next', '〉', f'次の{label_prefix}'),
-    ):
+    for row, side, direction, aria_prefix in ((prev_row, 'prev', '〈', f'前の{label_prefix}'), (next_row, 'next', '〉', f'次の{label_prefix}')):
         if not row:
             continue
         uid = url_id(row.get('url_id'))
         label = row.get(label_column) or row.get('name_ja') or row.get('name_en') or row.get('title_ja') or row.get('title_en') or uid
-        parts.append(
-            f'<a class="detail-pager detail-pager-{side}" href="../{esc(uid)}/" '
-            f'aria-label="{aria_prefix}: {esc(label)}"><span class="detail-pager-arrow" '
-            f'aria-hidden="true">{direction}</span></a>'
-        )
+        parts.append(f'<a class="detail-pager detail-pager-{side}" href="../{esc(uid)}/" aria-label="{aria_prefix}: {esc(label)}"><span class="detail-pager-arrow" aria-hidden="true">{direction}</span></a>')
     return ''.join(parts)
 
 
 def character_detail_layout(title, character_id, body, prev_row=None, next_row=None, depth=2):
     prefix = '../' * depth
-    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css">'
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css">'
     pager = entity_pager(prev_row, next_row, 'name_ja', 'キャラクター')
-    scripts = f'''<script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
-    return entity_detail_layout(
-        title,
-        body,
-        pager,
-        head,
-        scripts,
-        depth=depth,
-        main_open='<main class="character-detail-page">',
-        main_close='</main>',
-    )
+    scripts = f'''<script src="{prefix}assets/js/yaml-content.js"></script><script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
+    return entity_detail_layout(title, body, pager, head, scripts, depth=depth, main_open='<main class="character-detail-page">', main_close='</main>')
 
 
 def song_pager_html(row, prev_row=None, next_row=None, depth=2):
@@ -52,8 +34,8 @@ def song_pager_html(row, prev_row=None, next_row=None, depth=2):
     body = template.replace('{{SONG_ID}}', esc(row.get('song_id')))
     pager = entity_pager(prev_row, next_row, 'title_ja', '楽曲')
     prefix = '../' * depth
-    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css">'
-    scripts = f'''<script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css">'
+    scripts = f'''<script src="{prefix}assets/js/yaml-content.js"></script><script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
     return entity_detail_layout(row.get('title_ja') or row.get('title_en'), body, pager, head, scripts, depth=depth)
 
 
@@ -62,8 +44,8 @@ def work_detail_layout(row, prev_row=None, next_row=None, depth=2):
     body = template
     pager = entity_pager(prev_row, next_row, 'title_ja', '作品')
     prefix = '../' * depth
-    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/work-detail.css">'
-    scripts = f'''<script src="{prefix}assets/js/work-pages.js"></script><script>document.documentElement.lang=getLanguage();renderWork({esc(row.get('work_id'))!r}).catch(e=>{{const target=document.getElementById('work-page');if(target)target.textContent=e.message;}});</script>'''
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/work-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css">'
+    scripts = f'''<script src="{prefix}assets/js/yaml-content.js"></script><script src="{prefix}assets/js/work-pages.js"></script><script>document.documentElement.lang=getLanguage();renderWork({esc(row.get('work_id'))!r}).catch(e=>{{const target=document.getElementById('work-page');if(target)target.textContent=e.message;}});</script>'''
     return entity_detail_layout(row.get('title_ja') or row.get('title_en'), body, pager, head, scripts, depth=depth)
 
 
@@ -72,7 +54,7 @@ def build_character_pages(data, out):
     valid = [(i, r) for i, r in enumerate(data) if url_id(r.get('url_id'))]
     for pos, (_, r) in enumerate(valid):
         uid = url_id(r.get('url_id')); prev_row = valid[pos - 1][1] if pos > 0 else None; next_row = valid[pos + 1][1] if pos + 1 < len(valid) else None
-        html_text = character_detail_layout(r.get('name_ja','') or r.get('name_en',''), uid, template, prev_row=prev_row, next_row=next_row, depth=2)
+        html_text = character_detail_layout(r.get('name_ja', '') or r.get('name_en', ''), uid, template, prev_row=prev_row, next_row=next_row, depth=2)
         page_dir = out / uid
         page_dir.mkdir(parents=True, exist_ok=True)
         (page_dir / 'index.html').write_text(html_text, encoding='utf-8')
@@ -100,63 +82,26 @@ def build_work_pages(data, out):
 
 
 def copy_character_data():
-    """Copy character YAML and generate normalized JSON from the same parsed data."""
-    character_src = DATA / 'characters'
-    character_dst = SITE / 'data' / 'characters'
-    if not character_src.exists():
-        return
+    character_src = DATA / 'characters'; character_dst = SITE / 'data' / 'characters'
+    if not character_src.exists(): return
     shutil.copytree(character_src, character_dst, dirs_exist_ok=True)
     for yaml_path in character_src.glob('*.yaml'):
-        with yaml_path.open(encoding='utf-8') as f:
-            parsed = yaml.safe_load(f) or {}
-        with (character_dst / f'{yaml_path.stem}.json').open('w', encoding='utf-8') as f:
-            json.dump(parsed, f, ensure_ascii=False, indent=2)
+        with yaml_path.open(encoding='utf-8') as f: parsed = yaml.safe_load(f) or {}
+        with (character_dst / f'{yaml_path.stem}.json').open('w', encoding='utf-8') as f: json.dump(parsed, f, ensure_ascii=False, indent=2)
 
 
 ENTITY_BUILD_CONFIG = {
-    'characters': {
-        'build_pages': build_character_pages,
-        'label': 'Characters',
-        'heading_sub': 'キャラクター',
-        'list_markup': '<ul id="character-list" class="character-list"></ul>',
-        'list_css': 'entity-pages.css',
-        'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'キャラクター';renderList('characters').catch(e=>console.error(e));</script>""",
-    },
-    'works': {
-        'build_pages': build_work_pages,
-        'label': 'Works',
-        'heading_sub': '作品',
-        'list_markup': '<ul id="entity-list" class="character-list"></ul>',
-        'list_css': 'entity-pages.css',
-        'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'作品';renderList('works').catch(e=>console.error(e));</script>""",
-    },
-    'songs': {
-        'build_pages': build_song_pages,
-        'label': 'Songs',
-        'heading_sub': '楽曲',
-        'list_markup': '<ul id="entity-list" class="character-list"></ul>',
-        'list_css': 'entity-pages.css',
-        'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';renderList('songs').catch(e=>console.error(e));</script>""",
-    },
+    'characters': {'build_pages': build_character_pages, 'label': 'Characters', 'heading_sub': 'キャラクター', 'list_markup': '<ul id="character-list" class="character-list"></ul>', 'list_css': 'entity-pages.css', 'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'キャラクター';renderList('characters').catch(e=>console.error(e));</script>"""},
+    'works': {'build_pages': build_work_pages, 'label': 'Works', 'heading_sub': '作品', 'list_markup': '<ul id="entity-list" class="character-list"></ul>', 'list_css': 'entity-pages.css', 'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'作品';renderList('works').catch(e=>console.error(e));</script>"""},
+    'songs': {'build_pages': build_song_pages, 'label': 'Songs', 'heading_sub': '楽曲', 'list_markup': '<ul id="entity-list" class="character-list"></ul>', 'list_css': 'entity-pages.css', 'render_script': """<script>document.documentElement.lang=getLanguage();document.getElementById('page-sub').textContent=getLanguage()==='en'?'':'楽曲';renderList('songs').catch(e=>console.error(e));</script>"""},
 }
 
 
 def build_entity(csv_name, folder):
-    config = ENTITY_BUILD_CONFIG[folder]
-    data = rows(csv_name)
-    out = SITE / folder
-    out.mkdir(parents=True, exist_ok=True)
-    config['build_pages'](data, out)
-    body = (
-        f'<div class="page-heading"><h1 id="page-title">{config["label"]}</h1>'
-        f'<div class="page-sub" id="page-sub">{config["heading_sub"]}</div></div>'
-        f'{config["list_markup"]}'
-    )
+    config = ENTITY_BUILD_CONFIG[folder]; data = rows(csv_name); out = SITE / folder; out.mkdir(parents=True, exist_ok=True); config['build_pages'](data, out)
+    body = f'<div class="page-heading"><h1 id="page-title">{config["label"]}</h1><div class="page-sub" id="page-sub">{config["heading_sub"]}</div></div>{config["list_markup"]}'
     extra_head = f'<link rel="stylesheet" href="../assets/css/{config["list_css"]}">' if config.get('list_css') else ''
-    (out / 'index.html').write_text(
-        layout(config['label'], body, 1, extra_head=extra_head, extra_body=config['render_script']),
-        encoding='utf-8',
-    )
+    (out / 'index.html').write_text(layout(config['label'], body, 1, extra_head=extra_head, extra_body=config['render_script']), encoding='utf-8')
 
 
 def prepare_site():
@@ -177,6 +122,6 @@ def prepare_site():
 
 
 def main():
-    prepare_site(); build_entity('characters.csv', 'characters'); build_entity('works.csv', 'works'); build_entity('songs.csv', 'songs')
+    prepare_site(); build_entity('characters.csv', 'characters'); build_entity('works', 'works') if False else None; build_entity('works.csv', 'works'); build_entity('songs.csv', 'songs')
 
 if __name__ == '__main__': main()
