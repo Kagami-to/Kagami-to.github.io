@@ -1,5 +1,8 @@
 from pathlib import Path
+import json
 import shutil
+
+import yaml
 
 from build_data import DATA, rows, url_id
 from build_html import VIEWPORT, entity_detail_layout, esc, layout, site_header
@@ -96,6 +99,20 @@ def build_work_pages(data, out):
         (page_dir / 'index.html').write_text(work_detail_layout(r, prev_row=prev_row, next_row=next_row, depth=2), encoding='utf-8')
 
 
+def copy_character_data():
+    """Copy character YAML and generate normalized JSON from the same parsed data."""
+    character_src = DATA / 'characters'
+    character_dst = SITE / 'data' / 'characters'
+    if not character_src.exists():
+        return
+    shutil.copytree(character_src, character_dst, dirs_exist_ok=True)
+    for yaml_path in character_src.glob('*.yaml'):
+        with yaml_path.open(encoding='utf-8') as f:
+            parsed = yaml.safe_load(f) or {}
+        with (character_dst / f'{yaml_path.stem}.json').open('w', encoding='utf-8') as f:
+            json.dump(parsed, f, ensure_ascii=False, indent=2)
+
+
 ENTITY_BUILD_CONFIG = {
     'characters': {
         'build_pages': build_character_pages,
@@ -150,8 +167,7 @@ def prepare_site():
     for name in ('characters.csv', 'songs.csv', 'works.csv'):
         source = DATA / name
         if source.exists(): shutil.copy2(source, data_out / name)
-    character_yaml = DATA / 'characters'
-    if character_yaml.exists(): shutil.copytree(character_yaml, data_out / 'characters', dirs_exist_ok=True)
+    copy_character_data()
     pages_out = SITE / 'pages'; pages_out.mkdir(parents=True, exist_ok=True)
     site_text = ROOT / 'pages' / 'site_text.csv'
     if site_text.exists(): shutil.copy2(site_text, pages_out / 'site_text.csv')
