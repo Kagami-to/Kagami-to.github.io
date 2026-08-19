@@ -94,11 +94,13 @@ function renderYamlContent(data, root, context) {
 
   sections.forEach((section, index) => {
     if (!section || typeof section !== 'object') return;
-    const heading = lang === 'en' ? (section.title_en || section.title_ja || '') : (section.title_ja || section.title_en || '');
-    const rawContent = lang === 'en' ? (section.content_en ?? section.content_ja) : (section.content_ja ?? section.content_en);
+
+    const rawContent = lang === 'en' ? section.content_en : section.content_ja;
     const blocks = yamlContentBlocks(rawContent);
+    if (!blocks.length) return;
+
+    const heading = lang === 'en' ? (section.title_en || '') : (section.title_ja || '');
     const relatedWorks = Array.isArray(section.related_works) ? section.related_works : (Array.isArray(section.works) ? section.works : []);
-    if (!heading && !blocks.length && !relatedWorks.length) return;
 
     const sectionEl = document.createElement('section');
     sectionEl.className = 'yaml-content-section';
@@ -119,25 +121,23 @@ function renderYamlContent(data, root, context) {
       body.appendChild(element);
     });
 
-    if (blocks.length) {
-      if (section.display === 'collapsible') {
-        const details = document.createElement('details');
-        details.className = 'yaml-content-collapsible';
-        const summary = document.createElement('summary');
-        summary.className = 'yaml-content-toggle';
-        const label = document.createElement('span');
-        label.className = 'yaml-content-toggle-label';
-        label.textContent = yamlContentToggleLabel(section, lang, true);
-        summary.appendChild(label);
-        details.appendChild(summary);
-        details.appendChild(body);
-        details.addEventListener('toggle', () => {
-          label.textContent = yamlContentToggleLabel(section, lang, !details.open);
-        });
-        sectionEl.appendChild(details);
-      } else {
-        sectionEl.appendChild(body);
-      }
+    if (section.display === 'collapsible') {
+      const details = document.createElement('details');
+      details.className = 'yaml-content-collapsible';
+      const summary = document.createElement('summary');
+      summary.className = 'yaml-content-toggle';
+      const label = document.createElement('span');
+      label.className = 'yaml-content-toggle-label';
+      label.textContent = yamlContentToggleLabel(section, lang, true);
+      summary.appendChild(label);
+      details.appendChild(summary);
+      details.appendChild(body);
+      details.addEventListener('toggle', () => {
+        label.textContent = yamlContentToggleLabel(section, lang, !details.open);
+      });
+      sectionEl.appendChild(details);
+    } else {
+      sectionEl.appendChild(body);
     }
 
     if (relatedWorks.length) {
@@ -151,11 +151,18 @@ function renderYamlContent(data, root, context) {
     }
 
     root.appendChild(sectionEl);
+
     if (index < sections.length - 1) {
-      const divider = document.createElement('div');
-      divider.className = 'yaml-content-divider';
-      divider.setAttribute('aria-hidden', 'true');
-      root.appendChild(divider);
+      const remaining = sections.slice(index + 1).some(candidate => {
+        if (!candidate || typeof candidate !== 'object') return false;
+        return yamlContentBlocks(lang === 'en' ? candidate.content_en : candidate.content_ja).length > 0;
+      });
+      if (remaining) {
+        const divider = document.createElement('div');
+        divider.className = 'yaml-content-divider';
+        divider.setAttribute('aria-hidden', 'true');
+        root.appendChild(divider);
+      }
     }
   });
 }
