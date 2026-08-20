@@ -1,7 +1,7 @@
 character_id,url_id,name_ja,name_en,reading_ja,epithet_ja,epithet_en,appearance_image,debut_work_id,ability_ja,ability_en,theme_song_ids
 C001,yaya,双結八耶,Futayui Yaya,ふたゆい やや,割れた鏡の救世主,Savior of the Broken Mirror,assets/images/characters/yaya.png,P001,均衡をあらわす能力,Ability: Embodies balance,M010
 C002,kotone,上白川琴音,Kamishirakawa Kotone,かみしらかわ ことね,並外れた琴の天才,Extraordinary Koto Genius,,P001,,,
-C003,natano,鶴城なた乃,Tsurushiro Natano,つるしろ なたの,絶たれた夢の修復士,Restorer of Severed Dreams,,P001,やり直しをあらわす能力,Ability: Embodies starting over,M003
+C003,natano,鶴城なた乃,Tsurushiro Natano,つるしろ なたの,絶たれた夢の修復士,Restorer of Severed Dreams,assets/images/characters/natano.png,P001,やり直しをあらわす能力,Ability: Embodies starting over,M003
 C004,oka,猪民桜花,Inotami Ōka,いのたみ おうか,廃れた都の生き字引,Living Chronicle of the Forsaken Capital,,P001,境目をあらわす能力,Ability: Embodies boundaries,M005
 C005,ayane,上白川文音,Kamishirakawa Ayane,かみしらかわ あやね,並外れた文の秀才,Extraordinary Literary Scholar,,P001,仕方無く必要な物語をあらわす能力,Ability: Embodies stories that must be told,
 C006,allen,アレン・ハーグリーヴズ,Allen Hargreaves,,引き継がれた本の虫,Bookworm of the Inherited Passion,,P001,最も必要な書物をあらわす能力,Ability: Embodies the most necessary book,M007
