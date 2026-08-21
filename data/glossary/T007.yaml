@@ -1,0 +1,27 @@
+id: T007
+
+sections:
+  -
+    title_ja: "概要"
+    title_en: Overview
+    content_ja: |
+      目に見えない力。隔世では科学で説明される、電気や赤外線などを含む。利便性の向上などに役立てられているほか、メモランダムを著す(=弾幕を放つ)ためにも使われる。
+      
+      主にこの呼び方を使うのは、日本神話に由来する鴨草京、深韴神宮、神湖水道局などのメンバー。勢力が異なればそれぞれに「双結の血」「奇跡」「科学技術」などと呼ばれるが、全て同じもの。
+    content_en: |
+      Jintsūriki is invisible power. In Kakusei, it is understood scientifically and includes phenomena such as electricity and infrared radiation.
+      It is used to make everyday life more convenient, as well as to write Memorandums, that is, to unleash danmaku.
+      
+      The term is primarily used by people associated with Kamokusa-kyō, Mifutsu Jingū Shrine, the Jingo Waterworks Bureau, and other groups with roots in Japanese mythology. Other factions call the same phenomenon by different names, such as “Futayui bloodline,” “miracles,” or “science and technology,” but they all refer to the same thing.
+
+  -
+    content_ja:
+      - text: "「天才さんが見つけるとぉ、ひめの力じゃないことになっちゃってぇ」"
+      - align: right
+        text: |
+          ───　天照宮ひめ
+    content_en:
+      - text: "“When dear Genius figures it out, Hime’s power stops being Hime’s anymoreee…”"
+      - align: right
+        text: |
+          ───　Tenshōgū Hime
