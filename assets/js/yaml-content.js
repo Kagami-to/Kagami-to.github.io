@@ -67,8 +67,27 @@ function yamlContentLinkifyPlain(text, entities) {
   return output + source.slice(last);
 }
 
-function yamlContentLinkify(text, entities, protectedTerms = []) {
+function yamlContentLinkify(text, entities, protectedTerms = [], mode = 'inline') {
   const source = String(text || '');
+
+  if (mode === 'attribution') {
+    const escapedSource = escapeHtml(source);
+    const attribution = escapedSource.match(/^(\s*[—─-]{2,}\s*)(.+?)\s*$/);
+    if (!attribution) return escapedSource;
+
+    const prefix = attribution[1];
+    const nameText = attribution[2];
+    const protectedSet = new Set((protectedTerms || []).map(term => String(term || '').trim()).filter(Boolean));
+    if (protectedSet.has(String(nameText).replace(/&quot;/g, '"'))) return escapedSource;
+
+    const exactEntity = [...entities.values()].find(
+      entity => escapeHtml(entity.name) === nameText
+    );
+    if (!exactEntity) return escapedSource;
+
+    return `${prefix}<a class="yaml-content-inline-link yaml-content-inline-link-${exactEntity.kind}" href="${escapeHtml(exactEntity.url)}">${nameText}</a>`;
+  }
+
   const protectedPattern = yamlContentProtectedPattern(protectedTerms);
   if (!protectedPattern) return yamlContentLinkifyPlain(source, entities);
 
@@ -176,7 +195,8 @@ function renderYamlContent(data, root, context) {
       const element = document.createElement('div');
       element.className = 'yaml-content-block';
       element.style.textAlign = block.align;
-      element.innerHTML = yamlContentLinkify(block.text, entities, protectedTerms).replace(/\n/g, '<br>');
+      const linkMode = block.align === 'right' ? 'attribution' : 'inline';
+      element.innerHTML = yamlContentLinkify(block.text, entities, protectedTerms, linkMode).replace(/\n/g, '<br>');
       body.appendChild(element);
     });
 
