@@ -129,3 +129,26 @@ def export_yaml_directory(source_dir: Path, destination_dir: Path) -> None:
         destination = destination_dir / yaml_path.name
         destination.write_text(yaml_path.read_text(encoding="utf-8"), encoding="utf-8")
         write_normalized_json(yaml_path, destination_dir / f"{yaml_path.stem}.json")
+
+
+def export_link_reference(source: Path, destination: Path) -> None:
+    if not source.exists():
+        return
+    with source.open(encoding="utf-8") as handle:
+        raw = yaml.safe_load(handle) or {}
+
+    protected_terms = raw.get("protected_terms", [])
+    if not isinstance(protected_terms, list):
+        protected_terms = []
+
+    normalized = {
+        "protected_terms": [
+            _text(term).strip()
+            for term in protected_terms
+            if _text(term).strip()
+        ]
+    }
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with destination.open("w", encoding="utf-8") as handle:
+        json.dump(normalized, handle, ensure_ascii=False, indent=2)
