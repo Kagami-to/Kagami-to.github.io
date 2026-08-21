@@ -31,24 +31,19 @@ function yamlContentEntities(characters, glossary, works, songs, currentId, lang
   return entities;
 }
 
-function yamlContentLinkify(text, entities, mode = 'inline') {
+function yamlContentProtectedPattern(terms) {
+  const unique = [...new Set((terms || [])
+    .map(term => String(term || '').trim())
+    .filter(Boolean))]
+    .sort((a, b) => b.length - a.length);
+  if (!unique.length) return null;
+  const escapeRegex = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(unique.map(escapeRegex).join('|'), 'g');
+}
+
+function yamlContentLinkifyPlain(text, entities) {
   const source = escapeHtml(String(text || ''));
   if (!entities.size) return source;
-
-  if (mode === 'attribution') {
-    const attribution = source.match(/^(\s*[—─-]{2,}\s*)(.+?)\s*$/);
-    if (!attribution) return source;
-
-    const prefix = attribution[1];
-    const nameText = attribution[2];
-    const exactEntity = [...entities.values()].find(
-      entity => escapeHtml(entity.name) === nameText
-    );
-
-    if (!exactEntity) return source;
-
-    return `${prefix}<a class="yaml-content-inline-link yaml-content-inline-link-${exactEntity.kind}" href="${escapeHtml(exactEntity.url)}">${nameText}</a>`;
-  }
 
   const byName = new Map([...entities.values()].map(entity => [escapeHtml(entity.name), entity]));
   const pattern = [...byName.keys()]
@@ -56,17 +51,39 @@ function yamlContentLinkify(text, entities, mode = 'inline') {
     .map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
     .join('|');
   if (!pattern) return source;
+
   const regex = new RegExp(pattern, 'g');
   let output = '';
   let last = 0;
   let match;
+
   while ((match = regex.exec(source))) {
     output += source.slice(last, match.index);
     const entity = byName.get(match[0]);
     output += `<a class="yaml-content-inline-link yaml-content-inline-link-${entity.kind}" href="${escapeHtml(entity.url)}">${match[0]}</a>`;
     last = match.index + match[0].length;
   }
+
   return output + source.slice(last);
+}
+
+function yamlContentLinkify(text, entities, protectedTerms = []) {
+  const source = String(text || '');
+  const protectedPattern = yamlContentProtectedPattern(protectedTerms);
+  if (!protectedPattern) return yamlContentLinkifyPlain(source, entities);
+
+  let output = '';
+  let last = 0;
+  let match;
+
+  while ((match = protectedPattern.exec(source))) {
+    output += yamlContentLinkifyPlain(source.slice(last, match.index), entities);
+    output += escapeHtml(match[0]);
+    last = match.index + match[0].length;
+  }
+
+  output += yamlContentLinkifyPlain(source.slice(last), entities);
+  return output;
 }
 
 function yamlContentBlocks(value) {
@@ -122,6 +139,7 @@ function renderYamlContent(data, root, context) {
     currentId,
     lang,
   );
+  const protectedTerms = context?.protectedTerms || [];
   const sections = Array.isArray(data.sections) ? data.sections : [];
 
   sections.forEach(section => {
@@ -158,8 +176,7 @@ function renderYamlContent(data, root, context) {
       const element = document.createElement('div');
       element.className = 'yaml-content-block';
       element.style.textAlign = block.align;
-      const linkMode = block.align === 'right' ? 'attribution' : 'inline';
-      element.innerHTML = yamlContentLinkify(block.text, entities, linkMode).replace(/\n/g, '<br>');
+      element.innerHTML = yamlContentLinkify(block.text, entities, protectedTerms).replace(/\n/g, '<br>');
       body.appendChild(element);
     });
 
@@ -213,12 +230,24 @@ async function loadYamlContent(jsonUrl, root, currentId) {
   if (!response.ok) throw new Error('YAML content could not be loaded.');
 
   const data = await response.json();
-  const [characters, glossary, works, songs] = await Promise.all([
+  const [characters, glossary, works, songs, linkReference] = await Promise.all([
     loadCSV('../data/characters.csv'),
     loadCSV('../data/glossary.csv').catch(() => []),
     loadCSV('../data/works.csv'),
     loadCSV('../data/songs.csv'),
+    fetch(siteDataUrl('../data/link-reference.json'), { cache: 'no-store' })
+      .then(res => res.ok ? res.json() : {})
+      .catch(() => ({})),
   ]);
-  renderYamlContent(data, root, { currentId, characters, glossary, works, songs });
+  renderYamlContent(data, root, {
+    currentId,
+    characters,
+    glossary,
+    works,
+    songs,
+    protectedTerms: Array.isArray(linkReference.protected_terms)
+      ? linkReference.protected_terms
+      : [],
+  });
   return data;
 }
