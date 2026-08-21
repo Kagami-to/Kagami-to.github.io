@@ -31,9 +31,25 @@ function yamlContentEntities(characters, glossary, works, songs, currentId, lang
   return entities;
 }
 
-function yamlContentLinkify(text, entities) {
+function yamlContentLinkify(text, entities, mode = 'inline') {
   const source = escapeHtml(String(text || ''));
   if (!entities.size) return source;
+
+  if (mode === 'attribution') {
+    const attribution = source.match(/^(\s*[—─-]{2,}\s*)(.+?)\s*$/);
+    if (!attribution) return source;
+
+    const prefix = attribution[1];
+    const nameText = attribution[2];
+    const exactEntity = [...entities.values()].find(
+      entity => escapeHtml(entity.name) === nameText
+    );
+
+    if (!exactEntity) return source;
+
+    return `${prefix}<a class="yaml-content-inline-link yaml-content-inline-link-${exactEntity.kind}" href="${escapeHtml(exactEntity.url)}">${nameText}</a>`;
+  }
+
   const byName = new Map([...entities.values()].map(entity => [escapeHtml(entity.name), entity]));
   const pattern = [...byName.keys()]
     .sort((a, b) => b.length - a.length)
@@ -142,7 +158,8 @@ function renderYamlContent(data, root, context) {
       const element = document.createElement('div');
       element.className = 'yaml-content-block';
       element.style.textAlign = block.align;
-      element.innerHTML = yamlContentLinkify(block.text, entities).replace(/\n/g, '<br>');
+      const linkMode = block.align === 'right' ? 'attribution' : 'inline';
+      element.innerHTML = yamlContentLinkify(block.text, entities, linkMode).replace(/\n/g, '<br>');
       body.appendChild(element);
     });
 
