@@ -16,7 +16,7 @@ def site_header(prefix):
 
 
 def _entity_scripts(prefix, extra_scripts=''):
-    return f'''<script src="{prefix}assets/js/csv.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/entity-cards.js"></script><script src="{prefix}assets/js/entity-list-data.js"></script><script src="{prefix}assets/js/glossary-sort.js"></script><script src="{prefix}assets/js/menu-data.js"></script>{extra_scripts}'''
+    return f'''<script src="{prefix}assets/js/csv.js"></script><script src="{prefix}assets/js/language.js"></script><script src="{prefix}assets/js/entity-common.js"></script><script src="{prefix}assets/js/entity-cards.js"></script><script src="{prefix}assets/js/entity-list-data.js"></script><script src="{prefix}assets/js/glossary-sort.js"></script><script src="{prefix}assets/js/analytics.js"></script><script src="{prefix}assets/js/menu-data.js"></script>{extra_scripts}'''
 
 
 def layout(title, body, depth=0, extra_head='', extra_body=''):
