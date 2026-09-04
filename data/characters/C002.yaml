@@ -1,12 +1,43 @@
 id: C002
+
 sections:
-  - title_ja: 立場
+  -
+    title_ja: "立場"
     title_en: Position
+    content_ja: "上白川学園・中等部2年3組"
+    content_en: "Second-Year Student, Class 3, at Kamishirakawa Private Academy Middle School"
+
+  -
+    title_ja: "基本情報"
+    title_en: "Basic Information"
     content_ja: |
-      上白川学園・中等部2年生
+      趣味は和琴を奏でること、音楽を聴くこと、文学を読むこと。
+      好きな科目は国語らしいが、得意科目は数学。前者は評定8、後者は10の才女。祖母に和琴を習っており、その才能は中学生にして既に一部の業界人に知られている。
     content_en: |
-      Second-Year Student at Kamishirakawa Academy Middle School
-  - title_ja: 登場作品
+      Her hobbies include playing the Japanese koto, listening to music, and reading literature.
+      She reportedly favors Japanese as her favorite subject, but mathematics is her strongest. A gifted student, she has earned a grade of 8 in the former and a 10 in the latter. She has been learning the Japanese koto from her grandmother, and her talent is already known to some professionals in the field despite her being only a middle school student.
+
+  -
+    title_ja: "性格"
+    title_en: Personality
+    content_ja: |
+      双結八耶にとって最も親しい友人であり、琴音も同様に八耶を親友と感じている。
+      学力が高く、かつ誰に対してもほぼ同様に接する点は、八耶と非常に似ている。ただし基本的には必要以上に他人と喋らないため、そもそも友達が少ない。修学旅行の行動班にしても、八耶が誘ってくれなければおそらく余っていた。
+    content_en: |
+      She is Futayui Yaya’s closest friend, and Kotone likewise considers Yaya her best friend.
+      
+      She is very much like Yaya in that she excels academically and treats almost everyone in much the same way. However, she generally does not talk to others more than necessary, and consequently has few friends to begin with. Had Yaya not invited her to join her group for the school trip, she probably would have been left without a group.
+
+  -
+    title_ja: "学校生活"
+    title_en: "School Life"
+    content_ja: "選挙管理委員会に所属している。1年次、汚い企みは絶対に許されない、と急に思ってしまい、謎の正義感のままにこの役職に就いた。しかし特に誰も卑怯な手を使わずに滞りなく選挙が終わってしまい、不完全燃焼。自分が話しかけづら過ぎたせいなのかと少し落ち込んでいる。"
+    content_en: "She is a member of the election committee. In her first year, she suddenly became convinced that underhanded schemes could never be tolerated, and took on the role on the strength of this inexplicable sense of justice. However, the election proceeded smoothly, with no one resorting to any dirty tricks in the first place, leaving her feeling somewhat unfulfilled. She is now a little dejected, wondering if perhaps it was because she was simply too difficult for people to approach."
+
+  -
+    title_ja: "登場作品"
     title_en: Appearances
-    works:
+    content:
       - P001
+    content_ja: "※バックストーリーで言及されるのみ。ゲーム本編には登場しない。"
+    content_en: "Mentioned only in the backstory; does not appear in the game itself."
