@@ -1,8 +1,66 @@
 id: C003
+
 sections:
-  - title_ja: 登場作品
+  -
+    title_ja: "基本情報"
+    title_en: "Basic Information"
+    content_ja: "鴨草京で鍛冶屋を営む、ミステリアスなお姉さん。ただの鍛冶屋さんと見せかけて、他人の破れた夢も直せるし、転じて本来なら叶わない夢を叶う範囲まで引き寄せるような、下駄を履かせる能力になってしまった。"
+    content_en: "A mysterious young woman who runs a smithy in Kamokusa-kyō. Though she appears to be nothing more than a blacksmith, she can also mend other people’s shattered dreams. In turn, this has developed into an ability to give dreams that would normally be unattainable just enough of a boost to bring them within reach."
+
+  -
+    title_ja: "能力について"
+    title_en: "About Her Ability"
+    content_ja: |
+      どんなに夢のまた夢だったとしても、少なくとも可能にはなるという程度の能力。ちょっと不安があるぐらいのものは確実に成功させられる。
+      ただしその能力の副作用として、なた乃は誰かに頼まれている願い事が叶うまでの期間、それと相反することを口に出せない。
+      
+      例えば、誰かが恋を成就させたいと願い、なた乃の助力を仰いだとする。そして後から別の人物が恋敵として現れた場合、なた乃は後から現れた方に対して「あなたの恋はいずれ叶うだろう」とは言えても、「恋敵はいずれ失恋するだろう」とは言えないのである。
+      結果、複数名から相反する願い事を頼まれてしまった場合、なた乃はほとんど確かなことを言えなくなり、曖昧で胡散臭いはぐらかし方しか出来なくなってしまうのだ。ミステリアスということにされているが、実は単に喋れないだけである。
+    content_en: |
+      No matter how much something may seem like a pipe dream, she can at least make it possible. Anything that is merely a little uncertain can be made certain to succeed.
+      However, as a side effect of her ability, Natano cannot say anything that contradicts a wish someone has entrusted to her until that wish comes true.
+      
+      For example, suppose someone wishes to win the heart of the person they love and asks Natano for her assistance. If another person later appears as a romantic rival, Natano can tell that rival, “Your love will come true someday,” but she cannot say, “Your rival will eventually be rejected.”
+      As a result, if she is entrusted with multiple conflicting wishes, Nata-no becomes almost unable to say anything with certainty. All she can do is respond with vague, suspiciously evasive statements. She is considered mysterious, but in reality, she simply cannot say what she wants to say.
+
+  -
+    title_ja: "発言"
+    title_en: Quotes
+    display: collapsible
+    content_ja: |
+      「ワタシもお人好しになったものね」
+      
+      双結八耶の後を追う、双結零夜を心配した発言。過去の自分は、他人の心配が出来るほど優しい人格ではなかったとの自己評価。しかし前述の通り、なた乃は他人の願いを成就させる為に、自らの発言を狭めている。お人好しと言わずして何と言おう。はたまたこれも、言わなければならなくなってしまっただけの発言か。
+      
+      
+      「他人なんか雇ってられないわよ、零細企業だもの」
+      
+      経営する鍛冶屋で働きたがる、上白川文音を追い返した発言。その理由が「鍛冶屋ならば客と会話する機会は少ないだろう」「自分の妄想を具現化してもらえるチャンスがあるかもしれない」の2つだと見抜いていた。でもそれを本人に突き付けない辺りが、なた乃らしい。
+    content_en: |
+      > “I’ve really become a soft-hearted fool.”
+      
+      Natano says this out of concern for Futayui Rēya, who is following Futayui Yaya. She reflects that her former self was not kind enough to worry about other people. Yet, as noted above, Natano has restricted what she can say in order to help fulfill other people’s wishes. If that is not being a soft-hearted fool, then what is? Or perhaps this, too, is merely something she has been forced to say.
+      
+      
+      > “I can’t afford to hire anyone else. We’re a small business.”
+      
+      Natano says this to turn away Kamishirakawa Ayane, who wants to work at her smithy. She has seen through Ayane’s motives: that working at a smithy would mean fewer opportunities to talk to customers, and that she might have a chance to have her own fantasies made real. The fact that Nata-no chooses not to point either of these things out to her is very much in character for Natano.
+
+  -
+    title_ja: "登場作品"
     title_en: Appearances
-    works:
+    content:
       - P001
       - P002
       - P003
+
+  -
+    title_ja: "所持するメモランダム"
+    title_en: "Memorandums in Her Possession"
+    content_ja: |
+      鶴城筆「彩色剣備」
+      鶴城筆「オトメカジフラクチャー」
+      鶴城筆「袈裟斬」
+      鶴城筆「九条袈裟斬」
+      「スラッシュフォースコア」
+    content_en: "As the English translations of the Memorandums names have not yet been finalized, the Japanese names are reproduced here for convenience."
