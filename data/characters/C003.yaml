@@ -75,11 +75,18 @@ sections:
 
   -
     title_ja: "所持するメモランダム"
-    title_en: "Memorandums"
+    title_en: "Memorandums in Her Possession"
     content_ja: |
       鶴城筆「彩色剣備」
       鶴城筆「オトメカジフラクチャー」
       鶴城筆「袈裟斬」
       鶴城筆「九条袈裟斬」
       「スラッシュフォースコア」
-    content_en: "As the English translations of the Memorandums names have not yet been finalized, the Japanese names are reproduced here for convenience."
+    content_en: |
+      As the English translations of the Memorandums names have not yet been finalized, the Japanese names are reproduced here for convenience.
+      
+      鶴城筆「彩色剣備」
+      鶴城筆「オトメカジフラクチャー」
+      鶴城筆「袈裟斬」
+      鶴城筆「九条袈裟斬」
+      「スラッシュフォースコア」
