@@ -1,13 +1,102 @@
 id: C004
+
 sections:
-  - title_ja: 立場
+  -
+    title_ja: "立場"
     title_en: Position
+    content_ja: "鴨草京天照宮復都特命室・室長"
+    content_en: "Head of the Special Mission Office for the Restoration of Kamokusa-kyō at Tenshōgū"
+
+  -
+    title_ja: "基本情報"
+    title_en: "Basic Information"
     content_ja: |
-      鴨草京天照宮復都特命室・室長
+      鴨草京交通局長、兼、天照宮復都特命室長。
+      鴨草京の区画整理や都市計画などを担う。旧都再興における最大の功労者。その正体は旧都について書き記された書物の付喪神。
     content_en: |
-      Head of the Special Mission Office for the Restoration of Kamokusa-kyō at Tenshōgū
-  - title_ja: 登場作品
+      Director of the Kamokusa-kyō Transportation Bureau, and Head of the Special Mission Office for the Restoration of Kamokusa-kyō at Tenshōgū.
+      
+      She is responsible for matters such as zoning and urban planning in Kamokusa-kyō, and is the single greatest contributor to the restoration of the Old Capital. Her true identity is a tsukumogami born from a book chronicling the Old Capital.
+
+  -
+    title_ja: "性格"
+    title_en: Personality
+    content_ja: |
+      書物の付喪神という性質からか、論理的かつ効率的な考え方をすることが多い。碁盤の目と称される鴨草京の構造は、単に旧都をなぞっただけとも言えるが、桜花本人の思想の表れでもある。
+      しかし桜花は、人間の魅力を「感情」や「非効率さ」「不確定さ」などに見出している。そして、そういったものの象徴として「遊び心」という概念に憧れている。
+      
+      桜花は喋る時に語尾が伸びるのだが、実は完全な口調・口癖という訳でもなく、やや意図してわざとそのようにしている側面がある。ときに生き字引とも呼ばれる自分自身に、幼さやのんびりした印象を持ってもらいたいかららしい。そのため、真面目な場面でも語尾は伸びるが、真剣な場面では伸ばし忘れていることがある。
+    content_en: |
+      Perhaps owing to her nature as a tsukumogami born from a book, she often approaches things in a logical and efficient manner. The grid-like structure of Kamokusa-kyō, described as resembling a Go board, could simply be said to follow the layout of the Old Capital, but it is also an expression of Ōka’s own philosophy.
+      However, Ōka sees the appeal of humanity in such things as “emotion,” “inefficiency,” and “uncertainty.” She is particularly fascinated by the concept of “playfulness,” which she regards as a symbol of such qualities.
+      
+      When Ōka speaks, she tends to draw out the ends of her sentences. In fact, this is not entirely a natural speech pattern or habitual mannerism. There is an element of deliberate affectation to it. Apparently, she wants people to perceive herself, despite sometimes being called a living encyclopedia, as having a somewhat childish and easygoing air. For this reason, she still draws out her sentence endings even in serious situations, though there are times when she forgets to do so when she is truly earnest.
+
+  -
+    title_ja: "発言"
+    title_en: Quotes
+    display: collapsible
+    content_ja: |
+      「事実とざっくばらんに仰っしゃりますが、具体的に何を知ろうとしてたのですー？」
+      
+      闇雲に図書館に向かおうとする双結八耶への発言。この時点での桜花は、八耶が何者で何をするべきなのかを知っていたので、単に八耶を刺す以上の意味は無い。やや性格が悪い。
+      
+      
+      「雑でも暇でもなくて趣味が悪いんですねー」
+      
+      上白川文庫で、本を隠すというしょうもない小細工をしていたアレン・ハーグリーヴズに対しての発言。この前に大量の本が吹き飛ぶ様子を「雑ですねー」、それによって本を探すというアレンの能力を「暇な人ですねー」と斬っている。性格が悪い。
+    content_en: |
+      > “You’re quite frank about the facts, but what exactly were you trying to find out~?”
+      
+      Ōka says this to Futayui Yaya, who is blindly making her way toward the library. At this point, Ōka already knows who Yaya is and what she is supposed to do, so the remark has no deeper purpose than simply needling her. She can be rather mean-spirited.
+      
+      
+      > “So it’s neither carelessness nor boredom. You simply have poor taste~.”
+      
+      Ōka says this to Allen Hargreaves, who had been resorting to the rather pathetic trick of hiding books at Kamishirakawa Bunko. Just beforehand, she had dismissed the sight of countless books being blown away with “That’s rather careless,” then described Allen’s ability to search for books as something for “someone with too much free time.” She can be rather mean-spirited.
+
+  -
+    title_ja: "『虹鏡』での活躍"
+    title_en: "Her Role in “Rainbow Mirror”"
+    display: collapsible
+    toggle_ja:
+      open: "ネタバレを表示"
+      close: "ネタバレを隠す"
+    toggle_en:
+      open: "Show spoilers"
+      close: "Hide spoilers"
+    content:
+      - P001
+    content_ja: |
+      2面ボス。
+      「双結の継承者」により鴨草京の統治が揺らぐことを危惧した御虹重から、その人物を調査するように命じられていた。加えて、鴨草京が必要以上に力を持たないよう、継承者・双結八耶に監視させようと目論む御虹単から、八耶に正しい知識を与えろとの指示も受ける。そこで八耶を探し、道案内役を買って出る。
+    content_en: |
+      Stage 2 boss.
+      Concerned that the rule of Kamokusa-kyō might be destabilized by the “Heir of the Futayui,” Mikō Kasane had ordered her to investigate this individual. In addition, Mikō Hitoe, who sought to keep Kamokusa-kyō from gaining more power than necessary, instructed her to give the Heir, Futayui Yaya, the correct knowledge so that she could be kept under watch. Thus, she went in search of Yaya and offered to serve as her guide.
+
+  -
+    title_ja: "登場作品"
     title_en: Appearances
-    works:
+    content:
       - P001
       - P003
+
+  -
+    title_ja: "所持するメモランダム"
+    title_en: Memorandums
+    content_ja: |
+      「玄武洞」
+      京筆「謳歌の輩」
+      京筆「平安の京」
+      京筆「鶯の語呂合わせ」
+      京筆「朱雀の両翼」
+      「万代の宮」
+    content_en: |
+      As the English translations of the Memorandums names have not yet been finalized, the Japanese names are reproduced here for convenience.
+      
+      「玄武洞」
+      京筆「謳歌の輩」
+      京筆「平安の京」
+      京筆「鶯の語呂合わせ」
+      京筆「朱雀の両翼」
+      「万代の宮」
