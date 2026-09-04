@@ -47,6 +47,25 @@ sections:
       Natano says this to turn away Kamishirakawa Ayane, who wants to work at her smithy. She has seen through Ayane’s motives: that working at a smithy would mean fewer opportunities to talk to customers, and that she might have a chance to have her own fantasies made real. The fact that Nata-no chooses not to point either of these things out to her is very much in character for Natano.
 
   -
+    title_ja: "『虹鏡』での活躍"
+    title_en: "Her Role in “Rainbow Mirror”"
+    display: collapsible
+    toggle_ja:
+      open: "ネタバレを表示"
+      close: "ネタバレを隠す"
+    toggle_en:
+      open: "Show spoilers"
+      close: "Hide spoilers"
+    content:
+      - P001
+    content_ja: |
+      双結八耶にとって初めてとなるメモランダム勝負の相手。
+      双結零夜からは、八耶の力を試し、見込みがあれば力を与えるように依頼されていた。勝負ののち、八耶に図書館へ向かうよう告げる。
+    content_en: |
+      Futayui Yaya’s first opponent in a Memorandum match.
+      Futayui Rēya had asked her to test Yaya’s abilities and, if she showed promise, grant her additional power. After the match, she told Yaya to head to the library.
+
+  -
     title_ja: "登場作品"
     title_en: Appearances
     content:
