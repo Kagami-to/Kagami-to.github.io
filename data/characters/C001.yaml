@@ -19,7 +19,7 @@ sections:
     content_en: |
       Born on August 8, 2000, Yaya is 13 years old as of The Magic of Mirror in Message. Her strongest subject is Japanese, in which she consistently maintains a grade of 9 or higher.
       
-      She is the only daughter of a long-established liquor store on the outskirts of a shopping district a little ways from the academy. She has no particular dream for the future and intends to take over the family business in order to fulfill her parents' wishes.
+      She is the only daughter of the family that runs a long-established liquor store on the outskirts of a shopping district a little way from the academy. She has no particular dream for the future and intends to take over the family business in order to fulfill her parents' wishes.
       
 
   -
@@ -87,7 +87,7 @@ sections:
 
   -
     title_ja: "『虹鏡』での活躍"
-    title_en: "Her Role in “Rainbow Mirror”"
+    title_en: "Her Role in “Nijikagami”"
     display: collapsible
     toggle_ja:
       open: "ネタバレを表示"
