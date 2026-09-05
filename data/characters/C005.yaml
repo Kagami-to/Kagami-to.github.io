@@ -18,7 +18,6 @@ sections:
       A writer who lives at Kamishirakawa Bunko.
       She compiles the historical records of the Kagamito from the events of “Nijikagami” onward.
       She is the mirror image of Kamishirakawa Kotone, who lives in Kakusei.
-      
 
   -
     title_ja: "性格"
@@ -31,31 +30,37 @@ sections:
       She has been surrounded by books since she was young and used to write fanfiction based on them. As a result, she has developed the sort of thought process often associated with a self-insert romantic fan.
       However, she is also an extreme introvert who barely speaks to other people in the first place, and almost none of the novels she writes are ever read by anyone.
       She often shuts herself away in a world of her own imagination. If someone speaks to her while she is lost in one of these fantasies, she falls into a complete panic. She is about as textbook an introvert as they come.
-      
 
   -
     title_ja: "発言"
     title_en: Quotes
     display: collapsible
-    content_ja: |
-      > 「出鱈目の執筆は暇な小説家に回ってくる」
-      歴史書ばかり書かされていることへの愚痴。歴史書といっても殆どは統治を正当化する根拠にされているだけで、真っ当な事実が書かれている訳ではない。
-      なお「小説家って嘘を書く仕事でしょ」と宣った御虹単を殴ったことがある。
-      
-      
-      > 「隣に居る人間を選べるって、幸せなことですよ」
-      双結八耶に対しての発言。自らが書く妄想小説とも重ねてしまったものと思われる。
-      文音がアレンと共に図書館に住んでいるのは、彼女の選択では無いのだろうか……。
-    content_en: |
-      > “Writing nonsense is the sort of work that falls to a novelist with time on her hands.”
-      A complaint about being made to write nothing but historical records. Even those historical records are mostly used to justify the existing rule, rather than to record the truth as it actually happened.
-      She once punched Mikō Hitoe after Hitoe remarked that “a novelist’s job is to write lies, right?”
-      
-      
-      > “Being able to choose who one has beside oneself... that, in itself, is a kind of happiness.”
-      She says this to Futayui Yaya. Perhaps she cannot help but see her own imaginary novels in the same light.
-      It makes one wonder whether Ayane’s life in the library with Allen is really a choice she made herself...
-      
+    content_ja:
+      - quote: true
+        text: |
+          「出鱈目の執筆は暇な小説家に回ってくる」
+      - text: |
+          歴史書ばかり書かされていることへの愚痴。歴史書といっても殆どは統治を正当化する根拠にされているだけで、真っ当な事実が書かれている訳ではない。
+          なお「小説家って嘘を書く仕事でしょ」と宣った御虹単を殴ったことがある。
+      - quote: true
+        text: |
+          「隣に居る人間を選べるって、幸せなことですよ」
+      - text: |
+          双結八耶に対しての発言。自らが書く妄想小説とも重ねてしまったものと思われる。
+          文音がアレンと共に図書館に住んでいるのは、彼女の選択では無いのだろうか……。
+    content_en:
+      - quote: true
+        text: |
+          “Writing nonsense is the sort of work that falls to a novelist with time on her hands.”
+      - text: |
+          A complaint about being made to write nothing but historical records. Even those historical records are mostly used to justify the existing rule, rather than to record the truth as it actually happened.
+          She once punched Mikō Hitoe after Hitoe remarked that “a novelist’s job is to write lies, right?”
+      - quote: true
+        text: |
+          “Being able to choose who one has beside oneself... that, in itself, is a kind of happiness.”
+      - text: |
+          She says this to Futayui Yaya. Perhaps she cannot help but see her own imaginary novels in the same light.
+          It makes one wonder whether Ayane’s life in the library with Allen is really a choice she made herself...
 
   -
     title_ja: "『虹鏡』での活躍"
@@ -77,7 +82,6 @@ sections:
       Stage 3 midboss.
       While standing at the entrance to Kamishirakawa Bunko, she panics at the sight of an unknown visitor who suddenly appears, causing her attacks to go off uncontrollably. In fact, the director had already told her beforehand that a visitor was likely to arrive, so it is not entirely clear why she was so frightened.
       If anything, it may have been because she became aware of another person’s presence while she was lost in thought about her writing.
-      
 
   -
     title_ja: "登場作品"
@@ -91,6 +95,5 @@ sections:
     content_ja: "文筆「アーティストマジック」"
     content_en: |
       As the English translations of the Memorandums names have not yet been finalized, the Japanese name is reproduced here for convenience.
-      
+
       文筆「アーティストマジック」
-      
