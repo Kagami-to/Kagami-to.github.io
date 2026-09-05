@@ -109,20 +109,30 @@ function yamlContentBlocks(value) {
   const normalizeItem = item => {
     if (item && typeof item === 'object') {
       if (item.type === 'entity') return { type: 'entity', id: String(item.id || '').trim() };
-      if (item.type === 'text') return { type: 'text', align: item.align === 'right' ? 'right' : 'left', text: String(item.text ?? '') };
-      if ('text' in item) return { type: 'text', align: item.align === 'right' ? 'right' : 'left', text: String(item.text ?? '') };
+      if (item.type === 'text') return {
+        type: 'text',
+        align: item.align === 'right' ? 'right' : 'left',
+        quote: item.quote === true,
+        text: String(item.text ?? ''),
+      };
+      if ('text' in item) return {
+        type: 'text',
+        align: item.align === 'right' ? 'right' : 'left',
+        quote: item.quote === true,
+        text: String(item.text ?? ''),
+      };
       return null;
     }
     const text = String(item ?? '');
     return /^[PCMT]\d+$/.test(text.trim())
       ? { type: 'entity', id: text.trim() }
-      : { type: 'text', align: 'left', text };
+      : { type: 'text', align: 'left', quote: false, text };
   };
   if (Array.isArray(value)) return value.map(normalizeItem).filter(Boolean);
   if (typeof value === 'string' && value.length) {
     const text = value.trim();
     if (/^[PCMT]\d+$/.test(text)) return [{ type: 'entity', id: text }];
-    return [{ type: 'text', align: 'left', text: value }];
+    return [{ type: 'text', align: 'left', quote: false, text: value }];
   }
   return [];
 }
@@ -193,7 +203,9 @@ function renderYamlContent(data, root, context) {
 
       if (!block.text.trim()) return;
       const element = document.createElement('div');
-      element.className = 'yaml-content-block';
+      element.className = block.quote
+        ? 'yaml-content-block yaml-content-block-quote'
+        : 'yaml-content-block';
       element.style.textAlign = block.align;
       const linkMode = block.align === 'right' ? 'attribution' : 'inline';
       element.innerHTML = yamlContentLinkify(block.text, entities, protectedTerms, linkMode).replace(/\n/g, '<br>');
