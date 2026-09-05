@@ -1,13 +1,77 @@
 id: C005
+
 sections:
-  - title_ja: 立場
+  -
+    title_ja: "立場"
     title_en: Position
+    content_ja: "上白川文庫に住む文筆家"
+    content_en: "A writer who lives at Kamishirakawa Bunko."
+
+  -
+    title_ja: "基本情報"
+    title_en: "Basic Information"
     content_ja: |
-      上白川文庫・秘書
+      上白川文庫に住む文筆家。『虹鏡』以降の鏡外の歴史書を編纂している。
+      隔世に住む上白川琴音の鏡写しである。
     content_en: |
-      Secretary at Kamishirakawa Bunko
-  - title_ja: 登場作品
+      A writer who lives at Kamishirakawa Bunko. She compiles the historical records of the Kagamito from the events of “Nijikagami” onward.
+      She is the mirror image of Kamishirakawa Kotone, who lives in Kakusei.
+
+  -
+    title_ja: "性格"
+    title_en: Personality
+    content_ja: |
+      幼い頃から多くの書籍に触れ、またそれらの二次創作を書いていた。その結果、いわゆる夢女子のような思考回路を持っている。
+      ただそもそも他人とほとんど会話をしない極度の人見知りであり、彼女の書いた小説のほとんどは誰にも読まれることがない。
+      一人で空想の世界に閉じ籠もっていることが多い。そういう時に話し掛けると大パニックに陥る。分かりやすい陰キャ。
+    content_en: |
+      She has been surrounded by books since she was young and used to write fanfiction based on them. As a result, she has developed the sort of thought process often associated with a self-insert romantic fan.
+      However, she is also an extreme introvert who barely speaks to other people in the first place, and almost none of the novels she writes are ever read by anyone.
+      She often shuts herself away in a world of her own imagination. If someone speaks to her while she is lost in one of these fantasies, she falls into a complete panic. She is about as textbook an introvert as they come.
+
+  -
+    title_ja: "発言"
+    title_en: Quotes
+    content_ja:
+      - |
+        「出鱈目の執筆は暇な小説家に回ってくる」
+        歴史書ばかり書かされていることへの愚痴。歴史書といっても殆どは統治を正当化する根拠にされているだけで、真っ当な事実が書かれている訳ではない。
+        なお「小説家って嘘を書く仕事でしょ」と宣った御虹単を殴ったことがある。
+      - |
+        「隣に居る人間を選べるって、幸せなことですよ」
+        双結八耶に対しての発言。自らが書く妄想小説とも重ねてしまったものと思われる。
+        文音がアレンと共に図書館に住んでいるのは、彼女の選択では無いのだろうか……。
+    content_en:
+      - |
+        “Writing nonsense is what gets left to a novelist with nothing better to do.”
+        A complaint about being made to write nothing but historical records. Even those historical records are mostly used to justify the existing rule, rather than to record the truth as it actually happened.
+        She once punched Mikō Hitoe after Hitoe remarked that “a novelist’s job is to write lies, right?”
+      - |
+        “Being able to choose who you have beside you is a happy thing.”
+        She says this to Futayui Yaya. Perhaps she cannot help but see her own imaginary novels in the same light.
+        It makes one wonder whether Ayane’s life in the library with Allen is really a choice she made herself...
+
+  -
+    title_ja: "『虹鏡』での活躍"
+    title_en: "Her Role in “Nijikagami”"
+    display: collapsible
+    toggle_ja: "ネタバレを表示"
+    toggle_en: "Show spoilers"
+    content_ja: |
+      3面中ボス。
+      上白川文庫の入り口に突っ立っていたところ、突如として訪れた未知の客にビビり散らかして攻撃が暴発。しかし実はちゃんと事前に館長から客が来るだろうと聞いていたので、なんでビビってるのかよく分からない。
+      強いて言うなら、執筆についての考え事に耽っている時に、他人の存在を意識してしまったのが原因かも。
+    content_en: |
+      Stage 3 midboss.
+      While standing at the entrance to Kamishirakawa Bunko, she panics at the sight of an unknown visitor who suddenly appears, causing her attacks to go off uncontrollably. In fact, the director had already told her beforehand that a visitor was likely to arrive, so it is not entirely clear why she was so frightened.
+      If anything, it may have been because she became aware of another person’s presence while she was lost in thought about her writing.
+
+  -
+    title_ja: "登場作品"
     title_en: Appearances
-    works:
-      - P001
-      - P003
+    content: P001
+
+  -
+    title_ja: "使用するメモランダム"
+    title_en: "Memorandums Used"
+    content: M002
