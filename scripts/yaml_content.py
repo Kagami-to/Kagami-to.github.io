@@ -32,6 +32,7 @@ def _content_item(value: Any) -> Any:
         return {
             "type": "text",
             "align": "right" if value.get("align") == "right" else "left",
+            "quote": value.get("quote") is True,
             "text": _text(value.get("text")),
         }
     return None
