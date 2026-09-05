@@ -4,17 +4,19 @@ sections:
   -
     title_ja: "立場"
     title_en: Position
-    content_ja: "上白川文庫に住む文筆家"
-    content_en: "A writer who lives at Kamishirakawa Bunko."
+    content_ja: "上白川文庫・秘書"
+    content_en: "Secretary at Kamishirakawa Bunko"
 
   -
     title_ja: "基本情報"
     title_en: "Basic Information"
     content_ja: |
-      上白川文庫に住む文筆家。『虹鏡』以降の鏡外の歴史書を編纂している。
+      上白川文庫に住む文筆家。
+      『虹鏡』以降の鏡外の歴史書を編纂している。
       隔世に住む上白川琴音の鏡写しである。
     content_en: |
-      A writer who lives at Kamishirakawa Bunko. She compiles the historical records of the Kagamito from the events of “Nijikagami” onward.
+      A writer who lives at Kamishirakawa Bunko.
+      She compiles the historical records of the Kagamito from the events of “Nijikagami” onward.
       She is the mirror image of Kamishirakawa Kotone, who lives in Kakusei.
 
   -
@@ -73,5 +75,6 @@ sections:
 
   -
     title_ja: "使用するメモランダム"
-    title_en: "Memorandums Used"
-    content: M002
+    title_en: "Memorandum Used"
+    content_ja: "文筆「アーティストマジック」"
+    content_en: "Writing: “Artist Magic”"
