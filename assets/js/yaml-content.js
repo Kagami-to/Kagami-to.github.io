@@ -200,6 +200,14 @@ function renderYamlContent(data, root, context) {
       body.appendChild(element);
     });
 
+    const appendCards = () => {
+      if (!cards.length) return;
+      const related = document.createElement('div');
+      related.className = 'yaml-content-related-list';
+      related.innerHTML = cards.join('');
+      body.appendChild(related);
+    };
+
     if (body.children.length) {
       if (section.display === 'collapsible') {
         const details = document.createElement('details');
@@ -217,16 +225,12 @@ function renderYamlContent(data, root, context) {
         });
         sectionEl.appendChild(details);
       } else {
+        appendCards();
         sectionEl.appendChild(body);
       }
     }
 
-    if (cards.length) {
-      const related = document.createElement('div');
-      related.className = 'yaml-content-related-list';
-      related.innerHTML = cards.join('');
-      sectionEl.appendChild(related);
-    }
+    if (section.display === 'collapsible') appendCards();
 
     if (sectionEl.children.length) root.appendChild(sectionEl);
   });
