@@ -59,6 +59,8 @@ sections:
     display: collapsible
     toggle_ja: "ネタバレを表示"
     toggle_en: "Show spoilers"
+    content:
+      - P001
     content_ja: |
       3面中ボス。
       上白川文庫の入り口に突っ立っていたところ、突如として訪れた未知の客にビビり散らかして攻撃が暴発。しかし実はちゃんと事前に館長から客が来るだろうと聞いていたので、なんでビビってるのかよく分からない。
@@ -75,6 +77,9 @@ sections:
 
   -
     title_ja: "使用するメモランダム"
-    title_en: "Memorandum Used"
+    title_en: "Memorandums"
     content_ja: "文筆「アーティストマジック」"
-    content_en: "Writing: “Artist Magic”"
+    content_en: |
+      As the English translations of the Memorandums names have not yet been finalized, the Japanese name is reproduced here for convenience.
+      
+      文筆「アーティストマジック」
