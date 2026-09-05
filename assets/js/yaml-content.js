@@ -208,6 +208,10 @@ function renderYamlContent(data, root, context) {
       body.appendChild(related);
     };
 
+    // Entity-only `content` sections still need to render their cards.
+    // Add cards to the body before deciding whether the section has content.
+    appendCards();
+
     if (body.children.length) {
       if (section.display === 'collapsible') {
         const details = document.createElement('details');
@@ -225,12 +229,9 @@ function renderYamlContent(data, root, context) {
         });
         sectionEl.appendChild(details);
       } else {
-        appendCards();
         sectionEl.appendChild(body);
       }
     }
-
-    if (section.display === 'collapsible') appendCards();
 
     if (sectionEl.children.length) root.appendChild(sectionEl);
   });
