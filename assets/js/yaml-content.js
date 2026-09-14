@@ -114,25 +114,27 @@ function yamlContentBlocks(value) {
         align: item.align === 'right' ? 'right' : 'left',
         quote: item.quote === true,
         text: String(item.text ?? ''),
+        detail: String(item.detail ?? ''),
       };
       if ('text' in item) return {
         type: 'text',
         align: item.align === 'right' ? 'right' : 'left',
         quote: item.quote === true,
         text: String(item.text ?? ''),
+        detail: String(item.detail ?? ''),
       };
       return null;
     }
     const text = String(item ?? '');
     return /^[PCMT]\d+$/.test(text.trim())
       ? { type: 'entity', id: text.trim() }
-      : { type: 'text', align: 'left', quote: false, text };
+      : { type: 'text', align: 'left', quote: false, text, detail: '' };
   };
   if (Array.isArray(value)) return value.map(normalizeItem).filter(Boolean);
   if (typeof value === 'string' && value.length) {
     const text = value.trim();
     if (/^[PCMT]\d+$/.test(text)) return [{ type: 'entity', id: text }];
-    return [{ type: 'text', align: 'left', quote: false, text: value }];
+    return [{ type: 'text', align: 'left', quote: false, text: value, detail: '' }];
   }
   return [];
 }
@@ -151,6 +153,26 @@ function yamlContentCard(entity) {
   if (entity.kind === 'song' && typeof entitySongCard === 'function') return entitySongCard(row, entity.url);
   if (entity.kind === 'glossary' && typeof entityGlossaryCard === 'function') return entityGlossaryCard(row, entity.url);
   return `<a class="yaml-content-related-card" href="${escapeHtml(entity.url)}"><span class="yaml-content-related-card-title">${escapeHtml(entity.name)}</span></a>`;
+}
+
+function yamlContentQuoteDetails(block, entities, protectedTerms) {
+  const details = document.createElement('details');
+  details.className = 'yaml-content-quote-details';
+
+  const summary = document.createElement('summary');
+  summary.className = 'yaml-content-block yaml-content-block-quote yaml-content-quote-summary';
+  summary.style.textAlign = block.align;
+  const linkMode = block.align === 'right' ? 'attribution' : 'inline';
+  summary.innerHTML = yamlContentLinkify(block.text, entities, protectedTerms, linkMode).replace(/\n/g, '<br>');
+  details.appendChild(summary);
+
+  const detail = document.createElement('div');
+  detail.className = 'yaml-content-quote-detail';
+  detail.style.textAlign = block.align;
+  detail.innerHTML = yamlContentLinkify(block.detail, entities, protectedTerms, 'inline').replace(/\n/g, '<br>');
+  details.appendChild(detail);
+
+  return details;
 }
 
 function renderYamlContent(data, root, context) {
@@ -202,6 +224,12 @@ function renderYamlContent(data, root, context) {
       }
 
       if (!block.text.trim()) return;
+
+      if (block.quote && block.detail.trim()) {
+        body.appendChild(yamlContentQuoteDetails(block, entities, protectedTerms));
+        return;
+      }
+
       const element = document.createElement('div');
       element.className = block.quote
         ? 'yaml-content-block yaml-content-block-quote'
