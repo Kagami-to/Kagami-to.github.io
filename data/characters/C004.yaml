@@ -35,25 +35,28 @@ sections:
   -
     title_ja: "発言"
     title_en: Quotes
-    display: collapsible
-    content_ja: |
-      「事実とざっくばらんに仰っしゃりますが、具体的に何を知ろうとしてたのですー？」
-      
-      闇雲に図書館に向かおうとする双結八耶への発言。この時点での桜花は、八耶が何者で何をするべきなのかを知っていたので、単に八耶を刺す以上の意味は無い。やや性格が悪い。
-      
-      
-      「雑でも暇でもなくて趣味が悪いんですねー」
-      
-      上白川文庫で、本を隠すというしょうもない小細工をしていたアレン・ハーグリーヴズに対しての発言。この前に大量の本が吹き飛ぶ様子を「雑ですねー」、それによって本を探すというアレンの能力を「暇な人ですねー」と斬っている。性格が悪い。
-    content_en: |
-      > “You’re quite frank about the facts, but what exactly were you trying to find out~?”
-      
-      Ōka says this to Futayui Yaya, who is blindly making her way toward the library. At this point, Ōka already knows who Yaya is and what she is supposed to do, so the remark has no deeper purpose than simply needling her. She can be rather mean-spirited.
-      
-      
-      > “So it’s neither carelessness nor boredom. You simply have poor taste~.”
-      
-      Ōka says this to Allen Hargreaves, who had been resorting to the rather pathetic trick of hiding books at Kamishirakawa Bunko. Just beforehand, she had dismissed the sight of countless books being blown away with “That’s rather careless,” then described Allen’s ability to search for books as something for “someone with too much free time.” She can be rather mean-spirited.
+    content_ja:
+      - quote: true
+        text: |
+          「事実とざっくばらんに仰っしゃりますが、具体的に何を知ろうとしてたのですー？」
+        detail: |
+          闇雲に図書館に向かおうとする双結八耶への発言。この時点での桜花は、八耶が何者で何をするべきなのかを知っていたので、単に八耶を刺す以上の意味は無い。やや性格が悪い。
+      - quote: true
+        text: |
+          「雑でも暇でもなくて趣味が悪いんですねー」
+        detail: |
+          上白川文庫で、本を隠すというしょうもない小細工をしていたアレン・ハーグリーヴズに対しての発言。この前に大量の本が吹き飛ぶ様子を「雑ですねー」、それによって本を探すというアレンの能力を「暇な人ですねー」と斬っている。性格が悪い。
+    content_en:
+      - quote: true
+        text: |
+          “You’re quite frank about the facts, but what exactly were you trying to find out~?”
+        detail: |
+          Ōka says this to Futayui Yaya, who is blindly making her way toward the library. At this point, Ōka already knows who Yaya is and what she is supposed to do, so the remark has no deeper purpose than simply needling her. She can be rather mean-spirited.
+      - quote: true
+        text: |
+          “So it’s neither carelessness nor boredom. You simply have poor taste~.”
+        detail: |
+          Ōka says this to Allen Hargreaves, who had been resorting to the rather pathetic trick of hiding books at Kamishirakawa Bunko. Just beforehand, she had dismissed the sight of countless books being blown away with “That’s rather careless,” then described Allen’s ability to search for books as something for “someone with too much free time.” She can be rather mean-spirited.
 
   -
     title_ja: "『虹鏡』での活躍"
