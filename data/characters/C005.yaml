@@ -39,26 +39,26 @@ sections:
       - quote: true
         text: |
           「出鱈目の執筆は暇な小説家に回ってくる」
-      - text: |
+        detail: |
           歴史書ばかり書かされていることへの愚痴。歴史書といっても殆どは統治を正当化する根拠にされているだけで、真っ当な事実が書かれている訳ではない。
           なお「小説家って嘘を書く仕事でしょ」と宣った御虹単を殴ったことがある。
       - quote: true
         text: |
           「隣に居る人間を選べるって、幸せなことですよ」
-      - text: |
+        detail: |
           双結八耶に対しての発言。自らが書く妄想小説とも重ねてしまったものと思われる。
           文音がアレンと共に図書館に住んでいるのは、彼女の選択では無いのだろうか……。
     content_en:
       - quote: true
         text: |
           “Writing nonsense is the sort of work that falls to a novelist with time on her hands.”
-      - text: |
+        detail: |
           A complaint about being made to write nothing but historical records. Even those historical records are mostly used to justify the existing rule, rather than to record the truth as it actually happened.
           She once punched Mikō Hitoe after Hitoe remarked that “a novelist’s job is to write lies, right?”
       - quote: true
         text: |
           “Being able to choose who one has beside oneself... that, in itself, is a kind of happiness.”
-      - text: |
+        detail: |
           She says this to Futayui Yaya. Perhaps she cannot help but see her own imaginary novels in the same light.
           It makes one wonder whether Ayane’s life in the library with Allen is really a choice she made herself...
 
