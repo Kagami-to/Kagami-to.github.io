@@ -34,6 +34,7 @@ def _content_item(value: Any) -> Any:
             "align": "right" if value.get("align") == "right" else "left",
             "quote": value.get("quote") is True,
             "text": _text(value.get("text")),
+            "detail": _text(value.get("detail")) if value.get("detail") is not None else "",
         }
     return None
 
