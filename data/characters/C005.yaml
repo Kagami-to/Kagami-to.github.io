@@ -34,7 +34,6 @@ sections:
   -
     title_ja: "発言"
     title_en: Quotes
-    display: collapsible
     content_ja:
       - quote: true
         text: |
