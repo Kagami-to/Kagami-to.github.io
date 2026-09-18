@@ -9,3 +9,47 @@ async function buildMenu(){const panel=document.querySelector('.mobile-menu-pane
 panel.innerHTML='';appendStandardGroup(panel,{key:'works',main:'Works',sub:'作品',all:getLanguage()==='en'?'View all works':'すべての作品を見る',allPath:'/works/',rows:works.filter(r=>r.url_id&&(r.title_ja||r.title_en||r.subtitle_en)),ja:'title_ja',en:'title_en',dir:'/works/'},openKeys);appendStandardGroup(panel,{key:'characters',main:'Characters',sub:'キャラクター',all:getLanguage()==='en'?'View all characters':'すべてのキャラクターを見る',allPath:'/characters/',rows:chars.filter(r=>r.url_id&&(r.name_ja||r.name_en)),ja:'name_ja',en:'name_en',dir:'/characters/'},openKeys);appendStandardGroup(panel,{key:'songs',main:'Songs',sub:'楽曲',all:getLanguage()==='en'?'View all songs':'すべての楽曲を見る',allPath:'/songs/',rows:songs.filter(r=>r.url_id&&(r.title_ja||r.title_en)),ja:'title_ja',en:'title_en',dir:'/songs/'},openKeys);appendGlossaryGroup(panel,glossary.filter(r=>r.url_id&&(r.term_ja||r.term_en)),openKeys);const divider=document.createElement('div');divider.className='divider';panel.appendChild(divider);const langs=document.createElement('div');langs.className='lang-buttons';const ja=document.createElement('button');ja.textContent='日本語';const en=document.createElement('button');en.textContent='English';const active=getLanguage()==='en'?en:ja;active.className='active';langs.append(ja,en);panel.appendChild(langs);[ja,en].forEach(b=>b.addEventListener('click',async()=>{const menuWasOpen=panel.classList.contains('menu-open');setLanguage(b===en?'en':'ja');document.documentElement.lang=getLanguage();await buildMenu();if(menuWasOpen)setSiteMenu(true)}));panel.querySelectorAll('.all-link,.list-item[href]').forEach(a=>a.addEventListener('click',()=>setSiteMenu(false)))}
 function setSiteMenu(open){const panel=document.querySelector('.mobile-menu-panel'),overlay=document.querySelector('.mobile-menu-overlay'),button=document.querySelector('.menu-toggle');if(!panel)return;panel.classList.toggle('menu-open',open);overlay?.classList.toggle('menu-open',open);button?.classList.toggle('menu-open',open);button?.setAttribute('aria-expanded',String(open));document.body.classList.toggle('menu-open',open)}
 document.addEventListener('DOMContentLoaded',()=>{const header=document.querySelector('.site-header');if(!header)return;const nav=header.querySelector('nav');if(!nav)return;nav.innerHTML='<button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false"><span class="hamburger"><span></span><span></span><span></span></span></button>';const overlay=document.createElement('div');overlay.className='mobile-menu-overlay';const panel=document.createElement('aside');panel.className='mobile-menu-panel';document.body.append(overlay,panel);document.querySelector('.menu-toggle').addEventListener('click',()=>setSiteMenu(!panel.classList.contains('menu-open')));overlay.addEventListener('click',()=>setSiteMenu(false));document.addEventListener('keydown',e=>{if(e.key==='Escape')setSiteMenu(false)});buildMenu()});
+
+/* Header behavior: keep one line, fit long titles, and hide on downward scroll. */
+document.addEventListener('DOMContentLoaded',()=>{
+  const header=document.querySelector('.site-header');
+  const title=header?.querySelector('.site-title');
+  if(!header||!title)return;
+
+  const fitTitle=()=>{
+    const nav=header.querySelector('nav');
+    if(!nav)return;
+    header.style.height='68px';
+    header.style.minHeight='68px';
+    title.style.whiteSpace='nowrap';
+    title.style.overflow='hidden';
+    title.style.transformOrigin='left center';
+    title.style.transform='scaleX(1)';
+    const available=Math.max(0,header.clientWidth-nav.offsetWidth-40);
+    const natural=title.scrollWidth;
+    if(natural>available&&available>0){
+      const scale=Math.max(0.7,available/natural);
+      title.style.transform=`scaleX(${scale})`;
+    }
+  };
+
+  let lastY=window.scrollY;
+  let ticking=false;
+  const update=()=>{
+    const y=Math.max(0,window.scrollY);
+    if(!document.body.classList.contains('menu-open')){
+      if(y>lastY&&y>68)header.style.transform='translateY(-100%)';
+      else if(y<lastY)header.style.transform='translateY(0)';
+    }else{
+      header.style.transform='translateY(0)';
+    }
+    lastY=y;
+    ticking=false;
+  };
+  window.addEventListener('scroll',()=>{
+    if(!ticking){window.requestAnimationFrame(update);ticking=true;}
+  },{passive:true});
+  window.addEventListener('resize',fitTitle,{passive:true});
+  if(document.fonts?.ready)document.fonts.ready.then(fitTitle);
+  fitTitle();
+});
