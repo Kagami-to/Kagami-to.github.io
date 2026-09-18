@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded',()=>{const header=document.querySel
 .site-header{position:relative;height:68px;min-height:68px;overflow:visible;transform:none!important;}
 .site-header .site-title{white-space:nowrap;overflow:hidden;display:block;min-width:0;max-width:calc(100% - 76px);}
 .site-header nav{position:fixed;top:0;right:0;z-index:310;height:68px;display:flex;align-items:center;}
-.menu-toggle{width:60px;height:60px;margin:4px 8px 4px 0;border-radius:50%;background:#174b4d;box-shadow:0 3px 12px rgba(0,0,0,.22);}
+.menu-toggle{width:60px;height:60px;margin:4px 8px 4px 0;border-radius:8px;background:#174b4d;box-shadow:0 3px 12px rgba(0,0,0,.22);}
 .menu-toggle:hover{background:#174b4d;}
 .mobile-menu-overlay{top:0;z-index:200;}
 .mobile-menu-panel{top:0;height:100dvh;z-index:250;padding-top:84px;}
