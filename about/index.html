@@ -17,7 +17,7 @@
   padding:118px 0 120px;
 }
 .about-title{
-  margin:0 0 54px;
+  margin:0;
   color:#245;
   font-family:"Source Serif 4","Shippori Mincho",serif;
   font-size:38px;
@@ -26,11 +26,27 @@
   letter-spacing:.05em;
   text-align:center;
 }
+.about-subtitle{
+  margin:6px 0 18px;
+  color:#657676;
+  font-family:"IBM Plex Sans","Zen Kaku Gothic New",sans-serif;
+  font-size:14px;
+  font-weight:300;
+  line-height:1.5;
+  letter-spacing:.16em;
+  text-align:center;
+}
+.about-heading-divider{
+  height:2px;
+  margin:0 0 30px;
+  border:0;
+  background:#2d6869;
+}
 .about-story{
-  font-family:"Shippori Mincho","Source Serif 4",serif;
+  font-family:"Zen Kaku Gothic New","IBM Plex Sans",sans-serif;
   font-size:16px;
   line-height:2.25;
-  letter-spacing:.055em;
+  letter-spacing:.04em;
 }
 .about-story p{
   margin:0 0 1.7em;
@@ -39,8 +55,8 @@
   margin-bottom:0;
 }
 .about-opening{
-  font-size:19px;
-  line-height:2.15;
+  font-size:inherit;
+  line-height:inherit;
   color:#245;
 }
 .about-dialogue{
@@ -49,9 +65,10 @@
 }
 .about-ending{
   margin-top:3.2em !important;
-  padding-top:2.2em;
-  border-top:1px solid #c8d5d3;
+  padding-top:0;
+  border-top:0;
   color:#245;
+  font-family:"Shippori Mincho","Source Serif 4",serif;
   font-size:18px;
 }
 .about-ending strong{
@@ -65,16 +82,18 @@
     padding:100px 0 90px;
   }
   .about-title{
-    margin-bottom:40px;
     font-size:31px;
+  }
+  .about-subtitle{
+    margin-bottom:16px;
+  }
+  .about-heading-divider{
+    margin-bottom:24px;
   }
   .about-story{
     font-size:15px;
     line-height:2.15;
     letter-spacing:.04em;
-  }
-  .about-opening{
-    font-size:17px;
   }
   .about-dialogue{
     margin-left:.6em;
@@ -94,6 +113,8 @@
 
 <main class="about-main">
   <h1 class="about-title">About</h1>
+  <p class="about-subtitle">概要</p>
+  <hr class="about-heading-divider">
 
   <article class="about-story">
     <p class="about-opening">此の世を遍く照らす、日の光。これすなわち、天照宮ひめという神のお力なり――</p>
@@ -156,7 +177,7 @@
 
     <p>これが、いまより遥か昔。まだこの世とあの世の境も定かならぬ頃より伝わりし、八咫鏡のはじまりであります。</p>
 
-    <p class="about-ending">そして、これからここで皆さまにお話いたしますのは、皆さまの住まう鏡の、その外で紡がれし物語にございます。</p>
+    <p class="about-ending">さて、これからここで皆さまにお話いたしますのは、皆さまの住まう鏡の、その外で紡がれし物語にございます。</p>
   </article>
 </main>
 
