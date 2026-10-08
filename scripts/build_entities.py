@@ -108,6 +108,9 @@ def prepare_site():
     for name in ('index.html', 'robots.txt', 'sitemap.xml', 'favicon.ico', '1000019929.svg'):
         source = ROOT / name
         if source.exists(): shutil.copy2(source, SITE / name)
+    about_source = ROOT / 'about'
+    if about_source.is_dir():
+        shutil.copytree(about_source, SITE / 'about', dirs_exist_ok=True)
 
 
 def main():
