@@ -1,21 +1,184 @@
 <!doctype html>
 <html lang="ja">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><title>鏡外 - Kagamito Official Site</title><link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/entity-cards.css"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>鏡外 - Kagamito Official Site</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/entity-cards.css">
+<style>
+.home-page{
+  background:#245;
+  color:#fff;
+}
+.home-main{
+  min-height:100vh;
+  padding:68px 0 60px;
+}
+.home-intro{
+  width:min(1000px,calc(100% - 36px));
+  margin:0 auto;
+  padding:58px 0 42px;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+.home-title{
+  margin:0;
+  color:#fff;
+  font-family:"Shippori Mincho",serif;
+  font-size:42px;
+  font-weight:400;
+  line-height:1.2;
+  letter-spacing:.08em;
+}
+.home-description{
+  max-width:760px;
+  margin:22px 0 0;
+  color:#e1ecea;
+  font-family:"Zen Kaku Gothic New","IBM Plex Sans",sans-serif;
+  font-size:13px;
+  font-weight:400;
+  line-height:2;
+  letter-spacing:.04em;
+}
+.home-navigation{
+  width:min(1000px,calc(100% - 36px));
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  border-left:1px solid rgba(255,255,255,.2);
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+.home-link{
+  position:relative;
+  min-height:148px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:25px 72px 25px 28px;
+  border-right:1px solid rgba(255,255,255,.2);
+  border-top:1px solid rgba(255,255,255,.2);
+  color:#fff;
+  text-decoration:none;
+  background:#245;
+  transition:background .2s ease,padding-left .2s ease;
+}
+.home-link-wide{
+  grid-column:1 / -1;
+  min-height:126px;
+}
+.home-link:hover,
+.home-link:focus-visible{
+  background:#315f61;
+  padding-left:34px;
+  outline:none;
+}
+.home-link-title{
+  display:block;
+  color:#fff;
+  font-family:"Source Serif 4","Shippori Mincho",serif;
+  font-size:29px;
+  font-weight:550;
+  line-height:1.15;
+  letter-spacing:.02em;
+}
+.home-link-description{
+  display:block;
+  margin-top:8px;
+  color:#9db8b6;
+  font-family:"IBM Plex Sans","Zen Kaku Gothic New",sans-serif;
+  font-size:12px;
+  font-weight:300;
+  line-height:1.5;
+}
+.home-link-arrow{
+  position:absolute;
+  right:28px;
+  top:50%;
+  color:#fff;
+  font-family:"IBM Plex Sans","Zen Kaku Gothic New",sans-serif;
+  font-size:20px;
+  line-height:1;
+  transform:translateY(-50%);
+  transition:transform .2s ease;
+}
+.home-link:hover .home-link-arrow,
+.home-link:focus-visible .home-link-arrow{
+  transform:translate(6px,-50%);
+}
+@media(max-width:700px){
+  .home-intro{padding:42px 0 30px}
+  .home-title{font-size:36px}
+  .home-description{font-size:12px}
+  .home-navigation{grid-template-columns:1fr}
+  .home-link,.home-link-wide{grid-column:auto;min-height:116px}
+}
+@media(max-width:480px){
+  .home-main{padding-top:64px}
+  .home-intro,.home-navigation{width:calc(100% - 28px)}
+  .home-intro{padding-top:32px}
+  .home-title{font-size:32px}
+  .home-description{font-size:12px}
+  .home-link,.home-link-wide{min-height:108px;padding:22px 60px 22px 22px}
+  .home-link:hover,.home-link:focus-visible{padding-left:26px}
+  .home-link-title{font-size:26px}
+  .home-link-arrow{right:22px}
+}
+</style>
+</head>
 <body class="home-page">
-<header class="site-header"><a href="index.html" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a><nav></nav></header>
-<main class="home-hero">
-  <div class="home-hero-inner">
-    <div class="home-logo"><img src="/1000019929.svg" alt="鏡外"></div>
-    <section class="home-intro"><p><span data-home-key="home_intro_1">少女は鏡の外へと誘われた</span><br><span data-home-key="home_intro_2">まるで最初から、</span><br><span data-home-key="home_intro_3">そう決まっていたかのように</span></p></section>
-    <section class="home-enter"><p data-home-key="home_you_too">そして、あなたも。</p></section>
-  </div>
-  <div class="home-gradient" aria-hidden="true"></div>
+<header class="site-header">
+  <a href="index.html" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a>
+  <nav></nav>
+</header>
+
+<main class="home-main">
+  <section class="home-intro">
+    <h1 class="home-title">鏡外</h1>
+    <p class="home-description">
+      鏡の向こうの世界、「鏡外」へようこそ。作者の時雨々と申します。<br>
+      「鏡外」は、日本神話における三種の神器の1つ、八咫鏡の向こう側にある世界を描く、時雨々による一次創作作品です。<br>
+      このHPはそんな「鏡外」を楽しむ為の入口です。キャラクター設定や音楽、ショートストーリーなどを通して、少しでも「鏡外」に興味を持ってくださったら幸いです。
+    </p>
+  </section>
+
+  <nav class="home-navigation" aria-label="サイトメニュー">
+    <a href="about/" class="home-link home-link-wide">
+      <span class="home-link-title">About</span>
+      <span class="home-link-description">鏡外という世界に触れる</span>
+      <span class="home-link-arrow" aria-hidden="true">▶</span>
+    </a>
+
+    <a href="works/" class="home-link">
+      <span class="home-link-title">Works</span>
+      <span class="home-link-description">作品そのものを知る</span>
+      <span class="home-link-arrow" aria-hidden="true">▶</span>
+    </a>
+
+    <a href="characters/" class="home-link">
+      <span class="home-link-title">Characters</span>
+      <span class="home-link-description">キャラクターに親しむ</span>
+      <span class="home-link-arrow" aria-hidden="true">▶</span>
+    </a>
+
+    <a href="songs/" class="home-link">
+      <span class="home-link-title">Songs</span>
+      <span class="home-link-description">楽曲を聴く</span>
+      <span class="home-link-arrow" aria-hidden="true">▶</span>
+    </a>
+
+    <a href="glossary/" class="home-link">
+      <span class="home-link-title">Glossary</span>
+      <span class="home-link-description">用語を調べる</span>
+      <span class="home-link-arrow" aria-hidden="true">▶</span>
+    </a>
+  </nav>
 </main>
-<section class="home-description">
-  <p data-home-key="home_welcome">鏡の向こうの世界、「鏡外」へようこそ。作者の時雨々と申します。</p>
-  <p data-home-key="home_about">「鏡外」は、日本神話における三種の神器の1つ、八咫鏡の向こう側にある世界を描く、時雨々による一次創作作品です。</p>
-  <p data-home-key="home_guide">このHPはそんな「鏡外」を楽しむ為の入口です。キャラクター設定や音楽、ショートストーリーなどを通して、少しでも「鏡外」に興味を持ってくださったら幸いです。</p>
-</section>
-<section class="home-links"><nav><a href="works/">Works</a><a href="characters/">Characters</a><a href="songs/">Songs</a><a href="glossary/">Glossary</a></nav></section>
-<script src="assets/js/csv.js"></script><script src="assets/js/language.js"></script><script src="assets/js/glossary-sort.js"></script><script src="assets/js/analytics.js"></script><script src="assets/js/menu-data.js"></script><script src="assets/js/menu.js"></script>
-</body></html>
+
+<script src="assets/js/csv.js"></script>
+<script src="assets/js/language.js"></script>
+<script src="assets/js/glossary-sort.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script src="assets/js/menu-data.js"></script>
+<script src="assets/js/menu.js"></script>
+</body>
+</html>
