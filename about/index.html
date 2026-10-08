@@ -36,6 +36,12 @@
   letter-spacing:.16em;
   text-align:center;
 }
+.about-subtitle-en{display:none}
+.about-story-en{display:none}
+html[lang="en"] .about-subtitle-ja{display:none}
+html[lang="en"] .about-subtitle-en{display:inline}
+html[lang="en"] .about-story-ja{display:none}
+html[lang="en"] .about-story-en{display:block}
 .about-heading-divider{
   height:2px;
   margin:0 0 30px;
@@ -68,8 +74,8 @@
   padding-top:0;
   border-top:0;
   color:#245;
-  font-family:"Shippori Mincho","Source Serif 4",serif;
-  font-size:18px;
+  font-family:inherit;
+  font-size:inherit;
 }
 .about-ending strong{
   display:block;
@@ -99,9 +105,6 @@
     margin-left:.6em;
     margin-right:.6em;
   }
-  .about-ending{
-    font-size:16px;
-  }
 }
 </style>
 </head>
@@ -113,10 +116,10 @@
 
 <main class="about-main">
   <h1 class="about-title">About</h1>
-  <p class="about-subtitle">概要</p>
+  <p class="about-subtitle"><span class="about-subtitle-ja">概要</span><span class="about-subtitle-en">Overview</span></p>
   <hr class="about-heading-divider">
 
-  <article class="about-story">
+  <article class="about-story about-story-ja" lang="ja">
     <p class="about-opening">此の世を遍く照らす、日の光。これすなわち、天照宮ひめという神のお力なり――</p>
 
     <p>天照宮さまの坐すところ、昼は明るく、夜とてもその御光は絶えることなく、万のものはその光のもとに生きておりました。</p>
@@ -179,6 +182,71 @@
 
     <p class="about-ending">さて、これからここで皆さまにお話いたしますのは、皆さまの住まう鏡の、その外で紡がれし物語にございます。</p>
   </article>
+
+  <article class="about-story about-story-en" lang="en">
+    <p class="about-opening">The sunlight that shines upon all things in this world. Such is the power of a deity called Tenshōgū Hime...</p>
+
+    <p>Where Tenshōgū Hime dwelt, the days were bright, and even at night her radiance never faded. All things lived beneath her light.</p>
+
+    <p>Yet one day, a terrible affliction befell Tenshōgū Hime.</p>
+
+    <p>Grief-stricken, Tenshōgū Hime at last hid herself in a cave known as Ama-no-Iwato. From that moment onwards, the world was swiftly enveloped in darkness.</p>
+
+    <p>The sunlight vanished, and mountains, fields and seas alike were plunged into a darkness in which morning and night could no longer be distinguished.</p>
+
+    <p>The people were afraid and implored the gods.</p>
+
+    <p class="about-dialogue">“Please bring Tenshōgū Hime out of the cave!”</p>
+
+    <p>The gods put their heads together.</p>
+
+    <p>If they announced that a deity more exalted than Tenshōgū Hime had appeared, might she not look outside the cave to see for herself?</p>
+
+    <p>So they reasoned.</p>
+
+    <p>Yet there was one great difficulty.</p>
+
+    <p>There was no deity in all the world more exalted than Tenshōgū Hime. Someone would therefore have to play that part.</p>
+
+    <p>But to claim to be a deity more exalted than Tenshōgū Hime, the goddess of the sun, was far too presumptuous.</p>
+
+    <p>No one was willing to take on the role.</p>
+
+    <p>And so the gods once again put their heads together.</p>
+
+    <p>Then one of them spoke.</p>
+
+    <p class="about-dialogue">“Then why not let Tenshōgū Hime see her own reflection?”</p>
+
+    <p>The one who stepped forward was a deity named Ishikorimiya no Nami.</p>
+
+    <p>Accepting the gods’ request, Ishikorimiya no Nami fashioned a sacred treasure.</p>
+
+    <p>A wondrous mirror that showed anyone who peered into it exactly as they were.</p>
+
+    <p>This was Yata no Kagami.</p>
+
+    <p>In time, the mirror was completed.</p>
+
+    <p>Yet it reflected more than the figure of the person who gazed into it.</p>
+
+    <p>Upon its surface appeared mountains, seas, skies, trees and grasses, beasts and people.</p>
+
+    <p>Everything in this world was reflected there, all turned in reverse.</p>
+
+    <p>It was as though a second world, identical to this one, had come into being there from the very beginning.</p>
+
+    <p>With the mirror’s surface as the boundary, another world lay beyond it, different from the one on this side.</p>
+
+    <p>And so the world on the other side, separated by the mirror’s surface, came to be known as “Kakusei”.</p>
+
+    <p>Meanwhile, the world that had existed until then, on the outer side of Yata no Kagami, was given the distinct name “Kagamito”.</p>
+
+    <p>This is the origin of Yata no Kagami, passed down from ages long past, from a time when even the boundary between this world and the next was not yet clear.</p>
+
+    <p class="about-ending">Now, the tale I shall tell you here is woven in the world beyond the mirror in which you dwell.</p>
+  </article>
+
 </main>
 
 <script src="../assets/js/csv.js"></script>
