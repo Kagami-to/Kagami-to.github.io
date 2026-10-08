@@ -19,11 +19,27 @@
   width:min(1000px,calc(100% - 36px));
   margin:0 auto;
   padding:58px 0 42px;
-  border-bottom:1px solid rgba(255,255,255,.2);
+}
+.home-welcome{
+  margin:0;
+  color:#fff;
+  font-family:"Shippori Mincho","Source Serif 4",serif;
+  font-size:19px;
+  font-weight:500;
+  line-height:1.7;
+  letter-spacing:.06em;
+  text-align:center;
+}
+.home-intro-divider{
+  width:100%;
+  height:1px;
+  margin:24px 0;
+  border:0;
+  background:rgba(255,255,255,.25);
 }
 .home-description{
   max-width:760px;
-  margin:0;
+  margin:0 0 1.2em;
   padding:0;
   background:transparent;
   color:#e1ecea;
@@ -34,6 +50,7 @@
   letter-spacing:.04em;
   text-align:left;
 }
+.home-description:last-child{margin-bottom:0}
 .home-navigation{
   width:min(1000px,calc(100% - 36px));
   margin:0 auto;
@@ -125,41 +142,41 @@
 
 <main class="home-main">
   <section class="home-intro">
-    <p class="home-description">
-      鏡の向こうの世界、「鏡外」へようこそ。作者の時雨々と申します。<br>
-      「鏡外」は、日本神話における三種の神器の1つ、八咫鏡の向こう側にある世界を描く、時雨々による一次創作作品です。<br>
-      このHPはそんな「鏡外」を楽しむ為の入口です。キャラクター設定や音楽、ショートストーリーなどを通して、少しでも「鏡外」に興味を持ってくださったら幸いです。
-    </p>
+    <h1 class="home-welcome" data-home-key="home_welcome">鏡の向こうの世界、『鏡外』へようこそ。</h1>
+    <hr class="home-intro-divider">
+    <p class="home-description" data-home-key="home_author">作者の時雨々と申します。</p>
+    <p class="home-description" data-home-key="home_about">『鏡外』は、日本神話における三種の神器の1つ、八咫鏡の向こう側にある世界を描く、時雨々による一次創作作品です。</p>
+    <p class="home-description" data-home-key="home_guide">このHPはそんな『鏡外』を楽しむ為の入口です。キャラクター設定や音楽、ショートストーリーなどを通して、少しでも『鏡外』に興味を持ってくださったら幸いです。</p>
   </section>
 
   <nav class="home-navigation" aria-label="サイトメニュー">
     <a href="about/" class="home-link home-link-wide">
       <span class="home-link-title">About</span>
-      <span class="home-link-description">鏡外という世界に触れる</span>
+      <span class="home-link-description" data-home-key="home_about_nav">鏡外という世界に触れる</span>
       <span class="home-link-arrow" aria-hidden="true">▶</span>
     </a>
 
     <a href="works/" class="home-link">
       <span class="home-link-title">Works</span>
-      <span class="home-link-description">作品そのものを知る</span>
+      <span class="home-link-description" data-home-key="home_works_nav">作品そのものを知る</span>
       <span class="home-link-arrow" aria-hidden="true">▶</span>
     </a>
 
     <a href="characters/" class="home-link">
       <span class="home-link-title">Characters</span>
-      <span class="home-link-description">キャラクターに親しむ</span>
+      <span class="home-link-description" data-home-key="home_characters_nav">キャラクターに親しむ</span>
       <span class="home-link-arrow" aria-hidden="true">▶</span>
     </a>
 
     <a href="songs/" class="home-link">
       <span class="home-link-title">Songs</span>
-      <span class="home-link-description">楽曲を聴く</span>
+      <span class="home-link-description" data-home-key="home_songs_nav">楽曲を聴く</span>
       <span class="home-link-arrow" aria-hidden="true">▶</span>
     </a>
 
     <a href="glossary/" class="home-link">
       <span class="home-link-title">Glossary</span>
-      <span class="home-link-description">用語を調べる</span>
+      <span class="home-link-description" data-home-key="home_glossary_nav">用語を調べる</span>
       <span class="home-link-arrow" aria-hidden="true">▶</span>
     </a>
   </nav>
