@@ -3,6 +3,13 @@
 /* Kagamito Official — unified stylesheet */
 
 
+/* Shared color tokens */
+:root {
+  --color-deep-green: #354;
+  --color-green-border: #576;
+  --color-green-text: #565;
+}
+
 /* Base */
 
 *  {
