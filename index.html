@@ -72,7 +72,7 @@
   color:#183b3c;
   text-decoration:none;
   background:linear-gradient(90deg,#e4efec 0%,#e4efec 33.333%,#cddfdb 50%,#a8cbc3 73%,#6faaa0 100%);
-  transition:background .25s ease,padding-left .2s ease,box-shadow .25s ease;
+  transition:background .25s ease,box-shadow .25s ease;
 }
 .home-link::before{
   content:attr(data-number);
@@ -80,7 +80,7 @@
   z-index:0;
   left:-15px;
   top:50%;
-  color:#eee;
+  color:#fefefe;
   font-family:"Zen Kaku Gothic New",sans-serif;
   font-size:clamp(108px,13vw,176px);
   font-weight:700;
@@ -98,7 +98,7 @@
 .home-link:hover,
 .home-link:focus-visible{
   background:linear-gradient(125deg,#d3e5e1 0%,#b8d2ce 100%);
-  padding-left:34px;
+  padding-left:112px;
   outline:2px solid #6d9994;
   outline-offset:-2px;
   box-shadow:inset 4px 0 0 #6d9994;
@@ -108,6 +108,16 @@
 .home-link-arrow{
   position:relative;
   z-index:1;
+}
+.home-link-title,
+.home-link-description{
+  transition:transform .2s ease;
+}
+.home-link:hover .home-link-title,
+.home-link:hover .home-link-description,
+.home-link:focus-visible .home-link-title,
+.home-link:focus-visible .home-link-description{
+  transform:translateX(6px);
 }
 .home-link-title{
   display:block;
@@ -154,7 +164,7 @@
   .home-intro{padding-top:32px}
   .home-intro .home-description{font-size:12px}
   .home-link,.home-link-wide{min-height:108px;padding:22px 60px 22px 86px}
-  .home-link:hover,.home-link:focus-visible{padding-left:26px}
+  .home-link:hover,.home-link:focus-visible{padding-left:86px}
   .home-link-title{font-size:26px}
   .home-link-arrow{right:22px}
   .home-link::before{font-size:clamp(100px,25vw,140px)}
