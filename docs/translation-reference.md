@@ -361,6 +361,7 @@ Characters / Works / Songs の名前そのものは、それぞれのCSVを一�
 | colour | color |
 | centre / centred | center / centered |
 | favourite | favorite |
+| favour / favoured | favor / favored |
 | fulfil / fulfils / fulfilment | fulfill / fulfills / fulfillment |
 | fulfilment | fulfillment |
 | travelling / travelled | traveling / traveled |
