@@ -7,117 +7,44 @@
 <link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="../assets/css/entity-cards.css">
 <style>
-.about-page{
-  background:#f8f7f3;
-  color:#263737;
-}
-.about-main{
-  width:min(860px,calc(100% - 36px));
-  margin:0 auto;
-  padding:84px 0 120px;
-}
-.about-title{
-  margin:0;
-  color:#245;
-  font-family:"Source Serif 4","Shippori Mincho",serif;
-  font-size:38px;
-  font-weight:550;
-  line-height:1.3;
-  letter-spacing:.05em;
-  text-align:center;
-}
-.about-subtitle{
-  margin:6px 0 18px;
-  color:#657676;
-  font-family:"IBM Plex Sans","Zen Kaku Gothic New",sans-serif;
-  font-size:14px;
-  font-weight:300;
-  line-height:1.5;
-  letter-spacing:.16em;
-  text-align:center;
-}
+.about-subtitle-ja{display:inline}
 .about-subtitle-en{display:none}
 .about-story-en{display:none}
 html[lang="en"] .about-subtitle-ja{display:none}
 html[lang="en"] .about-subtitle-en{display:inline}
 html[lang="en"] .about-story-ja{display:none}
 html[lang="en"] .about-story-en{display:block}
-.about-heading-divider{
-  height:2px;
-  margin:0 0 30px;
-  border:0;
-  background:#2d6869;
-}
 .about-story{
+  max-width:860px;
+  margin:0 auto;
   font-family:"Zen Kaku Gothic New","IBM Plex Sans",sans-serif;
   font-size:16px;
-  line-height:2.25;
+  line-height:2.1;
   letter-spacing:.04em;
 }
-.about-story p{
-  margin:0 0 1.7em;
-}
-.about-story p:last-child{
-  margin-bottom:0;
-}
-.about-opening{
-  font-size:inherit;
-  line-height:inherit;
-  color:#245;
-}
-.about-dialogue{
-  margin:1.7em 1.5em;
-  color:#304647;
-}
-.about-ending{
-  margin-top:3.2em !important;
-  padding-top:0;
-  border-top:0;
-  color:#245;
-  font-family:inherit;
-  font-size:inherit;
-}
-.about-ending strong{
-  display:block;
-  margin-top:1.1em;
-  font-weight:550;
-}
+.about-story p{margin:0 0 1.7em}
+.about-story p:last-child{margin-bottom:0}
+.about-opening{color:#245}
+.about-dialogue{margin:1.7em 1.5em;color:#304647}
+.about-ending{margin-top:3.2em!important;color:#245}
+.about-ending strong{display:block;margin-top:1.1em;font-weight:550}
 @media(max-width:600px){
-  .about-main{
-    width:min(100% - 28px,860px);
-    padding:76px 0 90px;
-  }
-  .about-title{
-    font-size:31px;
-  }
-  .about-subtitle{
-    margin-bottom:16px;
-  }
-  .about-heading-divider{
-    margin-bottom:24px;
-  }
-  .about-story{
-    font-size:15px;
-    line-height:2.15;
-    letter-spacing:.04em;
-  }
-  .about-dialogue{
-    margin-left:.6em;
-    margin-right:.6em;
-  }
+  .about-story{font-size:15px;line-height:2.05}
+  .about-dialogue{margin-left:.6em;margin-right:.6em}
 }
 </style>
 </head>
-<body class="about-page">
+<body>
 <header class="site-header">
   <a href="../index.html" class="site-title"><span class="site-title-ja">鏡外 - </span>Kagamito Official Site</a>
   <nav></nav>
 </header>
 
-<main class="about-main">
-  <h1 class="about-title">About</h1>
-  <p class="about-subtitle"><span class="about-subtitle-ja">概要</span><span class="about-subtitle-en">Overview</span></p>
-  <hr class="about-heading-divider">
+<main class="container">
+  <div class="page-heading">
+    <h1 id="page-title">About</h1>
+    <div class="page-sub"><span class="about-subtitle-ja">概要</span><span class="about-subtitle-en">Overview</span></div>
+  </div>
 
   <article class="about-story about-story-ja" lang="ja">
     <p class="about-opening">此の世を遍く照らす、日の光。これすなわち、天照宮ひめという神のお力なり――</p>
