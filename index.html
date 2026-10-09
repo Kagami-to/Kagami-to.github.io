@@ -56,8 +56,8 @@
   margin:0 auto;
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  border-left:1px solid rgba(255,255,255,.2);
-  border-bottom:1px solid rgba(255,255,255,.2);
+  border-left:1px solid rgba(31,75,75,.18);
+  border-bottom:1px solid rgba(31,75,75,.18);
 }
 .home-link{
   position:relative;
@@ -66,12 +66,24 @@
   flex-direction:column;
   justify-content:center;
   padding:25px 72px 25px 28px;
-  border-right:1px solid rgba(255,255,255,.2);
-  border-top:1px solid rgba(255,255,255,.2);
-  color:#fff;
+  border-right:1px solid rgba(31,75,75,.18);
+  border-top:1px solid rgba(31,75,75,.18);
+  color:#183b3c;
   text-decoration:none;
-  background:#245;
-  transition:background .2s ease,padding-left .2s ease;
+  background:linear-gradient(125deg,#e4efec 0%,#cddfdb 100%);
+  transition:background .25s ease,padding-left .2s ease,box-shadow .25s ease;
+}
+.home-link:nth-child(2){
+  background:linear-gradient(125deg,#e8f0ed 0%,#d2e4df 100%);
+}
+.home-link:nth-child(3){
+  background:linear-gradient(125deg,#e1eeeb 0%,#c6ddda 100%);
+}
+.home-link:nth-child(4){
+  background:linear-gradient(125deg,#e7efed 0%,#d0e0df 100%);
+}
+.home-link:nth-child(5){
+  background:linear-gradient(125deg,#e2eeeb 0%,#cbdedb 100%);
 }
 .home-link-wide{
   grid-column:1 / -1;
@@ -79,13 +91,15 @@
 }
 .home-link:hover,
 .home-link:focus-visible{
-  background:#315f61;
+  background:linear-gradient(125deg,#d3e5e1 0%,#b8d2ce 100%);
   padding-left:34px;
-  outline:none;
+  outline:2px solid #6d9994;
+  outline-offset:-2px;
+  box-shadow:inset 4px 0 0 #6d9994;
 }
 .home-link-title{
   display:block;
-  color:#fff;
+  color:#183b3c;
   font-family:"Source Serif 4","Shippori Mincho",serif;
   font-size:29px;
   font-weight:550;
@@ -95,7 +109,7 @@
 .home-link-description{
   display:block;
   margin-top:8px;
-  color:#9db8b6;
+  color:#4e7472;
   font-family:"IBM Plex Sans","Zen Kaku Gothic New",sans-serif;
   font-size:12px;
   font-weight:300;
@@ -105,7 +119,7 @@
   position:absolute;
   right:28px;
   top:50%;
-  color:#fff;
+  color:#315f61;
   font-family:"IBM Plex Sans","Zen Kaku Gothic New",sans-serif;
   font-size:20px;
   line-height:1;
