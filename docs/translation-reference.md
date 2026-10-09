@@ -364,7 +364,6 @@ Characters / Works / Songs の名前そのものは、それぞれのCSVを一�
 | favour / favoured | favor / favored |
 | saviour | savior |
 | fulfil / fulfils / fulfilment | fulfill / fulfills / fulfillment |
-| fulfilment | fulfillment |
 | travelling / travelled | traveling / traveled |
 | organise / recognise / analyse | organize / recognize / analyze |
 | licence（名詞） / license（動詞） | 米式の licence / license の区別をしない表記 |
