@@ -362,6 +362,7 @@ Characters / Works / Songs の名前そのものは、それぞれのCSVを一�
 | centre / centred | center / centered |
 | favourite | favorite |
 | favour / favoured | favor / favored |
+| saviour | savior |
 | fulfil / fulfils / fulfilment | fulfill / fulfills / fulfillment |
 | fulfilment | fulfillment |
 | travelling / travelled | traveling / traveled |
@@ -369,7 +370,7 @@ Characters / Works / Songs の名前そのものは、それぞれのCSVを一�
 | licence（名詞） / license（動詞） | 米式の licence / license の区別をしない表記 |
 | programme（一般的な催し・番組等） | program（ただしコンピュータ・ソフトウェア分野では program を使用） |
 
-この一覧は代表例であり、固定訳・正式名称・作品名・楽曲名など、制作者が確定した表記は綴りの地域差を理由に変更しない。
+なお、過去形・現在分詞の `fulfilled` / `fulfilling` は英米で綴りが同じなので、これらは機械的に置換しない。\n\nこの一覧は代表例であり、固定訳・正式名称・作品名・楽曲名など、制作者が確定した表記は綴りの地域差を理由に変更しない。
 
 語彙についても、文脈に応じてイギリス英語で自然な語を優先する。たとえば学校制度を一般的に説明するときは `primary school` などを検討する。ただし、日本の学校・委員会・制度をイギリスの制度へ機械的に置き換え、原文の設定を変えてはならない。日本固有のものを説明する場合は、内容の正確さと英語の自然さを両立させる。
 
