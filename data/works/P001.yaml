@@ -5,7 +5,6 @@ routes:
     title_ja: 八耶編
     stages:
       - id: 0
-        title_ja: プロローグ(八耶編)
         scenes:
           - content:
               - type: flavor
