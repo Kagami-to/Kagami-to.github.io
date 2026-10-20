@@ -22,7 +22,7 @@ function workStoryHtml(data, selectedRouteId){
   const selected=usableRoutes.find(route=>String(route.id)===String(selectedRouteId))||usableRoutes[0];
   const routeButtons=usableRoutes.map(route=>{
     const title=lang==='en'?route.title_en:route.title_ja;
-    return `<button type="button" class="work-story-route${route.id===selected.id?' is-active':''}" data-story-route="${workEsc(route.id)}" aria-pressed="${route.id===selected.id?'true':'false'}">${workEsc(title)}</button>`;
+    return `<button type="button" class="work-story-route${route.id===selected.id?' is-active active':''}" data-story-route="${workEsc(route.id)}" aria-pressed="${route.id===selected.id?'true':'false'}">${workEsc(title)}</button>`;
   }).join('');
   const renderStage=stage=>{
     const title=lang==='en'?stage.title_en:stage.title_ja;
@@ -48,7 +48,7 @@ function workStoryHtml(data, selectedRouteId){
   }).join('');
   const stages=mainStages.map(renderStage).join('');
   const archive=mainStages.length?`<details class="work-story-archive"><summary><span>${lang==='en'?'Contents and story':'目次・本文を開く'}</span></summary><div class="work-story-archive-content"><nav class="work-story-toc" aria-label="${lang==='en'?'Story contents':'ストーリー目次'}"><ul>${stageList}</ul></nav><div class="work-story-stages">${stages}</div></div></details>`:'';
-  return `<section class="work-story-section" id="work-story"><h2 class="work-story-heading">${lang==='en'?'Story':'本編ストーリー'}</h2><div class="work-story-routes" role="group" aria-label="${lang==='en'?'Story route':'ストーリーのルート'}">${routeButtons}</div><div class="work-story-prologue">${prologueMarkup}</div>${archive}</section>`;
+  return `<section class="work-story-section" id="work-story"><h2 class="work-story-heading">${lang==='en'?'Story':'本編ストーリー'}</h2><div class="work-story-routes lang-buttons" role="group" aria-label="${lang==='en'?'Story route':'ストーリーのルート'}">${routeButtons}</div><div class="work-story-prologue">${prologueMarkup}</div>${archive}</section>`;
 }
 async function loadWorkStory(workId){
   try{
