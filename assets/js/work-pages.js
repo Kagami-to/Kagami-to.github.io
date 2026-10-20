@@ -7,7 +7,7 @@ function workDetailHtml(row){const en=getLanguage()==='en';return WORK_DETAIL_FI
 function workCollapsible(title,items,kind){if(!items.length)return '';return `<section class="work-collapsible-section"><details class="work-collapsible"><summary><span>${workEsc(title)}</span><small>${items.length}</small></summary><div class="work-collapsible-content work-collapsible-${kind}">${items.join('')}</div></details></section>`}
 function charactersForWork(workId,chars){const target=String(workId||'').trim().toUpperCase();return chars.filter(c=>String(c.appearance_work_ids||'').split(',').map(id=>id.trim().toUpperCase()).filter(Boolean).includes(target)).sort((a,b)=>String(a.character_id).localeCompare(String(b.character_id)))}
 function workStoryText(value){return workEsc(value||'').replace(/\n/g,'<br>')}
-function workStoryHtml(data){
+function workStoryHtml(data, selectedRouteId){
   const lang=getLanguage()==='en'?'en':'ja';
   const routes=Array.isArray(data?.routes)?data.routes:[];
   const usableRoutes=routes.filter(route=>{
@@ -19,7 +19,7 @@ function workStoryHtml(data){
     });
   });
   if(!usableRoutes.length)return '';
-  const selected=usableRoutes[0];
+  const selected=usableRoutes.find(route=>String(route.id)===String(selectedRouteId))||usableRoutes[0];
   const routeButtons=usableRoutes.map(route=>{
     const title=lang==='en'?route.title_en:route.title_ja;
     return `<button type="button" class="work-story-route${route.id===selected.id?' is-active':''}" data-story-route="${workEsc(route.id)}" aria-pressed="${route.id===selected.id?'true':'false'}">${workEsc(title)}</button>`;
@@ -63,9 +63,8 @@ async function renderWork(workId){
   const songCards=wc.map(s=>entitySongCard(s,`/songs/${urlId(s.url_id)}/`));
   const img=siteAssetPath(w.image_path||w.jacket_image||''),fields=workDetailHtml(w),storyMarkup=workStoryHtml(story);
   t.innerHTML=`<div class="work-title-group"><p class="work-number">${workEsc(w.numbering||w.work_id)}</p><div class="work-fit-box"><h1 class="work-title work-fit-text">${workEsc(title)}</h1></div>${sub?`<div class="work-fit-box"><p class="work-title-sub work-fit-text">${workEsc(sub)}</p></div>`:''}</div><div class="work-jacket">${img?`<img src="${workEsc(img)}" alt="${workEsc(w.title_ja||w.title_en||'')}">`:`<div class="work-jacket-placeholder">${en?'Image coming soon':'画像準備中'}</div>`}</div>${synopsis?`<div class="work-synopsis">${workEsc(synopsis)}</div>`:''}${storyMarkup}${workCollapsible(en?'Characters':'登場キャラクター',characterCards,'characters')}${workCollapsible(en?'Songs':'使用楽曲',songCards,'songs')}<div class="work-divider"><span>◆</span></div><section class="work-detail-placeholder">${fields||`<p>${en?'Additional work details will be placed here.':'今後、作品に関する詳細情報をここに追加します。'}</p>`}</section>`;
-  const storyRoot=t.querySelector('#work-story');
-  if(storyRoot){
-    storyRoot.addEventListener('click',event=>{
+  if(storyMarkup){
+    t.addEventListener('click',event=>{
       const button=event.target.closest('[data-story-route]');
       if(!button)return;
       const routeId=button.getAttribute('data-story-route');
@@ -73,11 +72,12 @@ async function renderWork(workId){
       if(!routeData)return;
       const routeTitle=en?routeData.title_en:routeData.title_ja;
       if(!routeTitle)return;
-      const routeOnly=workStoryHtml({...story,routes:[routeData]});
+      const current=t.querySelector('#work-story');
+      if(!current)return;
       const wrapper=document.createElement('div');
-      wrapper.innerHTML=routeOnly;
+      wrapper.innerHTML=workStoryHtml(story,routeId);
       const next=wrapper.querySelector('#work-story');
-      if(next)storyRoot.replaceWith(next);
+      if(next)current.replaceWith(next);
     });
   }
   workFitAll();window.__workFitReady=true;
