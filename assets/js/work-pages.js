@@ -24,11 +24,7 @@ function workStoryHtml(data, selectedRouteId){
     const title=lang==='en'?route.title_en:route.title_ja;
     return `<button type="button" class="work-story-route${route.id===selected.id?' is-active':''}" data-story-route="${workEsc(route.id)}" aria-pressed="${route.id===selected.id?'true':'false'}">${workEsc(title)}</button>`;
   }).join('');
-  const stageList=(selected.stages||[]).map(stage=>{
-    const title=lang==='en'?stage.title_en:stage.title_ja;
-    return title?`<li><a href="#work-story-stage-${workEsc(stage.id)}">${workEsc(title)}</a></li>`:'';
-  }).join('');
-  const stages=(selected.stages||[]).map(stage=>{
+  const renderStage=stage=>{
     const title=lang==='en'?stage.title_en:stage.title_ja;
     if(!title)return '';
     const scenes=(stage.scenes||[]).map(scene=>(scene.content||[]).map(item=>{
@@ -42,8 +38,17 @@ function workStoryHtml(data, selectedRouteId){
       return '';
     }).join('')).join('');
     return `<section class="work-story-stage" id="work-story-stage-${workEsc(stage.id)}"><h3>${workEsc(title)}</h3>${scenes}</section>`;
+  };
+  const prologue=(selected.stages||[]).find(stage=>Number(stage.id)===0);
+  const mainStages=(selected.stages||[]).filter(stage=>Number(stage.id)!==0);
+  const prologueMarkup=prologue?renderStage(prologue):'';
+  const stageList=mainStages.map(stage=>{
+    const title=lang==='en'?stage.title_en:stage.title_ja;
+    return title?`<li><a href="#work-story-stage-${workEsc(stage.id)}">${workEsc(title)}</a></li>`:'';
   }).join('');
-  return `<section class="work-story-section" id="work-story"><h2 class="work-story-heading">${lang==='en'?'Story':'本編ストーリー'}</h2><div class="work-story-routes" role="group" aria-label="${lang==='en'?'Story route':'ストーリーのルート'}">${routeButtons}</div><nav class="work-story-toc" aria-label="${lang==='en'?'Story contents':'ストーリー目次'}"><ul>${stageList}</ul></nav><div class="work-story-stages">${stages}</div></section>`;
+  const stages=mainStages.map(renderStage).join('');
+  const archive=mainStages.length?`<details class="work-story-archive"><summary><span>${lang==='en'?'Contents and story':'目次・本文を開く'}</span></summary><div class="work-story-archive-content"><nav class="work-story-toc" aria-label="${lang==='en'?'Story contents':'ストーリー目次'}"><ul>${stageList}</ul></nav><div class="work-story-stages">${stages}</div></div></details>`:'';
+  return `<section class="work-story-section" id="work-story"><h2 class="work-story-heading">${lang==='en'?'Story':'本編ストーリー'}</h2><div class="work-story-routes" role="group" aria-label="${lang==='en'?'Story route':'ストーリーのルート'}">${routeButtons}</div><div class="work-story-prologue">${prologueMarkup}</div>${archive}</section>`;
 }
 async function loadWorkStory(workId){
   try{
@@ -62,7 +67,7 @@ async function renderWork(workId){
   const characterCards=cs.map(c=>entityCharacterCard(c,`/characters/${urlId(c.url_id)}/`));
   const songCards=wc.map(s=>entitySongCard(s,`/songs/${urlId(s.url_id)}/`));
   const img=siteAssetPath(w.image_path||w.jacket_image||''),fields=workDetailHtml(w),storyMarkup=workStoryHtml(story);
-  t.innerHTML=`<div class="work-title-group"><p class="work-number">${workEsc(w.numbering||w.work_id)}</p><div class="work-fit-box"><h1 class="work-title work-fit-text">${workEsc(title)}</h1></div>${sub?`<div class="work-fit-box"><p class="work-title-sub work-fit-text">${workEsc(sub)}</p></div>`:''}</div><div class="work-jacket">${img?`<img src="${workEsc(img)}" alt="${workEsc(w.title_ja||w.title_en||'')}">`:`<div class="work-jacket-placeholder">${en?'Image coming soon':'画像準備中'}</div>`}</div>${synopsis?`<div class="work-synopsis">${workEsc(synopsis)}</div>`:''}${storyMarkup}${workCollapsible(en?'Characters':'登場キャラクター',characterCards,'characters')}${workCollapsible(en?'Songs':'使用楽曲',songCards,'songs')}<div class="work-divider"><span>◆</span></div><section class="work-detail-placeholder">${fields||`<p>${en?'Additional work details will be placed here.':'今後、作品に関する詳細情報をここに追加します。'}</p>`}</section>`;
+  t.innerHTML=`<div class="work-title-group"><p class="work-number">${workEsc(w.numbering||w.work_id)}</p><div class="work-fit-box"><h1 class="work-title work-fit-text">${workEsc(title)}</h1></div>${sub?`<div class="work-fit-box"><p class="work-title-sub work-fit-text">${workEsc(sub)}</p></div>`:''}</div><div class="work-jacket">${img?`<img src="${workEsc(img)}" alt="${workEsc(w.title_ja||w.title_en||'')}">`:`<div class="work-jacket-placeholder">${en?'Image coming soon':'画像準備中'}</div>`}</div>${synopsis?`<div class="work-synopsis">${workEsc(synopsis)}</div>`:''}${workCollapsible(en?'Characters':'登場キャラクター',characterCards,'characters')}${workCollapsible(en?'Songs':'使用楽曲',songCards,'songs')}<section class="work-detail-placeholder">${fields||`<p>${en?'Additional work details will be placed here.':'今後、作品に関する詳細情報をここに追加します。'}</p>`}</section><div class="work-divider"><span>◆</span></div>${storyMarkup}`;
   if(storyMarkup){
     t.addEventListener('click',event=>{
       const button=event.target.closest('[data-story-route]');
