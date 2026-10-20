@@ -26,7 +26,6 @@ function workStoryHtml(data, selectedRouteId){
   }).join('');
   const renderStage=stage=>{
     const title=lang==='en'?stage.title_en:stage.title_ja;
-    if(!title)return '';
     const scenes=(stage.scenes||[]).map(scene=>(scene.content||[]).map(item=>{
       const text=lang==='en'?item.text_en:item.text_ja;
       if(!text)return '';
@@ -37,7 +36,8 @@ function workStoryHtml(data, selectedRouteId){
       if(item.type==='flavor')return `<p class="work-story-flavor">${workStoryText(text)}</p>`;
       return '';
     }).join('')).join('');
-    return `<section class="work-story-stage" id="work-story-stage-${workEsc(stage.id)}"><h3>${workEsc(title)}</h3>${scenes}</section>`;
+    const heading=title?`<h3>${workEsc(title)}</h3>`:'';
+    return `<section class="work-story-stage" id="work-story-stage-${workEsc(stage.id)}">${heading}${scenes}</section>`;
   };
   const prologue=(selected.stages||[]).find(stage=>Number(stage.id)===0);
   const mainStages=(selected.stages||[]).filter(stage=>Number(stage.id)!==0);
