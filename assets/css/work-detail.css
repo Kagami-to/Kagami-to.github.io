@@ -3,3 +3,21 @@ html[lang="en"] .detail-back-link-ja{display:none}html:not([lang="en"]) .detail-
 /* Unified detail-page header geometry */
 .work-detail-page{padding-top:0}.work-detail-card{margin-top:10px}.detail-back-link{width:min(346px,calc(100% / 3));margin:10px 0 10px max(16px,calc((100% - 1040px) / 2));position:relative;top:0}.detail-back-link-en{display:none}@media(max-width:700px){.work-detail-page{padding-top:0}.work-detail-card{margin-top:10px}.detail-back-link{width:50%;margin:10px 0 10px 10px}}
 html[lang="en"] .detail-back-link-en{display:inline}
+
+/* YAML-driven story section */
+.work-story-section{position:relative;z-index:2;margin:38px 0 42px;padding:26px 0 0;border-top:1px solid rgba(45,104,105,.28);color:#344b4b}
+.work-story-heading{margin:0 0 18px;font:450 24px/1.5 "Source Serif 4","Shippori Mincho",serif;letter-spacing:.04em;color:#245}
+.work-story-routes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.work-story-route{appearance:none;border:1px solid #b9ceca;background:#f7faf9;color:#315f61;padding:9px 18px;font:400 14px/1.5 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif;cursor:pointer}
+.work-story-route:hover,.work-story-route.is-active{border-color:#2d6869;background:#e4efec;color:#173f40}
+.work-story-toc{margin:0 0 30px;padding:14px 18px;background:#eaf1ef}
+.work-story-toc ul{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none}
+.work-story-toc a{color:#315f61;text-decoration:none;font-size:14px}
+.work-story-toc a:hover{text-decoration:underline;text-underline-offset:3px}
+.work-story-stage{scroll-margin-top:24px;margin:0 0 36px}
+.work-story-stage h3{margin:0 0 20px;padding:0 0 10px;border-bottom:1px solid #b9ceca;color:#245;font:450 20px/1.5 "Source Serif 4","Shippori Mincho",serif}
+.work-story-flavor{margin:0 0 18px;font:350 15px/2.05 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif;white-space:normal;overflow-wrap:anywhere}
+.work-story-line{margin:0 0 18px}
+.work-story-speaker{display:block;margin-bottom:4px;color:#2d6869;font:500 14px/1.6 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif}
+.work-story-dialogue p{margin:0;font:350 15px/2 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:700px){.work-story-section{margin:30px 0 34px;padding-top:22px}.work-story-heading{font-size:21px}.work-story-route{padding:8px 13px;font-size:13px}.work-story-toc{padding:12px}.work-story-toc ul{gap:8px 16px}.work-story-stage{margin-bottom:30px}.work-story-stage h3{font-size:18px}.work-story-flavor,.work-story-dialogue p{font-size:14px;line-height:1.95}}
