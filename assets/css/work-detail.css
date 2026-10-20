@@ -36,3 +36,18 @@ html[lang="en"] .detail-back-link-en{display:inline}
 .work-story-archive .work-story-toc{margin:0 0 28px}
 .work-story-archive .work-story-stages .work-story-stage:last-child{margin-bottom:0}
 @media(max-width:700px){.work-story-archive>summary{min-height:48px;padding:9px 10px;font-size:14px}.work-story-archive-content{padding:6px 8px 14px}.work-story-archive .work-story-toc{margin-bottom:24px}}
+
+
+/* Align story typography with the shared Character YAML content styles */
+.work-story-section{margin:0 0 42px;padding:0;border-top:0}
+.work-story-heading{margin:0 0 16px;padding:0;border:0;color:#245;font:450 clamp(24px,3vw,34px)/1.4 "Source Serif 4","Shippori Mincho",serif;letter-spacing:.06em}
+.work-story-stage{margin:0 0 36px}
+.work-story-stage h3{margin:0 0 16px;padding:0;border:0;color:#245;font:450 clamp(24px,3vw,34px)/1.4 "Source Serif 4","Shippori Mincho",serif;letter-spacing:.06em}
+.work-story-flavor,.work-story-dialogue p{color:#455;font:350 15px/2.1 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif}
+.work-story-routes{margin:0 0 20px}
+.work-story-routes.lang-buttons{gap:8px}
+.work-story-routes.lang-buttons button{min-height:48px;padding:0 18px;border:0;border-radius:0;background:#cbdedb;color:#315f61;font:650 14px/1.5 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif}
+.work-story-routes.lang-buttons button:hover,.work-story-routes.lang-buttons button:focus-visible{background:#c5d9d7;outline:none}
+.work-story-routes.lang-buttons button.active,.work-story-routes.lang-buttons button.active:hover{background:#315f61;color:#fff}
+.work-story-prologue .work-story-stage{margin-bottom:28px}
+@media(max-width:760px){.work-story-heading,.work-story-stage h3{font-size:26px}.work-story-flavor,.work-story-dialogue p{font-size:14px;line-height:1.95}.work-story-routes.lang-buttons button{min-height:48px;padding:0 18px;font-size:13px}}
