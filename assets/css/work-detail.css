@@ -21,3 +21,18 @@ html[lang="en"] .detail-back-link-en{display:inline}
 .work-story-speaker{display:block;margin-bottom:4px;color:#2d6869;font:500 14px/1.6 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif}
 .work-story-dialogue p{margin:0;font:350 15px/2 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:700px){.work-story-section{margin:30px 0 34px;padding-top:22px}.work-story-heading{font-size:21px}.work-story-route{padding:8px 13px;font-size:13px}.work-story-toc{padding:12px}.work-story-toc ul{gap:8px 16px}.work-story-stage{margin-bottom:30px}.work-story-stage h3{font-size:18px}.work-story-flavor,.work-story-dialogue p{font-size:14px;line-height:1.95}}
+
+
+/* Story contents and stages share one collapsible area; prologue stays visible */
+.work-story-prologue:empty{display:none}
+.work-story-prologue .work-story-stage{margin-bottom:28px}
+.work-story-archive{margin:0 0 34px;border-top:1px solid #b9ceca;border-bottom:1px solid #b9ceca}
+.work-story-archive>summary{display:flex;align-items:center;gap:12px;min-height:50px;padding:10px 14px;box-sizing:border-box;cursor:pointer;list-style:none;color:#245;font:400 15px/1.6 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif;transition:background .15s ease}
+.work-story-archive>summary::-webkit-details-marker{display:none}
+.work-story-archive>summary:before{content:"";width:7px;height:7px;border-right:1.5px solid #2d6869;border-bottom:1.5px solid #2d6869;transform:rotate(-45deg);transition:transform .18s ease;flex:0 0 auto}
+.work-story-archive[open]>summary:before{transform:rotate(45deg) translate(-1px,-1px)}
+.work-story-archive>summary:hover,.work-story-archive[open]>summary{background:#f1f6f5}
+.work-story-archive-content{padding:8px 14px 18px;background:rgba(247,250,249,.65)}
+.work-story-archive .work-story-toc{margin:0 0 28px}
+.work-story-archive .work-story-stages .work-story-stage:last-child{margin-bottom:0}
+@media(max-width:700px){.work-story-archive>summary{min-height:48px;padding:9px 10px;font-size:14px}.work-story-archive-content{padding:6px 8px 14px}.work-story-archive .work-story-toc{margin-bottom:24px}}
