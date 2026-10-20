@@ -10,6 +10,7 @@ SITE_DATA = ROOT / '_site' / 'data'
 def main():
     export_yaml_directory(DATA / 'characters', SITE_DATA / 'characters')
     export_yaml_directory(DATA / 'glossary', SITE_DATA / 'glossary')
+    export_yaml_directory(DATA / 'works', SITE_DATA / 'works')
     export_link_reference(DATA / 'link-reference.yaml', SITE_DATA / 'link-reference.json')
 
 
