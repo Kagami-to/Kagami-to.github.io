@@ -3,6 +3,7 @@ id: P001
 routes:
   - id: yaya
     title_ja: 八耶編
+    title_en: Yaya Route
     stages:
       - id: 0
         scenes:
