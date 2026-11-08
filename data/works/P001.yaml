@@ -10,3 +10,15 @@ routes:
               - type: flavor
                 text_ja: >-
                   修学旅行を楽しんでいたごく普通の女子中学生、双結八耶。大阪・京都の2泊3日、今日はその2日目であった。京都市内の班別自由行動の最中、伏見稲荷大社を訪れる際に、八耶はとりわけ仲の良い親友である上白川琴音とともに班からはぐれてしまった。更に琴音は何やらブツブツと呟きながら走っていってしまう。
+      - id: 1
+        title_ja: 1面
+        title_en: Stage 1
+        scenes:
+          - content:
+              - type: flavor
+                text_ja: >-
+                  琴音を追って大通りを北上していく八耶だったが、いつしか周りの景色が一変していることに気が付く。全ての文字は反転し、道は舗装されていない。見渡す限りどこもかしこも、観光地というだけでは片付けられない、古めかしい建築が連なる。
+                  困惑する八耶の前に、刀を構えた赤髪の女が立ちはだかり……。
+                text_en: >-
+                  As Futayui Yaya headed north along the main street in pursuit of Kotone, she gradually became aware that the scenery around her had completely changed. All the writing appeared in mirror image, and the roads were unpaved. As far as the eye could see, the streets were lined with old-fashioned buildings, their age and sheer number impossible to explain away as merely a tourist attraction.
+                  Confused, Yaya found her way blocked by a red-haired woman standing before her, sword at the ready...
