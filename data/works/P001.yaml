@@ -10,6 +10,8 @@ routes:
               - type: flavor
                 text_ja: >-
                   修学旅行を楽しんでいたごく普通の女子中学生、双結八耶。大阪・京都の2泊3日、今日はその2日目であった。京都市内の班別自由行動の最中、伏見稲荷大社を訪れる際に、八耶はとりわけ仲の良い親友である上白川琴音とともに班からはぐれてしまった。更に琴音は何やらブツブツと呟きながら走っていってしまう。
+                text_en: >-
+                  Futayui Yaya was an entirely ordinary secondary school student enjoying her school trip. It was the second day of a three-day, two-night trip to Osaka and Kyoto. During a group outing in Kyoto, Yaya and her particularly close friend, Kamishirakawa Kotone, became separated from the rest of their group while visiting Fushimi Inari Taisha. Kotone then ran off, muttering something under her breath.
       - id: 1
         title_ja: 1面
         title_en: Stage 1
