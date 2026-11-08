@@ -24,30 +24,34 @@ function workStoryHtml(data, selectedRouteId){
     const title=lang==='en'?route.title_en:route.title_ja;
     return `<button type="button" class="work-story-route${route.id===selected.id?' is-active active':''}" data-story-route="${workEsc(route.id)}" aria-pressed="${route.id===selected.id?'true':'false'}">${workEsc(title)}</button>`;
   }).join('');
-  const renderStage=stage=>{
-    const title=lang==='en'?stage.title_en:stage.title_ja;
-    const scenes=(stage.scenes||[]).map(scene=>(scene.content||[]).map(item=>{
-      const text=lang==='en'?item.text_en:item.text_ja;
-      if(!text)return '';
-      if(item.type==='dialogue'){
-        const speaker=item.speaker? `<span class="work-story-speaker">${workEsc(item.speaker)}</span>`:'';
-        return `<div class="work-story-line work-story-dialogue">${speaker}<p>${workStoryText(text)}</p></div>`;
-      }
-      if(item.type==='flavor')return `<p class="work-story-flavor">${workStoryText(text)}</p>`;
-      return '';
-    }).join('')).join('');
-    const heading=title?`<h3>${workEsc(title)}</h3>`:'';
-    return `<section class="work-story-stage" id="work-story-stage-${workEsc(stage.id)}">${heading}${scenes}</section>`;
+  const renderStageContent=stage=>(stage.scenes||[]).map(scene=>(scene.content||[]).map(item=>{
+    const text=lang==='en'?item.text_en:item.text_ja;
+    if(!text)return '';
+    if(item.type==='dialogue'){
+      const speaker=item.speaker? `<span class="work-story-speaker">${workEsc(item.speaker)}</span>`:'';
+      return `<div class="work-story-line work-story-dialogue">${speaker}<p>${workStoryText(text)}</p></div>`;
+    }
+    if(item.type==='flavor')return `<p class="work-story-flavor">${workStoryText(text)}</p>`;
+    return '';
+  }).join('')).join('');
+  const renderPrologue=stage=>{
+    const content=renderStageContent(stage);
+    return content?`<section class="work-story-stage work-story-prologue-stage" id="work-story-stage-${workEsc(stage.id)}">${content}</section>`:'';
   };
   const prologue=(selected.stages||[]).find(stage=>Number(stage.id)===0);
   const mainStages=(selected.stages||[]).filter(stage=>Number(stage.id)!==0);
-  const prologueMarkup=prologue?renderStage(prologue):'';
+  const prologueMarkup=prologue?renderPrologue(prologue):'';
   const stageList=mainStages.map(stage=>{
     const title=lang==='en'?stage.title_en:stage.title_ja;
     return title?`<li><a href="#work-story-stage-${workEsc(stage.id)}">${workEsc(title)}</a></li>`:'';
   }).join('');
-  const stages=mainStages.map(renderStage).join('');
-  const archive=mainStages.length?`<details class="work-story-archive"><summary><span>${lang==='en'?'Contents and story':'目次・本文を開く'}</span></summary><div class="work-story-archive-content"><nav class="work-story-toc" aria-label="${lang==='en'?'Story contents':'ストーリー目次'}"><ul>${stageList}</ul></nav><div class="work-story-stages">${stages}</div></div></details>`:'';
+  const stages=mainStages.map(stage=>{
+    const content=renderStageContent(stage);
+    if(!content)return '';
+    const title=stage.title_ja||'';
+    return `<section class="work-story-stage" id="work-story-stage-${workEsc(stage.id)}"><details class="work-story-stage-details"><summary>${workEsc(title)}</summary><div class="work-story-stage-content">${content}</div></details></section>`;
+  }).join('');
+  const archive=mainStages.length?`<div class="work-story-archive"><nav class="work-story-toc" aria-label="${lang==='en'?'Story contents':'ストーリー目次'}"><ul>${stageList}</ul></nav><div class="work-story-stages">${stages}</div></div>`:'';
   return `<section class="work-story-section" id="work-story"><h2 class="work-story-heading">${lang==='en'?'Story':'本編ストーリー'}</h2><div class="work-story-routes lang-buttons" role="group" aria-label="${lang==='en'?'Story route':'ストーリーのルート'}">${routeButtons}</div><div class="work-story-prologue">${prologueMarkup}</div>${archive}</section>`;
 }
 async function loadWorkStory(workId){
