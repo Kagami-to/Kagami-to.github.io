@@ -1,0 +1,72 @@
+/* Shared outer geometry for Character, Song, Work and Glossary detail pages. */
+.detail-page-shell{
+  position:relative;
+  width:100%;
+  padding:78px 0 60px;
+  background:#fafafa;
+  color:#222;
+}
+.detail-page-wrap{
+  width:min(1040px,calc(100% - 32px));
+  margin:0 auto;
+}
+.detail-page-shell .detail-back-link{
+  display:flex;
+  width:min(346px,calc(100% / 3));
+  height:24px;
+  align-items:center;
+  margin:0 0 10px;
+  padding:0 4px;
+  box-sizing:border-box;
+  color:#315f61;
+  text-decoration:none;
+  font:350 13px/1.6 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif;
+  letter-spacing:.04em;
+}
+.detail-page-shell .detail-back-link:hover{
+  color:#245;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.detail-page-shell .character-detail-card,
+.detail-page-shell .song-detail-card,
+.detail-page-shell .work-detail-card,
+.detail-page-shell .glossary-detail-card{
+  width:100%;
+  margin:0;
+  padding:48px 52px 58px;
+}
+.detail-page-shell .glossary-category-mark{
+  top:148px;
+}
+@media(max-width:760px){
+  .detail-page-shell{
+    padding:78px 0 44px;
+  }
+  .detail-page-wrap{
+    width:calc(100% - 20px);
+  }
+  .detail-page-shell .detail-back-link{
+    width:50%;
+    height:24px;
+    margin:0 0 10px;
+    padding:0 2px;
+    font-size:12px;
+  }
+  .detail-page-shell .character-detail-card,
+  .detail-page-shell .song-detail-card,
+  .detail-page-shell .work-detail-card,
+  .detail-page-shell .glossary-detail-card{
+    padding:32px 26px 44px;
+  }
+  .detail-page-shell .glossary-category-mark{
+    top:144px;
+    right:-18px;
+    font-size:46px;
+  }
+}
+@media(max-width:600px){
+  .detail-page-shell{
+    padding-top:74px;
+  }
+}

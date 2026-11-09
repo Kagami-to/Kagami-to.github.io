@@ -22,7 +22,7 @@ def entity_pager(prev_row, next_row, label_column, label_prefix):
 
 def character_detail_layout(title, character_id, body, prev_row=None, next_row=None, depth=2):
     prefix = '../' * depth
-    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css">'
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css"><link rel="stylesheet" href="{prefix}assets/css/detail-layout.css">'
     pager = entity_pager(prev_row, next_row, 'name_ja', 'キャラクター')
     scripts = f'''<script src="{prefix}assets/js/yaml-content.js"></script><script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
     return entity_detail_layout(title, body, pager, head, scripts, depth=depth, main_open='<main class="character-detail-page">', main_close='</main>')
