@@ -2,7 +2,7 @@
 .detail-page-shell{
   position:relative;
   width:100%;
-  padding:78px 0 60px;
+  padding:73px 0 60px;
   background:#fafafa;
   color:#222;
 }
@@ -15,7 +15,7 @@
   width:min(346px,calc(100% / 3));
   height:24px;
   align-items:center;
-  margin:0 0 10px;
+  margin:0 0 5px;
   padding:0 4px;
   box-sizing:border-box;
   color:#315f61;
@@ -41,7 +41,7 @@
 }
 @media(max-width:760px){
   .detail-page-shell{
-    padding:78px 0 44px;
+    padding:73px 0 44px;
   }
   .detail-page-wrap{
     width:calc(100% - 20px);
@@ -49,7 +49,7 @@
   .detail-page-shell .detail-back-link{
     width:50%;
     height:24px;
-    margin:0 0 10px;
+    margin:0 0 5px;
     padding:0 2px;
     font-size:12px;
   }
@@ -67,6 +67,6 @@
 }
 @media(max-width:600px){
   .detail-page-shell{
-    padding-top:74px;
+    padding-top:69px;
   }
 }
