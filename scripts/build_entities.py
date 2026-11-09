@@ -25,7 +25,7 @@ def character_detail_layout(title, character_id, body, prev_row=None, next_row=N
     head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css"><link rel="stylesheet" href="{prefix}assets/css/detail-layout.css">'
     pager = entity_pager(prev_row, next_row, 'name_ja', 'キャラクター')
     scripts = f'''<script src="{prefix}assets/js/yaml-content.js"></script><script src="{prefix}assets/js/character-pages.js"></script><script>renderCharacter({character_id!r}).catch(e=>{{const target=document.getElementById('character-page');if(target)target.textContent=e.message;}});</script>'''
-    return entity_detail_layout(title, body, pager, head, scripts, depth=depth, main_open='<main class="character-detail-page">', main_close='</main>')
+    return entity_detail_layout(title, body, pager, head, scripts, depth=depth, main_open='<main class="detail-page-shell character-detail-page">', main_close='</main>')
 
 
 def song_pager_html(row, prev_row=None, next_row=None, depth=2):
@@ -33,7 +33,7 @@ def song_pager_html(row, prev_row=None, next_row=None, depth=2):
     body = template.replace('{{SONG_ID}}', esc(row.get('song_id')))
     pager = entity_pager(prev_row, next_row, 'title_ja', '楽曲')
     prefix = '../' * depth
-    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css">'
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/song-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css"><link rel="stylesheet" href="{prefix}assets/css/detail-layout.css">'
     scripts = f'''<script src="{prefix}assets/js/yaml-content.js"></script><script src="{prefix}assets/js/song-pages.js"></script><script>document.documentElement.lang=getLanguage();renderSong({esc(row.get('song_id'))!r}).catch(e=>{{const target=document.getElementById('song-page');if(target)target.textContent=e.message;}});</script>'''
     return entity_detail_layout(row.get('title_ja') or row.get('title_en'), body, pager, head, scripts, depth=depth)
 
@@ -43,7 +43,7 @@ def work_detail_layout(row, prev_row=None, next_row=None, depth=2):
     body = template
     pager = entity_pager(prev_row, next_row, 'title_ja', '作品')
     prefix = '../' * depth
-    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/work-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css">'
+    head = f'<link rel="stylesheet" href="{prefix}assets/css/character-detail.css"><link rel="stylesheet" href="{prefix}assets/css/work-detail.css"><link rel="stylesheet" href="{prefix}assets/css/yaml-content.css"><link rel="stylesheet" href="{prefix}assets/css/detail-layout.css">'
     scripts = f'''<script src="{prefix}assets/js/yaml-content.js"></script><script src="{prefix}assets/js/work-pages.js"></script><script>document.documentElement.lang=getLanguage();renderWork({esc(row.get('work_id'))!r}).catch(e=>{{const target=document.getElementById('work-page');if(target)target.textContent=e.message;}});</script>'''
     return entity_detail_layout(row.get('title_ja') or row.get('title_en'), body, pager, head, scripts, depth=depth)
 
