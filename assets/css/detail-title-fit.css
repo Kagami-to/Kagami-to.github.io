@@ -14,7 +14,7 @@
   transform-origin: left center;
 }
 
-@media (max-width: 700px) {
+@media (max-width:760px) {
   .work-title,
   .character-detail-name,
   .song-title,
