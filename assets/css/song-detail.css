@@ -3,3 +3,21 @@ html[lang="en"] .detail-back-link-ja{display:none}html:not([lang="en"]) .detail-
 /* Unified detail-page header geometry */
 .song-detail-page{padding-top:0}.song-detail-card{margin-top:10px}.detail-back-link{width:min(346px,calc(100% / 3));margin:10px 0 10px max(16px,calc((100% - 1040px) / 2));position:relative;top:0}@media(max-width:760px){.song-detail-page{padding-top:0}.song-detail-card{margin-top:10px}.detail-back-link{width:50%;margin:10px 0 10px 10px}}
 html[lang="en"] .detail-back-link-en{display:inline}
+
+/* Place related character and work cards side by side when both exist. */
+.song-info.song-related-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:30px;
+  align-items:start;
+}
+.song-info.song-related-grid>.song-info-section{
+  min-width:0;
+  margin:0;
+}
+@media(max-width:760px){
+  .song-info.song-related-grid{
+    grid-template-columns:minmax(0,1fr);
+    gap:24px;
+  }
+}
