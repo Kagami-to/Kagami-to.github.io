@@ -27,15 +27,9 @@ html[lang="en"] .detail-back-link-en{display:inline}
 .work-story-prologue:empty{display:none}
 .work-story-prologue .work-story-stage{margin-bottom:28px}
 .work-story-archive{margin:0 0 34px;border-top:1px solid #b9ceca;border-bottom:1px solid #b9ceca}
-.work-story-archive>summary{display:flex;align-items:center;gap:12px;min-height:50px;padding:10px 14px;box-sizing:border-box;cursor:pointer;list-style:none;color:#245;font:400 15px/1.6 "IBM Plex Sans","Zen Kaku Gothic New",sans-serif;transition:background .15s ease}
-.work-story-archive>summary::-webkit-details-marker{display:none}
-.work-story-archive>summary:before{content:"";width:7px;height:7px;border-right:1.5px solid #2d6869;border-bottom:1.5px solid #2d6869;transform:rotate(-45deg);transition:transform .18s ease;flex:0 0 auto}
-.work-story-archive[open]>summary:before{transform:rotate(45deg) translate(-1px,-1px)}
-.work-story-archive>summary:hover,.work-story-archive[open]>summary{background:#f1f6f5}
-.work-story-archive-content{padding:8px 14px 18px;background:rgba(247,250,249,.65)}
 .work-story-archive .work-story-toc{margin:0 0 28px}
 .work-story-archive .work-story-stages .work-story-stage:last-child{margin-bottom:0}
-@media(max-width:760px){.work-story-archive>summary{min-height:48px;padding:9px 10px;font-size:14px}.work-story-archive-content{padding:6px 8px 14px}.work-story-archive .work-story-toc{margin-bottom:24px}}
+@media(max-width:760px){.work-story-archive .work-story-toc{margin-bottom:24px}}
 
 
 /* Align story typography with the shared Character YAML content styles */
