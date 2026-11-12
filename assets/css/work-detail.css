@@ -26,7 +26,7 @@ html[lang="en"] .detail-back-link-en{display:inline}
 /* Story contents and stages share one collapsible area; prologue stays visible */
 .work-story-prologue:empty{display:none}
 .work-story-prologue .work-story-stage{margin-bottom:28px}
-.work-story-archive{margin:0 0 34px;border-top:1px solid #b9ceca;border-bottom:1px solid #b9ceca}
+.work-story-archive{margin:0 0 34px;border-bottom:1px solid #b9ceca}
 .work-story-archive .work-story-toc{margin:0 0 28px}
 .work-story-archive .work-story-stages .work-story-stage:last-child{margin-bottom:0}
 @media(max-width:760px){.work-story-archive .work-story-toc{margin-bottom:24px}}
