@@ -52,7 +52,7 @@ function workStoryHtml(data, selectedRouteId){
     const heading=title?`<h3>${workEsc(title)}</h3>`:'';
     return `<section class="work-story-stage" id="work-story-stage-${workEsc(stage.id)}">${heading}<div class="work-story-stage-content">${content}</div></section>`;
   }).join('');
-  const archive=mainStages.length?`<div class="work-story-archive"><nav class="work-story-toc" aria-label="${lang==='en'?'Story contents':'ストーリー目次'}"><ul>${stageList}</ul></nav><div class="work-story-prologue">${prologueMarkup}</div><div class="work-story-stages">${stages}</div></div>`:`<div class="work-story-prologue">${prologueMarkup}</div>`;
+  const archive=mainStages.length?`<div class="work-story-archive"><div class="work-story-prologue">${prologueMarkup}</div><nav class="work-story-toc" aria-label="${lang==='en'?'Story contents':'ストーリー目次'}"><ul>${stageList}</ul></nav><div class="work-story-stages">${stages}</div></div>`:`<div class="work-story-prologue">${prologueMarkup}</div>`;
   return `<section class="work-story-section" id="work-story"><h2 class="work-story-heading">${lang==='en'?'Story':'本編ストーリー'}</h2><div class="work-story-routes lang-buttons" role="group" aria-label="${lang==='en'?'Story route':'ストーリーのルート'}">${routeButtons}</div>${archive}</section>`;
 }
 async function loadWorkStory(workId){
